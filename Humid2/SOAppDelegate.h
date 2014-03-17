@@ -12,4 +12,7 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
+// the list of services that will be integrated into app lifecycle
+- (NSArray *)services;
+
 @end

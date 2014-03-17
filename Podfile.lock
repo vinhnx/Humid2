@@ -4,11 +4,15 @@ PODS:
   - CocoaLumberjack/Core (1.8.1)
   - CocoaLumberjack/Extensions (1.8.1):
     - CocoaLumberjack/Core
+  - NXVLogFormatter (0.0.1):
+    - CocoaLumberjack (~> 1.8.1)
 
 DEPENDENCIES:
-  - CocoaLumberjack
+  - CocoaLumberjack (~> 1.8.1)
+  - NXVLogFormatter (~> 0.0.1)
 
 SPEC CHECKSUMS:
   CocoaLumberjack: 020378ec400d658923bf5887178394f65f052c90
+  NXVLogFormatter: 5708990cb7002e8d2ea4beb2cf6b7f6ff0da64c3
 
 COCOAPODS: 0.29.0

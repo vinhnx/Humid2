@@ -25,6 +25,7 @@
 		84F9991A18D6E95A00899921 /* NXVAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9991918D6E95A00899921 /* NXVAppDelegate.m */; };
 		84F9995E18D70A4A00899921 /* CustomActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9995B18D70A4A00899921 /* CustomActionSheet.m */; };
 		84F9995F18D70A4A00899921 /* UIAlertView+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9995D18D70A4A00899921 /* UIAlertView+Block.m */; };
+		84F9996318D70E5200899921 /* Forecast.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F9996218D70E5200899921 /* Forecast.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,9 @@
 		84F9995B18D70A4A00899921 /* CustomActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomActionSheet.m; sourceTree = "<group>"; };
 		84F9995C18D70A4A00899921 /* UIAlertView+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Block.h"; sourceTree = "<group>"; };
 		84F9995D18D70A4A00899921 /* UIAlertView+Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Block.m"; sourceTree = "<group>"; };
+		84F9996118D70E5200899921 /* Forecast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Forecast.h; sourceTree = "<group>"; };
+		84F9996218D70E5200899921 /* Forecast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Forecast.m; sourceTree = "<group>"; };
+		84F9996418D7149300899921 /* Logging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Logging.h; sourceTree = "<group>"; };
 		C1568D2E87884813B69C0D96 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E718FA6DFD9A4AD2975BA9D1 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -146,6 +150,7 @@
 				84F998E718D6D8A500899921 /* InfoPlist.strings */,
 				84F998EA18D6D8A500899921 /* main.m */,
 				84F998EC18D6D8A500899921 /* Humid2-Prefix.pch */,
+				84F9996418D7149300899921 /* Logging.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -222,6 +227,7 @@
 		84F9991B18D6E99D00899921 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				84F9996018D70E2700899921 /* ForecastIO */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -243,6 +249,15 @@
 				84F9995D18D70A4A00899921 /* UIAlertView+Block.m */,
 			);
 			path = "UIKit-Block";
+			sourceTree = "<group>";
+		};
+		84F9996018D70E2700899921 /* ForecastIO */ = {
+			isa = PBXGroup;
+			children = (
+				84F9996118D70E5200899921 /* Forecast.h */,
+				84F9996218D70E5200899921 /* Forecast.m */,
+			);
+			name = ForecastIO;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -380,6 +395,7 @@
 				84F9995E18D70A4A00899921 /* CustomActionSheet.m in Sources */,
 				84F9991118D6DF4700899921 /* NXVMainViewController.m in Sources */,
 				84F998EB18D6D8A500899921 /* main.m in Sources */,
+				84F9996318D70E5200899921 /* Forecast.m in Sources */,
 				84F9995F18D70A4A00899921 /* UIAlertView+Block.m in Sources */,
 				84F998EF18D6D8A500899921 /* SOAppDelegate.m in Sources */,
 				84F9991A18D6E95A00899921 /* NXVAppDelegate.m in Sources */,

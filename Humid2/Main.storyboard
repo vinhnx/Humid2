@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="q1N-9F-Yo3">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="Kit-od-xOY">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="q1N-9F-Yo3" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Mb7-Kx-dLM">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="kzV-XV-JIB" kind="relationship" relationship="rootViewController" id="HEh-F7-ukK"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kq1-Xi-Bhg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-10" y="91"/>
+        </scene>
+        <!--Main View Controller - Humid-->
+        <scene sceneID="7la-ma-hjK">
+            <objects>
+                <viewController storyboardIdentifier="mainViewController" id="kzV-XV-JIB" customClass="NXVMainViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="geV-9k-Liw"/>
+                        <viewControllerLayoutGuide type="bottom" id="afg-p7-t4C"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zWy-6v-QnQ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="nice day" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hl9-G1-gBz">
+                                <rect key="frame" x="92" y="197" width="136" height="51"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="26"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.15406422664748595" green="0.30056896905345049" blue="0.45110818614130432" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Humid" id="AKi-YE-MOG"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZGk-KV-UNY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="448" y="93"/>
+        </scene>
+    </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

@@ -6,8 +6,10 @@
 //  Copyright (c) 2014 Vinh Nguyen. All rights reserved.
 //
 
-#import "SOAppDelegate.h"
+#import <UIKit/UIKit.h>
 
-@interface NXVAppDelegate : SOAppDelegate
+@interface SOAppDelegate : UIResponder <UIApplicationDelegate>
+
+@property (strong, nonatomic) UIWindow *window;
 
 @end

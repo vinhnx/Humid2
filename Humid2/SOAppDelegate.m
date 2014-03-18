@@ -7,9 +7,6 @@
 //
 
 #import "SOAppDelegate.h"
-#import "Forecast.h"
-// import any other services singleton instace here
-// ...
 
 @implementation SOAppDelegate
 
@@ -34,21 +31,7 @@
 {
     // initialize log
     [self setupLogging];
-    Forecast *forecastManager = [Forecast sharedManager];
-    forecastManager.APIKey = @"72ca48d8bd7d4d147bebf1c8fb951fe7";
-    [forecastManager getForecastForLatitude:10.7574
-                                  longitude:106.6734
-                                    success:^(id JSON) {
-                                        if (JSON) {
-                                            DDLogWarn(@"%@", JSON);
-                                        }
-                                    }
-                                    failure:^(NSError *error, id response) {
-                                        if (error) {
-                                            NSLog(@">>> error: %@", error.localizedDescription);
-                                            NSLog(@"+++ response: %@", response);
-                                        }
-                                    }];
+    
 	id <UIApplicationDelegate> service;
 	// loop through the current services and proxy the delegate call
 	for (service in self.services) {

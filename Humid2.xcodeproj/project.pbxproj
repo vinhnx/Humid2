@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6301B947C3FA4FC4A78FFAE6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C1568D2E87884813B69C0D96 /* libPods.a */; };
+		8433DFD618D7FE0A00576C22 /* Forecast+CLLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8433DFD518D7FE0A00576C22 /* Forecast+CLLocation.m */; };
 		843AFD9C18D7F9D900E17047 /* ForecastAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 843AFD9B18D7F9D900E17047 /* ForecastAPIClient.m */; };
 		84F998DF18D6D8A500899921 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F998DE18D6D8A500899921 /* Foundation.framework */; };
 		84F998E118D6D8A500899921 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F998E018D6D8A500899921 /* CoreGraphics.framework */; };
@@ -41,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8433DFD418D7FE0A00576C22 /* Forecast+CLLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Forecast+CLLocation.h"; sourceTree = "<group>"; };
+		8433DFD518D7FE0A00576C22 /* Forecast+CLLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Forecast+CLLocation.m"; sourceTree = "<group>"; };
 		843AFD9A18D7F9D900E17047 /* ForecastAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForecastAPIClient.h; sourceTree = "<group>"; };
 		843AFD9B18D7F9D900E17047 /* ForecastAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForecastAPIClient.m; sourceTree = "<group>"; };
 		84F998DB18D6D8A500899921 /* Humid2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Humid2.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -267,6 +270,8 @@
 				84F9996218D70E5200899921 /* Forecast.m */,
 				843AFD9A18D7F9D900E17047 /* ForecastAPIClient.h */,
 				843AFD9B18D7F9D900E17047 /* ForecastAPIClient.m */,
+				8433DFD418D7FE0A00576C22 /* Forecast+CLLocation.h */,
+				8433DFD518D7FE0A00576C22 /* Forecast+CLLocation.m */,
 			);
 			name = ForecastIO;
 			sourceTree = "<group>";
@@ -409,6 +414,7 @@
 				84F9996318D70E5200899921 /* Forecast.m in Sources */,
 				84F9995F18D70A4A00899921 /* UIAlertView+Block.m in Sources */,
 				84F998EF18D6D8A500899921 /* SOAppDelegate.m in Sources */,
+				8433DFD618D7FE0A00576C22 /* Forecast+CLLocation.m in Sources */,
 				843AFD9C18D7F9D900E17047 /* ForecastAPIClient.m in Sources */,
 				84F9991A18D6E95A00899921 /* NXVAppDelegate.m in Sources */,
 			);

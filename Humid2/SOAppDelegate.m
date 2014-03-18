@@ -18,7 +18,7 @@
 	return nil;
 }
 
-#pragma mark - config
+#pragma mark - CocoaLumberjack logging configuration
 
 - (void)setupLogging
 {
@@ -31,6 +31,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // initialize log
+    [self setupLogging];
+
 	id <UIApplicationDelegate> service;
 	// loop through the current services and proxy the delegate call
 	for (service in self.services) {

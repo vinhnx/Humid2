@@ -13,13 +13,15 @@
 @implementation SOAppDelegate
 
 // be default, we'll have no services in the delegate
-- (NSArray *)services {
+- (NSArray *)services
+{
 	return nil;
 }
 
 #pragma mark - config
 
-- (void)setupLogging {
+- (void)setupLogging
+{
 	[DDLog addLogger:[DDTTYLogger sharedInstance]];
 	// custom Log Formmater
 	[[DDTTYLogger sharedInstance] setLogFormatter:[NXVLogFormatter new]];
@@ -79,7 +81,8 @@
 	}
 }
 
-- (void)applicationWillTerminate:(UIApplication *)application {
+- (void)applicationWillTerminate:(UIApplication *)application
+{
 	id <UIApplicationDelegate> service;
 	for (service in self.services) {
 		if ([service respondsToSelector:@selector(applicationWillTerminate:)]) {
@@ -88,7 +91,8 @@
 	}
 }
 
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
 	id <UIApplicationDelegate> service;
 	BOOL result = NO;
 	for (service in self.services) {
@@ -99,7 +103,8 @@
 	return result;
 }
 
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
 	id <UIApplicationDelegate> service;
 	BOOL result = NO;
 	for (service in self.services) {

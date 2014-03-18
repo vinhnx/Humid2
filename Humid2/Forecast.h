@@ -8,9 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-
-// Updated to match the Forecast.io API as of August 4, 2013
-
 // Cache keys
 extern NSString *const kFCCacheKey;
 extern NSString *const kFCCacheArchiveKey;
@@ -91,5 +88,29 @@ extern NSString *const kFCIconTornado;
 extern NSString *const kFCIconHurricane;
 
 @interface Forecast : NSObject
+
+@property (nonatomic, copy) NSString *APIKey; // Forecast.io service API key
+
+/**
+ *  Initialize and return a new Forecast singleton object
+ *
+ *  @return A new singleton object
+ */
++ (instancetype)sharedManager;
+
+/**
+ *  Fetch forecast info for the given location with success and failure block
+ *
+ *  @return JSON repsonse
+ *
+ *  @param latitude  the latitude of the location
+ *  @param longitude the longitude of the location
+ *  @param success   the block object to be executed when the operation finishes successfully
+ *  @param failure   the block object to be executed when the operation finishes unsuccessfully
+ */
+- (void)getForecastForLatitude:(double)latitude
+                     longitude:(double)longitude
+                       success:(void (^)(id JSON))success
+                       failure:(void (^)(NSError *error, id response))failure;
 
 @end

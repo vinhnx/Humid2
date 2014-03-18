@@ -135,6 +135,20 @@ NSString *const kFCIconHurricane = @"hurricane";
 {
     // IMPORTANT, we have to check if API key was set
     [self checkAPIKey];
+
+    // generate the URL string based on the passed in params
+    NSString *urlString = [self URLStringForLatitude:latitude longitude:longitude];
+
+    // call GET request on the API for the URL
+    [[ForecastAPIClient sharedClient] GET:urlString
+                               parameters:nil
+                                  success:^(NSURLSessionDataTask *task, id JSON) {
+                                      success(JSON);
+                                  }
+                                  failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                      NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
+                                      failure(error, response);
+                                  }];
 }
 
 #pragma mark - Private methods
@@ -146,6 +160,14 @@ NSString *const kFCIconHurricane = @"hurricane";
         [NSException raise:@"Forecast"
                     format:@"Forecast.io API key must be set"];
     }
+}
+
+- (NSString *)URLStringForLatitude:(double)latitude longitude:(double)longitude
+{
+    // API call pattern: https://api.forecast.io/forecast/APIKEY/LATITUDE,LONGITUDE
+    return [NSString stringWithFormat:@"%@/%.6f,%.6f",
+            self.APIKey, latitude, longitude];
+
 }
 
 @end

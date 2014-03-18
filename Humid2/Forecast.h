@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ForecastAPIClient.h"
 
 // Cache keys
 extern NSString *const kFCCacheKey;

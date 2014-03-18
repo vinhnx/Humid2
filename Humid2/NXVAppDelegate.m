@@ -55,11 +55,11 @@
     [forecastManager getForecastForLocation:[[CLLocation alloc] initWithLatitude:10.7574 longitude:106.6734]
                                     success:^(id JSON) {
                                         if (JSON) {
-                                            NSLog(@"\n%@", JSON);
+//                                            NSLog(@"\n%@", JSON);
                                         }
                                     } failure:^(NSError *error, id response) {
                                         if (error) {
-                                            NSLog(@">>> error: %@", error.localizedDescription);
+//                                            NSLog(@">>> error: %@", error.localizedDescription);
                                         }
                                     }];
 

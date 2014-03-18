@@ -139,6 +139,10 @@ NSString *const kFCIconHurricane = @"hurricane";
     // generate the URL string based on the passed in params
     NSString *urlString = [self URLStringForLatitude:latitude longitude:longitude];
 
+#ifdef NDEBUG
+    NSLog(@"-- Checking forecast for %@", urlString);
+#endif
+
     // call GET request on the API for the URL
     [[ForecastAPIClient sharedClient] GET:urlString
                                parameters:nil

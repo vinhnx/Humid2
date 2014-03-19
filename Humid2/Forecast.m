@@ -94,7 +94,7 @@ NSString *const kFCIconHurricane = @"hurricane";
 
 @interface Forecast () {
     NSUserDefaults *_userDefaults;
-    dispatch_queue_t _async_queue;
+//    dispatch_queue_t _async_queue;
 }
 
 @end
@@ -119,8 +119,8 @@ NSString *const kFCIconHurricane = @"hurricane";
     self = [super init];
     if (self) {
         _userDefaults = [NSUserDefaults standardUserDefaults];
-        // setup the async queue
-        _async_queue = dispatch_queue_create("com.humid2forecast.asyncqueue", NULL);
+//        // setup the async queue
+//        _async_queue = dispatch_queue_create("com.humid2forecast.asyncqueue", NULL);
 
     }
     return self;
@@ -153,6 +153,15 @@ NSString *const kFCIconHurricane = @"hurricane";
                                       NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
                                       failure(error, response);
                                   }];
+}
+
+- (void)cancelAllForecastRequests
+{
+    for (id task in [[ForecastAPIClient sharedClient] tasks]) { // loop through all NSURLSession tasks
+        if ([task respondsToSelector:@selector(cancel)]) {
+            [task cancel];
+        }
+    }
 }
 
 #pragma mark - Private methods

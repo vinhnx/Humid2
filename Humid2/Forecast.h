@@ -114,4 +114,9 @@ extern NSString *const kFCIconHurricane;
                        success:(void (^)(id JSON))success
                        failure:(void (^)(NSError *error, id response))failure;
 
+/**
+ *  Cancel all requests that are currently being executed
+ */
+- (void)cancelAllForecastRequests;
+
 @end

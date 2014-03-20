@@ -121,7 +121,6 @@ NSString *const kFCIconHurricane = @"hurricane";
         _userDefaults = [NSUserDefaults standardUserDefaults];
 //        // setup the async queue
 //        _async_queue = dispatch_queue_create("com.humid2forecast.asyncqueue", NULL);
-
     }
     return self;
 }

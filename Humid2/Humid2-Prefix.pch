@@ -16,4 +16,5 @@
 #import "Logging.h"
 #import <AFNetworking/AFNetworkActivityIndicatorManager.h>
 #import <AFNetworkActivityLogger/AFNetworkActivityLogger.h>
+#import <UAObfuscatedString/NSString+UAObfuscatedString.h>
 #endif

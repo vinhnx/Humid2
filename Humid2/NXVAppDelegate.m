@@ -35,7 +35,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
 
     Forecast *forecastManager = [Forecast sharedManager];
-    forecastManager.APIKey = @"72ca48d8bd7d4d147bebf1c8fb951fe7";
+    forecastManager.APIKey = @""._7._2.c.a._4._8.d._8.b.d._7.d._4.d._1._4._7.b.e.b.f._1.c._8.f.b._9._5._1.f.e._7;
 
     /*
     [forecastManager getForecastForLatitude:10.7574

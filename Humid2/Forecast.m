@@ -87,8 +87,8 @@
 - (NSString *)URLStringForLatitude:(double)latitude longitude:(double)longitude
 {
     // API call pattern: https://api.forecast.io/forecast/APIKEY/LATITUDE,LONGITUDE
-    return [NSString stringWithFormat:@"%@/%.6f,%.6f",
-            self.APIKey, latitude, longitude];
+    return [[NSString stringWithFormat:@"%@/%.6f,%.6f",
+            self.APIKey, latitude, longitude] stringByAppendingString:@"?units=auto"];
 }
 
 @end

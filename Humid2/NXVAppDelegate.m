@@ -8,9 +8,6 @@
 
 #import "NXVAppDelegate.h"
 #import "NXVMainViewController.h"
-// import any other services singleton instance here
-#import "Forecast.h"
-#import "Forecast+CLLocation.h"
 
 @implementation NXVAppDelegate
 // the service are only initizlized once
@@ -33,37 +30,6 @@
     NXVMainViewController *mainViewController = [storyBoard instantiateInitialViewController];
     self.window.rootViewController = mainViewController;
     self.window.backgroundColor = [UIColor whiteColor];
-
-    Forecast *forecastManager = [Forecast sharedManager];
-    forecastManager.APIKey = @""._7._2.c.a._4._8.d._8.b.d._7.d._4.d._1._4._7.b.e.b.f._1.c._8.f.b._9._5._1.f.e._7;
-
-    /*
-    [forecastManager getForecastForLatitude:10.7574
-                                  longitude:106.6734
-                                    success:^(id JSON) {
-                                            if (JSON) {
-                                                DDLogWarn(@"%@", JSON);
-                                            }
-                                        }
-                                        failure:^(NSError *error, id response) {
-                                            if (error) {
-                                                NSLog(@">>> error: %@", error.localizedDescription);
-                                            }
-                                        }];
-    */
-
-    [forecastManager getForecastForLocation:[[CLLocation alloc] initWithLatitude:10.7574 longitude:106.6734]
-                                    success:^(id JSON) {
-                                        if (JSON) {
-//                                            NSLog(@"\n%@", JSON);
-                                        }
-                                    } failure:^(NSError *error, id response) {
-                                        if (error) {
-//                                            NSLog(@">>> error: %@", error.localizedDescription);
-                                        }
-                                    }];
-
-
     [self.window makeKeyAndVisible];
     return YES;
 }

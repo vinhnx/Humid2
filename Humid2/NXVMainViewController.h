@@ -7,5 +7,9 @@
 //
 
 @interface NXVMainViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UILabel *weatherSummaryLabel;
+@property (weak, nonatomic) IBOutlet UILabel *degreeSymbol;
+
+- (IBAction)showForecastInfo:(id)sender;
 
 @end

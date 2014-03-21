@@ -19,4 +19,7 @@
 #import <AFNetworkActivityLogger/AFNetworkActivityLogger.h>
 #import <UAObfuscatedString/NSString+UAObfuscatedString.h>
 #import <Mantle/Mantle.h>
+#import "NXVForecastModel.h"
+#import "Forecast.h"
+#import "Forecast+CLLocation.h"
 #endif

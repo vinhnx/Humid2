@@ -47,8 +47,51 @@
 
 @implementation NXVForecastModel
 
-#pragma mark - Debug Methods
+#pragma mark - Mapping Property
 
++ (NSDictionary *)JSONKeyPathsByPropertyKey
+{
+	return @{
+			   // Model property                  :   JSON value
+			   @"latitude"                        :   @"latitude",
+			   @"longitude"                       :   @"longitude",
+			   @"currentlyDict"                   :   @"currently",
+			   @"currentlySummary"                :   @"currently.summary",
+			   @"currentlyTemperature"            :   @"currently.temperature",
+			   @"currentlyApparentTemperature"    :   @"currently.apparentTemperature",
+			   @"currentlyPrecipIntensity"        :   @"currently.precipIntensity",
+			   @"currentlyPrecipProbability"      :   @"currently.precipProbability",
+			   @"currentlyPrecipType"             :   @"currently.precipType",
+			   @"currentlyHumidity"               :   @"currently.humidity",
+			   @"currentlyWindSpeed"              :   @"currently.windSpeed",
+			   @"currentlyWindBearing"            :   @"currently.windBearing",
+			   @"currentlyNearestStormDistance"   :   @"currently.nearestStormDistance",
+			   @"currentlyNearestStormBearing"    :   @"currently.nearestStormBearing",
+			   @"currentlyDewPoint"               :   @"currently.dewPoint",
+			   @"currentlyVisibility"             :   @"currently.visibility",
+			   @"currentlyCloudCover"             :   @"currently.cloudCover",
+			   @"currentlyPressure"               :   @"currently.pressure",
+			   @"currentlyOzone"                  :   @"currently.ozone",
+			   @"minutelyDict"                    :   @"minutely",
+			   @"minutelySummary"                 :   @"minutely.summary",
+			   @"minutelyData"                    :   @"minutely.data",
+			   @"hourlyDict"                      :   @"hourly",
+			   @"hourlySummary"                   :   @"hourly.summary",
+			   @"hourlyData"                      :   @"hourly.data",
+			   @"dailyDict"                       :   @"daily",
+			   @"dailySummary"                    :   @"daily.summary",
+			   @"dailyData"                       :   @"daily.data",
+			   @"alerts"                          :   @"alerts",
+			   @"unit"                            :   @"flags.units"
+	};
+}
+
++ (NSValueTransformer *)assigneeJSONTransformer
+{
+	return [NSValueTransformer mtl_JSONDictionaryTransformerWithModelClass:[self class]];
+}
+
+#pragma mark - Debug Methods
 
 - (NSString *)description
 {

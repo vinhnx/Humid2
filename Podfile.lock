@@ -25,6 +25,9 @@ PODS:
   - CocoaLumberjack/Core (1.8.1)
   - CocoaLumberjack/Extensions (1.8.1):
     - CocoaLumberjack/Core
+  - Mantle (1.4.1):
+    - Mantle/extobjc
+  - Mantle/extobjc (1.4.1)
   - NXVLogFormatter (0.0.1):
     - CocoaLumberjack (~> 1.8.1)
   - UAObfuscatedString (0.2)
@@ -33,6 +36,7 @@ DEPENDENCIES:
   - AFNetworkActivityLogger (~> 2.0.1)
   - AFNetworking (~> 2.2.1)
   - CocoaLumberjack (~> 1.8.1)
+  - Mantle (~> 1.4.1)
   - NXVLogFormatter (~> 0.0.1)
   - UAObfuscatedString (~> 0.2)
 
@@ -40,6 +44,7 @@ SPEC CHECKSUMS:
   AFNetworkActivityLogger: c2e99aec5d965a3ee33f0954a20c5ddab18934fe
   AFNetworking: 0121f4b69be3fa58d1ab317866e036e12ac9651d
   CocoaLumberjack: 020378ec400d658923bf5887178394f65f052c90
+  Mantle: 0714cdb2b8559d9e6c2410d6a8529e3307bff189
   NXVLogFormatter: 5708990cb7002e8d2ea4beb2cf6b7f6ff0da64c3
   UAObfuscatedString: 40473fc35590e0170992afb88147214d76c7ce34
 

@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Vinh Nguyen. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 
 @interface SOAppDelegate : UIResponder <UIApplicationDelegate>
 

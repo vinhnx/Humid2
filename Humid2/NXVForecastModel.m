@@ -91,54 +91,14 @@
 	return [NSValueTransformer mtl_JSONDictionaryTransformerWithModelClass:[self class]];
 }
 
-#pragma mark - Debug Methods
+#pragma mark - Debug QuickLook Object
 
-- (NSString *)description
+- (id)debugQuickLookObject
 {
-	return [NSString stringWithFormat:@"%@",
-	        @{
-	            // model property                 :   json value
-	            @"latitude"                       :   @(_latitude),
-	            @"longitude"                      :   @(_longitude),
-	            @"currentlyDict"                  :   _currentlyDict,
-	            @"currentlyTemperature"           :   @(_currentlyTemperature),
-	            @"currentlyApparentTemperature"   :   @(_currentlyApparentTemperature),
-	            @"currentlyPrecipIntensity"       :   @(_currentlyPrecipIntensity),
-	            @"currentlyPrecipProbability"     :   @(_currentlyPrecipProbability),
-	            @"currentlyPrecipType"            :   _currentlyPrecipType,
-	            @"currentlyHumidity"              :   @(_currentlyHumidity),
-	            @"currentlyWindSpeed"             :   @(_currentlyWindSpeed),
-	            @"currentlyWindBearing"           :   @(_currentlyWindBearing),
-	            @"currentlyNearestStormDistance"  :   @(_currentlyNearestStormDistance),
-	            @"currentlyNearestStormBearing"   :   @(_currentlyNearestStormBearing),
-	            @"currentlyDewPoint"              :   @(_currentlyDewPoint),
-	            @"currentlyVisibility"            :   @(_currentlyVisibility),
-	            @"currentlyCloudCover"            :   @(_currentlyCloudCover),
-	            @"currentlyPressure"              :   @(_currentlyPressure),
-	            @"currentlyOzone"                 :   @(_currentlyOzone),
-	            @"minutelyDict"                   :   _minutelyDict,
-	            @"minutelySummary"                :   _minutelySummary,
-	            @"minutelyData"                   :   _minutelyData,
-	            @"hourlyDict"                     :   _hourlyDict,
-	            @"hourlySummary"                  :   _hourlySummary,
-	            @"hourlyData"                     :   _hourlyData,
-	            @"dailyDict"                      :   _dailyDict,
-	            @"dailySummary"                   :   _dailySummary,
-	            @"dailyData"                      :   _dailyData,
-	            @"alerts"                         :   _alerts,
-	            @"unit"                           :   _unit
-			}];
+    CLLocation *debuggingLocation = [[CLLocation alloc] initWithLatitude:self.latitude
+                                                               longitude:self.longitude];
+    return debuggingLocation;
 }
 
-- (NSString *)debugDescription
-{
-	return [NSString stringWithFormat:@"<%@: %p, %@>",
-	        [self class],
-	        self,
-	        @{
-	            @"latitude"   : @(_latitude),
-	            @"longitude"  : @(_longitude)
-			}];
-}
 
 @end

@@ -104,11 +104,4 @@
 ///// An HTTP(S) URI that contains detailed information about the alert.
 //@property (nonatomic, copy, readonly) NSString *alertURL;
 
-
-/// Overridden Forecast Model Description. For debugging purpose
-- (NSString *)description;
-
-/// Debug Description
-- (NSString *)debugDescription;
-
 @end

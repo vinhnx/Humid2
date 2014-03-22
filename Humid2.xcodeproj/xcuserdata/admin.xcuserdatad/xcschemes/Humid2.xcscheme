@@ -38,6 +38,26 @@
                ReferencedContainer = "container:Humid2.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8466F5D418DD639D00164908"
+               BuildableName = "Humid2 UI Tests.xctest"
+               BlueprintName = "Humid2 UI Tests"
+               ReferencedContainer = "container:Humid2.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8466F5EA18DD640800164908"
+               BuildableName = "Humid2UITests.octest"
+               BlueprintName = "Humid2UITests"
+               ReferencedContainer = "container:Humid2.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

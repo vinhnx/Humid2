@@ -7,8 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14187B1234604174A9E0FAB9 /* libPods-Humid2UITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C0AFD1F10D4452790621823 /* libPods-Humid2UITests.a */; };
+		379A9A82C794482D9D2428ED /* libPods-Humid2Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28B93496BA41420FB22B7744 /* libPods-Humid2Tests.a */; };
 		8433DFD618D7FE0A00576C22 /* Forecast+CLLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8433DFD518D7FE0A00576C22 /* Forecast+CLLocation.m */; };
 		843AFD9C18D7F9D900E17047 /* ForecastAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 843AFD9B18D7F9D900E17047 /* ForecastAPIClient.m */; };
+		8466F5EC18DD640800164908 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F998F718D6D8A600899921 /* XCTest.framework */; };
+		8466F5ED18DD640800164908 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F998DE18D6D8A500899921 /* Foundation.framework */; };
+		8466F5EE18DD640800164908 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F998E218D6D8A500899921 /* UIKit.framework */; };
+		8466F5F418DD640800164908 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8466F5F218DD640800164908 /* InfoPlist.strings */; };
+		8466F5FF18DD66A300164908 /* JustSomeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8466F5FE18DD66A300164908 /* JustSomeTest.m */; };
 		8477D51D18DC4650006240CF /* NXVForecastModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8477D51C18DC4650006240CF /* NXVForecastModel.m */; };
 		84F998DF18D6D8A500899921 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F998DE18D6D8A500899921 /* Foundation.framework */; };
 		84F998E118D6D8A500899921 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F998E018D6D8A500899921 /* CoreGraphics.framework */; };
@@ -32,6 +39,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		8466F5F818DD640800164908 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84F998D318D6D8A500899921 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84F998DA18D6D8A500899921;
+			remoteInfo = Humid2;
+		};
 		84F998FB18D6D8A600899921 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 84F998D318D6D8A500899921 /* Project object */;
@@ -42,10 +56,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		28B93496BA41420FB22B7744 /* libPods-Humid2Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Humid2Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8433DFD418D7FE0A00576C22 /* Forecast+CLLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Forecast+CLLocation.h"; sourceTree = "<group>"; };
 		8433DFD518D7FE0A00576C22 /* Forecast+CLLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Forecast+CLLocation.m"; sourceTree = "<group>"; };
 		843AFD9A18D7F9D900E17047 /* ForecastAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForecastAPIClient.h; sourceTree = "<group>"; };
 		843AFD9B18D7F9D900E17047 /* ForecastAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForecastAPIClient.m; sourceTree = "<group>"; };
+		8466F5EB18DD640800164908 /* Humid2UITests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Humid2UITests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8466F5F118DD640800164908 /* Humid2UITests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Humid2UITests-Info.plist"; sourceTree = "<group>"; };
+		8466F5F318DD640800164908 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8466F5F718DD640800164908 /* Humid2UITests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Humid2UITests-Prefix.pch"; sourceTree = "<group>"; };
+		8466F5FD18DD66A300164908 /* JustSomeTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JustSomeTest.h; sourceTree = "<group>"; };
+		8466F5FE18DD66A300164908 /* JustSomeTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JustSomeTest.m; sourceTree = "<group>"; };
 		8477D51B18DC4650006240CF /* NXVForecastModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXVForecastModel.h; sourceTree = "<group>"; };
 		8477D51C18DC4650006240CF /* NXVForecastModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXVForecastModel.m; sourceTree = "<group>"; };
 		84F998DB18D6D8A500899921 /* Humid2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Humid2.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -76,12 +97,26 @@
 		84F9996118D70E5200899921 /* Forecast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Forecast.h; sourceTree = "<group>"; };
 		84F9996218D70E5200899921 /* Forecast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Forecast.m; sourceTree = "<group>"; };
 		84F9996418D7149300899921 /* Logging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Logging.h; sourceTree = "<group>"; };
+		8C0AFD1F10D4452790621823 /* libPods-Humid2UITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Humid2UITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABC8D57BD856403481011749 /* libPods-Humid2.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Humid2.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ACE2966033FC40BC8BE89663 /* Pods-Humid2UITests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Humid2UITests.xcconfig"; path = "Pods/Pods-Humid2UITests.xcconfig"; sourceTree = "<group>"; };
+		B201647C01544429B43EF78A /* Pods-Humid2Tests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Humid2Tests.xcconfig"; path = "Pods/Pods-Humid2Tests.xcconfig"; sourceTree = "<group>"; };
 		C1568D2E87884813B69C0D96 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9B41A30C85942BE8F3D1AEA /* Pods-Humid2.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Humid2.xcconfig"; path = "Pods/Pods-Humid2.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		8466F5E818DD640800164908 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8466F5EC18DD640800164908 /* XCTest.framework in Frameworks */,
+				8466F5EE18DD640800164908 /* UIKit.framework in Frameworks */,
+				8466F5ED18DD640800164908 /* Foundation.framework in Frameworks */,
+				14187B1234604174A9E0FAB9 /* libPods-Humid2UITests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		84F998D818D6D8A500899921 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -100,12 +135,33 @@
 				84F998F818D6D8A600899921 /* XCTest.framework in Frameworks */,
 				84F998FA18D6D8A600899921 /* UIKit.framework in Frameworks */,
 				84F998F918D6D8A600899921 /* Foundation.framework in Frameworks */,
+				379A9A82C794482D9D2428ED /* libPods-Humid2Tests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8466F5EF18DD640800164908 /* Humid2UITests */ = {
+			isa = PBXGroup;
+			children = (
+				8466F5FD18DD66A300164908 /* JustSomeTest.h */,
+				8466F5FE18DD66A300164908 /* JustSomeTest.m */,
+				8466F5F018DD640800164908 /* Supporting Files */,
+			);
+			path = Humid2UITests;
+			sourceTree = "<group>";
+		};
+		8466F5F018DD640800164908 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8466F5F118DD640800164908 /* Humid2UITests-Info.plist */,
+				8466F5F218DD640800164908 /* InfoPlist.strings */,
+				8466F5F718DD640800164908 /* Humid2UITests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		84B0750B18DBE8A600FDD820 /* Singleton */ = {
 			isa = PBXGroup;
 			children = (
@@ -124,9 +180,12 @@
 			children = (
 				84F998E418D6D8A500899921 /* Humid2 */,
 				84F998FD18D6D8A600899921 /* Humid2Tests */,
+				8466F5EF18DD640800164908 /* Humid2UITests */,
 				84F998DD18D6D8A500899921 /* Frameworks */,
 				84F998DC18D6D8A500899921 /* Products */,
 				E9B41A30C85942BE8F3D1AEA /* Pods-Humid2.xcconfig */,
+				B201647C01544429B43EF78A /* Pods-Humid2Tests.xcconfig */,
+				ACE2966033FC40BC8BE89663 /* Pods-Humid2UITests.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -135,6 +194,7 @@
 			children = (
 				84F998DB18D6D8A500899921 /* Humid2.app */,
 				84F998F618D6D8A600899921 /* Humid2Tests.xctest */,
+				8466F5EB18DD640800164908 /* Humid2UITests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -148,6 +208,8 @@
 				84F998F718D6D8A600899921 /* XCTest.framework */,
 				C1568D2E87884813B69C0D96 /* libPods.a */,
 				ABC8D57BD856403481011749 /* libPods-Humid2.a */,
+				28B93496BA41420FB22B7744 /* libPods-Humid2Tests.a */,
+				8C0AFD1F10D4452790621823 /* libPods-Humid2UITests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -288,6 +350,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		8466F5EA18DD640800164908 /* Humid2UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8466F5FA18DD640800164908 /* Build configuration list for PBXNativeTarget "Humid2UITests" */;
+			buildPhases = (
+				FE6A2A0169D64F5D9C851BCA /* Check Pods Manifest.lock */,
+				8466F5E718DD640800164908 /* Sources */,
+				8466F5E818DD640800164908 /* Frameworks */,
+				8466F5E918DD640800164908 /* Resources */,
+				9F5AAA7E6A0D48C9824E4F12 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8466F5F918DD640800164908 /* PBXTargetDependency */,
+			);
+			name = Humid2UITests;
+			productName = Humid2UITests;
+			productReference = 8466F5EB18DD640800164908 /* Humid2UITests.octest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		84F998DA18D6D8A500899921 /* Humid2 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84F9990718D6D8A600899921 /* Build configuration list for PBXNativeTarget "Humid2" */;
@@ -311,9 +393,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84F9990A18D6D8A600899921 /* Build configuration list for PBXNativeTarget "Humid2Tests" */;
 			buildPhases = (
+				32079583FA344C1BA88582CC /* Check Pods Manifest.lock */,
 				84F998F218D6D8A600899921 /* Sources */,
 				84F998F318D6D8A600899921 /* Frameworks */,
 				84F998F418D6D8A600899921 /* Resources */,
+				A8DE6306FB12492F86966CE0 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -335,6 +419,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Vinh Nguyen";
 				TargetAttributes = {
+					8466F5EA18DD640800164908 = {
+						TestTargetID = 84F998DA18D6D8A500899921;
+					};
 					84F998F518D6D8A600899921 = {
 						TestTargetID = 84F998DA18D6D8A500899921;
 					};
@@ -354,11 +441,20 @@
 			targets = (
 				84F998DA18D6D8A500899921 /* Humid2 */,
 				84F998F518D6D8A600899921 /* Humid2Tests */,
+				8466F5EA18DD640800164908 /* Humid2UITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		8466F5E918DD640800164908 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8466F5F418DD640800164908 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		84F998D918D6D8A500899921 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -380,6 +476,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		32079583FA344C1BA88582CC /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		9F5AAA7E6A0D48C9824E4F12 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-Humid2UITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		A8418F5234C343D5BBBA51E7 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -393,6 +519,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A8DE6306FB12492F86966CE0 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-Humid2Tests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CCC519A488C148B4AA5E222E /* Copy Pods Resources */ = {
@@ -410,9 +551,32 @@
 			shellScript = "\"${SRCROOT}/Pods/Pods-Humid2-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		FE6A2A0169D64F5D9C851BCA /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		8466F5E718DD640800164908 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8466F5FF18DD66A300164908 /* JustSomeTest.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		84F998D718D6D8A500899921 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -441,6 +605,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		8466F5F918DD640800164908 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 84F998DA18D6D8A500899921 /* Humid2 */;
+			targetProxy = 8466F5F818DD640800164908 /* PBXContainerItemProxy */;
+		};
 		84F998FC18D6D8A600899921 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 84F998DA18D6D8A500899921 /* Humid2 */;
@@ -449,6 +618,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		8466F5F218DD640800164908 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8466F5F318DD640800164908 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		84F998E718D6D8A500899921 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -468,6 +645,48 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		8466F5FB18DD640800164908 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = ACE2966033FC40BC8BE89663 /* Pods-Humid2UITests.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Humid2.app/Humid2";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Humid2UITests/Humid2UITests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Humid2UITests/Humid2UITests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		8466F5FC18DD640800164908 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = ACE2966033FC40BC8BE89663 /* Pods-Humid2UITests.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Humid2.app/Humid2";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Humid2UITests/Humid2UITests-Prefix.pch";
+				INFOPLIST_FILE = "Humid2UITests/Humid2UITests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 		84F9990518D6D8A600899921 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -568,6 +787,7 @@
 		};
 		84F9990B18D6D8A600899921 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B201647C01544429B43EF78A /* Pods-Humid2Tests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Humid2.app/Humid2";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -590,6 +810,7 @@
 		};
 		84F9990C18D6D8A600899921 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B201647C01544429B43EF78A /* Pods-Humid2Tests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Humid2.app/Humid2";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -609,6 +830,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8466F5FA18DD640800164908 /* Build configuration list for PBXNativeTarget "Humid2UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8466F5FB18DD640800164908 /* Debug */,
+				8466F5FC18DD640800164908 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		84F998D618D6D8A500899921 /* Build configuration list for PBXProject "Humid2" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -13,9 +13,7 @@
 static double kNXVLocationLatitude = 10.7574;
 static double kNXVLocationLongitude = 106.6734;
 
-@interface NXVMainViewController () {
-    CLGeocoder *_geocoder;
-}
+@interface NXVMainViewController ()
 @property (nonatomic, strong) NXVForecastModel *forecastModel;
 @property (nonatomic, copy) NSString *degreeSymbolString;
 @end

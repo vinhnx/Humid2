@@ -14,9 +14,9 @@ target :Humid2 do
 end
 
 target :Humid2Tests, :exclusive => true do
-    # pod 'Kiwi'
-    pod 'Specta'
-    pod 'Expecta'
+    pod 'Kiwi'
+    # pod 'Specta'
+    # pod 'Expecta'
     pod 'OHHTTPStubs', '~> 3.1.0'
 end
 

@@ -15,9 +15,9 @@ static double kNXVLocationLongitude = 106.6734;
 
 @interface NXVMainViewController ()
 @property (nonatomic, strong) NXVForecastModel *forecastModel;
-@property (nonatomic, copy) NSString *degreeSymbolString;
-@property (nonatomic, strong) Reachability *internetReachability;
-@property (nonatomic, assign) BOOL connectionAvailable;
+@property (nonatomic, copy  ) NSString         *degreeSymbolString;
+@property (nonatomic, strong) Reachability     *internetReachability;
+@property (nonatomic, assign) BOOL             connectionAvailable;
 @end
 
 @implementation NXVMainViewController

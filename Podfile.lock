@@ -36,6 +36,7 @@ PODS:
   - NXVLogFormatter (0.0.1):
     - CocoaLumberjack (~> 1.8.1)
   - OHHTTPStubs (3.1.0)
+  - Reachability (3.1.1)
   - Specta (0.2.1)
   - UAObfuscatedString (0.2)
 
@@ -49,6 +50,7 @@ DEPENDENCIES:
   - Mantle (~> 1.4.1)
   - NXVLogFormatter (~> 0.0.1)
   - OHHTTPStubs (~> 3.1.0)
+  - Reachability (~> 3.1.1)
   - Specta
   - UAObfuscatedString (~> 0.2)
 
@@ -62,6 +64,7 @@ SPEC CHECKSUMS:
   Mantle: 0714cdb2b8559d9e6c2410d6a8529e3307bff189
   NXVLogFormatter: 5708990cb7002e8d2ea4beb2cf6b7f6ff0da64c3
   OHHTTPStubs: d67c42c0212f0883ddb8592375aa0dc00dc50a36
+  Reachability: be4883bb93f31e38266ae3365e5600a317aae735
   Specta: 2d06220591110c6d9757d8be8ecf8e63aa40dc2a
   UAObfuscatedString: 40473fc35590e0170992afb88147214d76c7ce34
 

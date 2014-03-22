@@ -16,6 +16,8 @@ static double kNXVLocationLongitude = 106.6734;
 @interface NXVMainViewController ()
 @property (nonatomic, strong) NXVForecastModel *forecastModel;
 @property (nonatomic, copy) NSString *degreeSymbolString;
+@property (nonatomic, strong) Reachability *internetReachability;
+@property (nonatomic, assign) BOOL connectionAvailable;
 @end
 
 @implementation NXVMainViewController
@@ -42,6 +44,7 @@ static double kNXVLocationLongitude = 106.6734;
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    [self setupReachabilityManager];
 }
 
 - (void)didReceiveMemoryWarning
@@ -129,6 +132,36 @@ static double kNXVLocationLongitude = 106.6734;
                                         }
                                     }];
     DDLogWarn(@"TEST: step++");
+}
+
+
+#pragma mark - Reachability handler
+
+- (void)setupReachabilityManager
+{
+
+#pragma clang diagnostic push // ignore clang warning
+#pragma clang diagnostic ignored "-Warc-retain-cycles"
+
+    // Set the general internet connection availability to YES to avoid issues with lazy reachibility notifier
+    self.connectionAvailable = YES;
+
+    // allocate the internet reachability object
+    self.internetReachability = [Reachability reachabilityForInternetConnection];
+    self.internetReachability.unreachableBlock = ^(Reachability *reachability) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // reachability status
+            // Unreachable
+            [[Forecast sharedManager] cancelAllForecastRequests];
+            DDLogError(@"NETWORK ERROR: %@\n%@",
+                       NSLocalizedString(@"Something is not quite right", nil),
+                       NSLocalizedString(@"Internet connection seems unreachable!", nil));
+
+        });
+    };
+    [self.internetReachability startNotifier];
+    self.connectionAvailable = [self.internetReachability isReachable];
+#pragma clang diagnostic pop
 }
 
 @end

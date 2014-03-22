@@ -10,6 +10,7 @@ target :Humid2 do
     pod 'UAObfuscatedString', '~> 0.2'
     pod 'Mantle', '~> 1.4.1'
     pod 'libextobjc/EXTScope'
+    pod 'Reachability', '~> 3.1.1'
 end
 
 target :Humid2Tests, :exclusive => true do

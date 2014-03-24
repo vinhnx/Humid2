@@ -9,40 +9,40 @@
 #import "NXVForecastModel.h"
 
 @interface NXVForecastModel ()
-@property (nonatomic, assign, readwrite) CGFloat latitude;
-@property (nonatomic, assign, readwrite) CGFloat longitude;
-@property (nonatomic, copy, readwrite) NSString *timezone;
-@property (nonatomic, assign, readwrite) NSInteger offset;
-@property (nonatomic, copy, readwrite) NSDictionary *currentlyDict;
-@property (nonatomic, assign, readwrite) NSInteger currentlyTime;
-@property (nonatomic, copy, readwrite) NSString *currentlySummary;
-@property (nonatomic, copy, readwrite) NSString *currentlyIcon;
-@property (nonatomic, assign, readwrite) CGFloat currentlyTemperature;
-@property (nonatomic, assign, readwrite) CGFloat currentlyApparentTemperature;
-@property (nonatomic, assign, readwrite) CGFloat currentlyPrecipIntensity;
-@property (nonatomic, assign, readwrite) CGFloat currentlyPrecipProbability;
-@property (nonatomic, copy, readwrite) NSString *currentlyPrecipType;
-@property (nonatomic, assign, readwrite) CGFloat currentlyHumidity;
-@property (nonatomic, assign, readwrite) CGFloat currentlyWindSpeed;
-@property (nonatomic, assign, readwrite) NSInteger currentlyWindBearing;
-@property (nonatomic, assign, readwrite) NSInteger currentlyNearestStormDistance;
-@property (nonatomic, assign, readwrite) NSInteger currentlyNearestStormBearing;
-@property (nonatomic, assign, readwrite) CGFloat currentlyDewPoint;
-@property (nonatomic, assign, readwrite) CGFloat currentlyVisibility;
-@property (nonatomic, assign, readwrite) CGFloat currentlyCloudCover;
-@property (nonatomic, assign, readwrite) CGFloat currentlyPressure;
-@property (nonatomic, assign, readwrite) CGFloat currentlyOzone;
-@property (nonatomic, copy, readwrite) NSDictionary *minutelyDict;
-@property (nonatomic, copy, readwrite) NSString *minutelySummary;
-@property (nonatomic, copy, readwrite) NSArray *minutelyData;
-@property (nonatomic, copy, readwrite) NSDictionary *hourlyDict;
-@property (nonatomic, copy, readwrite) NSString *hourlySummary;
-@property (nonatomic, copy, readwrite) NSArray *hourlyData;
-@property (nonatomic, copy, readwrite) NSDictionary *dailyDict;
-@property (nonatomic, copy, readwrite) NSString *dailySummary;
-@property (nonatomic, copy, readwrite) NSArray *dailyData;
-@property (nonatomic, copy, readwrite) NSString *unit;
-@property (nonatomic, copy, readwrite) NSArray *alerts;
+@property (nonatomic, assign, readwrite) CGFloat      latitude;
+@property (nonatomic, assign, readwrite) CGFloat      longitude;
+@property (nonatomic, copy, readwrite  ) NSString     *timezone;
+@property (nonatomic, assign, readwrite) NSInteger    offset;
+@property (nonatomic, copy, readwrite  ) NSDictionary *currentlyDict;
+@property (nonatomic, assign, readwrite) NSInteger    currentlyTime;
+@property (nonatomic, copy, readwrite  ) NSString     *currentlySummary;
+@property (nonatomic, copy, readwrite  ) NSString     *currentlyIcon;
+@property (nonatomic, assign, readwrite) CGFloat      currentlyTemperature;
+@property (nonatomic, assign, readwrite) CGFloat      currentlyApparentTemperature;
+@property (nonatomic, assign, readwrite) CGFloat      currentlyPrecipIntensity;
+@property (nonatomic, assign, readwrite) CGFloat      currentlyPrecipProbability;
+@property (nonatomic, copy, readwrite  ) NSString     *currentlyPrecipType;
+@property (nonatomic, assign, readwrite) CGFloat      currentlyHumidity;
+@property (nonatomic, assign, readwrite) CGFloat      currentlyWindSpeed;
+@property (nonatomic, assign, readwrite) NSInteger    currentlyWindBearing;
+@property (nonatomic, assign, readwrite) NSInteger    currentlyNearestStormDistance;
+@property (nonatomic, assign, readwrite) NSInteger    currentlyNearestStormBearing;
+@property (nonatomic, assign, readwrite) CGFloat      currentlyDewPoint;
+@property (nonatomic, assign, readwrite) CGFloat      currentlyVisibility;
+@property (nonatomic, assign, readwrite) CGFloat      currentlyCloudCover;
+@property (nonatomic, assign, readwrite) CGFloat      currentlyPressure;
+@property (nonatomic, assign, readwrite) CGFloat      currentlyOzone;
+@property (nonatomic, copy, readwrite  ) NSDictionary *minutelyDict;
+@property (nonatomic, copy, readwrite  ) NSString     *minutelySummary;
+@property (nonatomic, copy, readwrite  ) NSArray      *minutelyData;
+@property (nonatomic, copy, readwrite  ) NSDictionary *hourlyDict;
+@property (nonatomic, copy, readwrite  ) NSString     *hourlySummary;
+@property (nonatomic, copy, readwrite  ) NSArray      *hourlyData;
+@property (nonatomic, copy, readwrite  ) NSDictionary *dailyDict;
+@property (nonatomic, copy, readwrite  ) NSString     *dailySummary;
+@property (nonatomic, copy, readwrite  ) NSArray      *dailyData;
+@property (nonatomic, copy, readwrite  ) NSString     *unit;
+@property (nonatomic, copy, readwrite  ) NSArray      *alerts;
 @end
 
 @implementation NXVForecastModel

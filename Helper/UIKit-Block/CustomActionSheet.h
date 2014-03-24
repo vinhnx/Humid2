@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void(^CompletionBlock)(NSString *buttonTitle, NSInteger buttonIndex);
+
 @interface CustomActionSheet : NSObject <UIActionSheetDelegate>
 
 /**
@@ -34,6 +36,6 @@
  *  @param completionHanlder the completion hanlder to perform something
  */
 - (void)       showInView:(UIView *)view
-    withCompletionHandler:(void (^)(NSString *buttonTitle, NSInteger buttonIndex))completionHanlder;
+    withCompletionHandler:(CompletionBlock)completionHanlder;
 
 @end

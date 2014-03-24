@@ -51,13 +51,14 @@ static double kNXVLocationLongitude = 106.6734;
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    [[Forecast sharedManager] cancelAllForecastRequests];
 }
 
 #pragma mark - Instance Methods
 
-- (IBAction)showForecastInfo:(id)sender
+- (void)showDetailedWeatherForecastInfo
 {
-    DDLogError(@"TODO: %s called, but no implementation.", __PRETTY_FUNCTION__);
+    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 #pragma mark - Private Methods
@@ -123,13 +124,19 @@ static double kNXVLocationLongitude = 106.6734;
                                                                           self.degreeSymbolString];
                                             }
 
+                                            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                                                  action:@selector(showDetailedWeatherForecastInfo)];
+                                            tap.numberOfTapsRequired = 1;
+                                            [self.view addGestureRecognizer:tap];
+
                                             DDLogWarn(@"TEST: currently summary: %@", forecast.currentlySummary);
                                         }
-                                    } failure:^(NSError *error, id response) {
-                                        if (error) {
-                                            // handle error
-                                            DDLogError(@"ERROR: %@", error.localizedDescription);
+                                        else {
+                                            DDLogError(@"something could be wrong...");
                                         }
+                                    } failure:^(NSError *error, id response) {
+                                        // handle error
+                                        DDLogError(@"ERROR: %@", error.localizedDescription);
                                     }];
     DDLogWarn(@"TEST: step++");
 }

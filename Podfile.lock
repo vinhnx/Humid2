@@ -43,6 +43,7 @@ PODS:
     - CocoaLumberjack (~> 1.8.1)
   - OHHTTPStubs (3.1.0)
   - Reachability (3.1.1)
+  - Shimmer (1.0.1)
   - UAObfuscatedString (0.2)
 
 DEPENDENCIES:
@@ -56,6 +57,7 @@ DEPENDENCIES:
   - NXVLogFormatter (~> 0.0.1)
   - OHHTTPStubs (~> 3.1.0)
   - Reachability (~> 3.1.1)
+  - Shimmer (~> 1.0.1)
   - UAObfuscatedString (~> 0.2)
 
 SPEC CHECKSUMS:
@@ -69,6 +71,7 @@ SPEC CHECKSUMS:
   NXVLogFormatter: 5708990cb7002e8d2ea4beb2cf6b7f6ff0da64c3
   OHHTTPStubs: d67c42c0212f0883ddb8592375aa0dc00dc50a36
   Reachability: be4883bb93f31e38266ae3365e5600a317aae735
+  Shimmer: a1b92685f04ae7363e655f636a41a276dbb1507e
   UAObfuscatedString: 40473fc35590e0170992afb88147214d76c7ce34
 
 COCOAPODS: 0.29.0

@@ -11,16 +11,19 @@ target :Humid2 do
     pod 'Mantle', '~> 1.4.1'
     pod 'libextobjc/EXTScope'
     pod 'Reachability', '~> 3.1.1'
+    pod 'ProgressHUD', '~> 1.1'
+    pod 'UIView+DebugQuickLook', '~> 1.0'
 end
 
 target :Humid2Tests, :exclusive => true do
     pod 'Kiwi'
     # pod 'Specta'
     # pod 'Expecta'
-    pod 'OHHTTPStubs', '~> 3.1.0'
+    # pod 'OHHTTPStubs', '~> 3.1.0'
 end
 
 target :Humid2UITests, :exclusive => true do
     pod 'KIF', '~> 2.0.0'
-    pod 'OHHTTPStubs', '~> 3.1.0'
+    # pod 'Kiwi-KIF', '~> 1.0.1'
+    # pod 'OHHTTPStubs', '~> 3.1.0'
 end

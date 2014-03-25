@@ -56,9 +56,9 @@ static double kNXVLocationLongitude = 106.6734;
 
 #pragma mark - Instance Methods
 
-- (void)showDetailedWeatherForecastInfo
+- (void)showDetailedWeatherForecastInfo:(id)sender
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    DDLogError(@"%s", __PRETTY_FUNCTION__);
 }
 
 #pragma mark - Private Methods
@@ -109,6 +109,7 @@ static double kNXVLocationLongitude = 106.6734;
                                     success:^(id JSON) {
                                         @strongify(self);
                                         if (JSON) {
+
                                             NSError *error = nil;
                                             NXVForecastModel *forecast = [MTLJSONAdapter modelOfClass:[NXVForecastModel class]
                                                                                    fromJSONDictionary:(NSDictionary *)JSON
@@ -125,7 +126,7 @@ static double kNXVLocationLongitude = 106.6734;
                                             }
 
                                             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                                                  action:@selector(showDetailedWeatherForecastInfo)];
+                                                                                                                  action:@selector(showDetailedWeatherForecastInfo:)];
                                             tap.numberOfTapsRequired = 1;
                                             [self.view addGestureRecognizer:tap];
 

@@ -10,5 +10,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *weatherSummaryLabel;
 @property (weak, nonatomic) IBOutlet UILabel *degreeSymbol;
 
-- (void)showDetailedWeatherForecastInfo;
+- (IBAction)showDetailedWeatherForecastInfo:(id)sender;
+
 @end

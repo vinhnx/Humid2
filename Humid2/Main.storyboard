@@ -67,7 +67,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="showDetailedWeatherForecastInfo:" destination="kzV-XV-JIB" eventType="touchUpInside" id="a9b-eT-0t1"/>
+                                    <segue destination="eY7-Re-Ff6" kind="custom" identifier="showDetail" customClass="BlurryModalSegue" id="1Db-FS-EYa"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -76,17 +76,72 @@
                         <accessibility key="accessibilityConfiguration" label="MainView">
                             <bool key="isElement" value="YES"/>
                         </accessibility>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="GyP-rg-5t9" appends="YES" id="qCV-U7-lME"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="HUMID" id="AKi-YE-MOG"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="degreeSymbol" destination="ejf-r1-SyS" id="e2V-VG-SsQ"/>
+                        <outlet property="infoButton" destination="FCE-yu-6fs" id="uia-FX-9wU"/>
                         <outlet property="weatherSummaryLabel" destination="hl9-G1-gBz" id="xdi-F9-QVd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZGk-KV-UNY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="GyP-rg-5t9" userLabel="tapToShowDetailedWeatherForecastInfo">
+                    <connections>
+                        <segue destination="eY7-Re-Ff6" kind="custom" identifier="tapToShowDetails" customClass="BlurryModalSegue" id="8WJ-xN-uJE"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="448" y="93"/>
+        </scene>
+        <!--Weather Details View Controller-->
+        <scene sceneID="YlI-Ze-wqO">
+            <objects>
+                <viewController storyboardIdentifier="weatherDetailsViewController" id="eY7-Re-Ff6" customClass="NXVWeatherDetailsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ufR-04-K0Z"/>
+                        <viewControllerLayoutGuide type="bottom" id="1cY-4g-NoK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TnS-Oa-2pb">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OEy-pB-IdC">
+                                <rect key="frame" x="54" y="508" width="213" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="19"/>
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Got it!">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="dismissDetailsViewController:" destination="eY7-Re-Ff6" eventType="touchUpInside" id="w3g-LD-TJP"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="8sZ-ug-4IV">
+                                <rect key="frame" x="20" y="181" width="280" height="233"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="textColor" red="0.74901960779999999" green="0.70196078429999997" blue="0.56078431370000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="detailsTextView" destination="8sZ-ug-4IV" id="a2c-3i-lYZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FyO-CI-cBU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="925" y="91"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -94,4 +149,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="8WJ-xN-uJE"/>
+    </inferredMetricsTieBreakers>
 </document>

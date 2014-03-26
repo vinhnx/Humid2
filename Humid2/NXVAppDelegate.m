@@ -25,6 +25,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [super application:application didFinishLaunchingWithOptions:launchOptions];
+    [[BlurryModalSegue appearance] setBackingImageBlurRadius:@(20)];
+    [[BlurryModalSegue appearance] setBackingImageSaturationDeltaFactor:@(.45)];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];

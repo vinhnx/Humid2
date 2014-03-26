@@ -22,6 +22,7 @@
 #import <libextobjc/EXTScope.h>
 #import <Reachability/Reachability.h>
 #import <ProgressHUD/ProgressHUD.h>
+#import <BlurryModalSegue/BlurryModalSegue.h>
 #import "NXVForecastModel.h"
 #import "Forecast.h"
 #import "Forecast+CLLocation.h"

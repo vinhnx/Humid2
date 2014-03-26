@@ -7,11 +7,12 @@
 //
 
 #import "NXVMainViewController.h"
+#import "NXVWeatherDetailsViewController.h"
 #import "NXVForecastModel.h"
 
 // testing location lat and long coordinate keys
-static double kNXVLocationLatitude = 10.7574;
-static double kNXVLocationLongitude = 106.6734;
+static double kNXVLATITUDE = 10.7574;
+static double kNXVLONGITUDE = 106.6734;
 
 @interface NXVMainViewController ()
 @property (nonatomic, strong) NXVForecastModel *forecastModel;
@@ -54,11 +55,20 @@ static double kNXVLocationLongitude = 106.6734;
     [[Forecast sharedManager] cancelAllForecastRequests];
 }
 
-#pragma mark - Instance Methods
-
-- (void)showDetailedWeatherForecastInfo:(id)sender
+- (void)viewDidLayoutSubviews
 {
-    DDLogError(@"%s", __PRETTY_FUNCTION__);
+    [super viewDidLayoutSubviews];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"showDetail"] || [segue.identifier isEqualToString:@"tapToShowDetails"]) {
+        NXVWeatherDetailsViewController *detailsViewController = [segue destinationViewController];
+        detailsViewController.detailString = [NSString stringWithFormat:@"%@\n\n%@\n\n%@",
+                                           self.forecastModel.minutelySummary ?: @"",
+                                           self.forecastModel.hourlySummary,
+                                           self.forecastModel.dailySummary];
+    }
 }
 
 #pragma mark - Private Methods
@@ -68,70 +78,25 @@ static double kNXVLocationLongitude = 106.6734;
     Forecast *forecastManager = [Forecast sharedManager];
     forecastManager.APIKey = @""._7._2.c.a._4._8.d._8.b.d._7.d._4.d._1._4._7.b.e.b.f._1.c._8.f.b._9._5._1.f.e._7;
 
-    // TODO: implement a LocationHelper protocol?!
-
-    // #1, using Location's lat & longi coord
-    /*
-    @weakify(self);
-    [forecastManager getForecastForLatitude:kNXVLocationLatitude
-                                  longitude:kNXVLocationLongitude
-                                    success:^(id JSON) {
-                                        @strongify(self);
-                                        if (JSON) {
-                                            NSError *error = nil;
-                                            NXVForecastModel *forecast = [MTLJSONAdapter modelOfClass:[NXVForecastModel class]
-                                                                                   fromJSONDictionary:(NSDictionary *)JSON
-                                                                                                error:&error];
-                                            if (forecast) {
-                                                DDLogInfo(@"currently summary: %@", forecast.currentlySummary);
-                                                self.weatherSummaryLabel.text = forecast.currentlySummary;
-                                                self.degreeSymbolString = @"\u00b0";
-                                                ([self.forecastModel.unit isKindOfClass:[NSString class]] && [self.forecastModel.unit
-                                                                                      isEqualToString:@"us"])
-                                                ? (self.degreeSymbolString = @"\u2109")
-                                                : (self.degreeSymbolString = @"\u2103");
-                                                self.degreeSymbol.text = [NSString stringWithFormat:@"%.f%@", floorf(forecast.currentlyApparentTemperature), self.degreeSymbolString];
-                                            }
-                                        }
-                                    } failure:^(NSError *error, id response) {
-                                        if (error) {
-                                            // handle error
-                                            DDLogError(@"%@", error.localizedDescription);
-                                        }
-                                    }];
-    */
-
-    // #2, using Forecast+CLLocation category
-    CLLocation *location = [[CLLocation alloc] initWithLatitude:kNXVLocationLatitude
-                                                      longitude:kNXVLocationLongitude];
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:kNXVLATITUDE
+                                                      longitude:kNXVLONGITUDE];
     @weakify(self);
     [forecastManager getForecastForLocation:location
                                     success:^(id JSON) {
                                         @strongify(self);
-                                        if (JSON) {
-
-                                            NSError *error = nil;
-                                            NXVForecastModel *forecast = [MTLJSONAdapter modelOfClass:[NXVForecastModel class]
-                                                                                   fromJSONDictionary:(NSDictionary *)JSON
-                                                                                                error:&error];
-                                            if (forecast) {
-                                                self.weatherSummaryLabel.text = forecast.currentlySummary;
-                                                ([self.forecastModel.unit isKindOfClass:[NSString class]] && [self.forecastModel.unit
-                                                                                                              isEqualToString:@"us"])
-                                                ? (self.degreeSymbolString = @"\u2109")
-                                                : (self.degreeSymbolString = @"\u2103");
-                                                self.degreeSymbol.text = [NSString stringWithFormat:@"%.f%@",
-                                                                          floorf(forecast.currentlyApparentTemperature),
-                                                                          self.degreeSymbolString];
-                                            }
-
-                                            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                                                  action:@selector(showDetailedWeatherForecastInfo:)];
-                                            tap.numberOfTapsRequired = 1;
-                                            [self.view addGestureRecognizer:tap];
-
-                                            DDLogWarn(@"TEST: currently summary: %@", forecast.currentlySummary);
-                                        }
+										if (!self.forecastModel) {
+											NSError *error = nil;
+											self.forecastModel = [MTLJSONAdapter modelOfClass:[NXVForecastModel class]
+											                               fromJSONDictionary:(NSDictionary *)JSON
+											                                            error:&error];
+                                            self.weatherSummaryLabel.text = self.forecastModel ? self.forecastModel.currentlySummary : NSLocalizedString(@"...", nil);
+                                            ([self.forecastModel.unit isKindOfClass:[NSString class]] && [self.forecastModel.unit isEqualToString:@"us"])
+                                            ? (self.degreeSymbolString = @"\u2109")
+                                            : (self.degreeSymbolString = @"\u2103");
+                                            self.degreeSymbol.text = [NSString stringWithFormat:@"%.f%@",
+                                                                      floorf(self.forecastModel.currentlyApparentTemperature),
+                                                                      self.degreeSymbolString];
+										}
                                         else {
                                             DDLogError(@"something could be wrong...");
                                         }
@@ -161,6 +126,12 @@ static double kNXVLocationLongitude = 106.6734;
             // reachability status
             // Unreachable
             [[Forecast sharedManager] cancelAllForecastRequests];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"NETWORK ERROR"
+                                                                message:@"Internet connection seems unreachable! %@\n%@"
+                                                               delegate:nil
+                                                      cancelButtonTitle:NSLocalizedString(@"Close", nil)
+                                                      otherButtonTitles:nil];
+            [alertView show];
             DDLogError(@"NETWORK ERROR: %@\n%@",
                        NSLocalizedString(@"Something is not quite right", nil),
                        NSLocalizedString(@"Internet connection seems unreachable!", nil));

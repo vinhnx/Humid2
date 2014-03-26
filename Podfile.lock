@@ -20,6 +20,9 @@ PODS:
   - AFNetworking/UIKit (2.2.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - BlurryModalSegue (1.0.0):
+    - MZAppearance (~> 1.1.1)
+    - UIImage+BlurredFrame (~> 0.0.4)
   - CocoaLumberjack (1.8.1):
     - CocoaLumberjack/Extensions
   - CocoaLumberjack/Core (1.8.1)
@@ -45,20 +48,23 @@ PODS:
   - Mantle (1.4.1):
     - Mantle/extobjc
   - Mantle/extobjc (1.4.1)
+  - MZAppearance (1.1.1)
   - NXVLogFormatter (0.0.1):
     - CocoaLumberjack (~> 1.8.1)
   - ProgressHUD (1.1)
   - Reachability (3.1.1)
   - UAObfuscatedString (0.2)
+  - UIImage+BlurredFrame (0.0.4)
   - UIView+DebugQuickLook (1.0)
 
 DEPENDENCIES:
   - AFNetworkActivityLogger (~> 2.0.1)
   - AFNetworking (~> 2.2.1)
+  - BlurryModalSegue
   - CocoaLumberjack (~> 1.8.1)
   - Kiwi
   - Kiwi-KIF (~> 1.0.1)
-  - libextobjc/EXTScope
+  - libextobjc/EXTScope (~> 0.4)
   - Mantle (~> 1.4.1)
   - NXVLogFormatter (~> 0.0.1)
   - ProgressHUD (~> 1.1)
@@ -69,16 +75,19 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworkActivityLogger: c2e99aec5d965a3ee33f0954a20c5ddab18934fe
   AFNetworking: 0121f4b69be3fa58d1ab317866e036e12ac9651d
+  BlurryModalSegue: 35b785b80d61fa05b7c422673bac2f975f312367
   CocoaLumberjack: 020378ec400d658923bf5887178394f65f052c90
   KIF: ff3b46deb62ce3f8e99c6a2c786729e1eea241ba
   Kiwi: d60d7498b640a16f58b01925fc3c8d7c4d809f66
   Kiwi-KIF: b5391f7f57e91f43fdb2d4227d64277a67cf9e09
   libextobjc: 2c9fc8226f0f38e562587f65172f93f0c9b4a47a
   Mantle: 0714cdb2b8559d9e6c2410d6a8529e3307bff189
+  MZAppearance: 8b02683f0019f725557ae9839ed6cab153fff669
   NXVLogFormatter: 5708990cb7002e8d2ea4beb2cf6b7f6ff0da64c3
   ProgressHUD: 9b41c9416b3ba4f9c5661afe9efa7938198ba810
   Reachability: be4883bb93f31e38266ae3365e5600a317aae735
   UAObfuscatedString: 40473fc35590e0170992afb88147214d76c7ce34
+  UIImage+BlurredFrame: 9f29c4796105b50742abc31a69e18e37afb080a0
   UIView+DebugQuickLook: aef933f0af8963bf2d5b848af0ef21018658b262
 
 COCOAPODS: 0.29.0

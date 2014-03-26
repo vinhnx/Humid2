@@ -28,6 +28,12 @@ PODS:
   - KIF (2.0.0)
   - Kiwi (2.2.4):
     - Kiwi/SenTestingKit
+  - Kiwi-KIF (1.0.1):
+    - KIF (~> 2.0.0)
+    - Kiwi-KIF/SenTestingKit
+  - Kiwi-KIF/SenTestingKit (1.0.1):
+    - KIF (~> 2.0.0)
+    - Kiwi/SenTestingKit (~> 2.2.3)
   - Kiwi/ARC (2.2.4)
   - Kiwi/NonARC (2.2.4)
   - Kiwi/SenTestingKit (2.2.4):
@@ -50,8 +56,8 @@ DEPENDENCIES:
   - AFNetworkActivityLogger (~> 2.0.1)
   - AFNetworking (~> 2.2.1)
   - CocoaLumberjack (~> 1.8.1)
-  - KIF (~> 2.0.0)
   - Kiwi
+  - Kiwi-KIF (~> 1.0.1)
   - libextobjc/EXTScope
   - Mantle (~> 1.4.1)
   - NXVLogFormatter (~> 0.0.1)
@@ -66,6 +72,7 @@ SPEC CHECKSUMS:
   CocoaLumberjack: 020378ec400d658923bf5887178394f65f052c90
   KIF: ff3b46deb62ce3f8e99c6a2c786729e1eea241ba
   Kiwi: d60d7498b640a16f58b01925fc3c8d7c4d809f66
+  Kiwi-KIF: b5391f7f57e91f43fdb2d4227d64277a67cf9e09
   libextobjc: 2c9fc8226f0f38e562587f65172f93f0c9b4a47a
   Mantle: 0714cdb2b8559d9e6c2410d6a8529e3307bff189
   NXVLogFormatter: 5708990cb7002e8d2ea4beb2cf6b7f6ff0da64c3

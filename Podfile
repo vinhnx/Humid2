@@ -23,7 +23,7 @@ target :Humid2Tests, :exclusive => true do
 end
 
 target :Humid2UITests, :exclusive => true do
-    pod 'KIF', '~> 2.0.0'
-    # pod 'Kiwi-KIF', '~> 1.0.1'
+    # pod 'KIF', '~> 2.0.0'
+    pod 'Kiwi-KIF', '~> 1.0.1'
     # pod 'OHHTTPStubs', '~> 3.1.0'
 end

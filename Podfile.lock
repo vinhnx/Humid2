@@ -20,7 +20,6 @@ PODS:
   - AFNetworking/UIKit (2.2.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - BEMSimpleLineGraph (2.0.1)
   - BlurryModalSegue (1.0.0):
     - MZAppearance (~> 1.1.1)
     - UIImage+BlurredFrame (~> 0.0.4)
@@ -61,7 +60,6 @@ PODS:
 DEPENDENCIES:
   - AFNetworkActivityLogger (~> 2.0.1)
   - AFNetworking (~> 2.2.1)
-  - BEMSimpleLineGraph (~> 2.0.1)
   - BlurryModalSegue
   - CocoaLumberjack (~> 1.8.1)
   - Kiwi
@@ -77,7 +75,6 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworkActivityLogger: c2e99aec5d965a3ee33f0954a20c5ddab18934fe
   AFNetworking: 0121f4b69be3fa58d1ab317866e036e12ac9651d
-  BEMSimpleLineGraph: ec3f7ea00f88d2318c34bad1cea6234acff39bb3
   BlurryModalSegue: 35b785b80d61fa05b7c422673bac2f975f312367
   CocoaLumberjack: 020378ec400d658923bf5887178394f65f052c90
   KIF: ff3b46deb62ce3f8e99c6a2c786729e1eea241ba

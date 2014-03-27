@@ -12,7 +12,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="0.0" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.59999999999999998" green="0.23921568627450981" blue="0.19215686274509805" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="barTintColor" red="0.59999999999999998" green="0.23921568627450981" blue="0.19215686274509805" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.74901960779999999" green="0.27058823529999998" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="15"/>
                             <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -42,16 +42,18 @@
                                 <rect key="frame" x="0.0" y="197" width="320" height="173"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0ºC" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ejf-r1-SyS" userLabel="DegreeLabel">
+                                    <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0ºC" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ejf-r1-SyS" userLabel="DegreeLabel">
                                         <rect key="frame" x="180" y="20" width="127" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="53"/>
                                         <color key="textColor" red="0.74901960784313726" green="0.70196078431372544" blue="0.5607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="nice day" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="172" translatesAutoresizingMaskIntoConstraints="NO" id="hl9-G1-gBz" userLabel="WeatherDetailsLabel">
-                                        <rect key="frame" x="0.0" y="0.0" width="172" height="173"/>
+                                    <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="nice day" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="162" translatesAutoresizingMaskIntoConstraints="NO" id="hl9-G1-gBz" userLabel="WeatherDetailsLabel">
+                                        <rect key="frame" x="10" y="0.0" width="162" height="173"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="30"/>
                                         <color key="textColor" red="0.74901960779999999" green="0.70196078429999997" blue="0.56078431370000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -59,7 +61,7 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.15294117647058825" green="0.24705882352941178" blue="0.24705882352941178" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FCE-yu-6fs" userLabel="InfoButton">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vk9-KT-SjB" userLabel="InfoButton">
                                 <rect key="frame" x="278" y="526" width="22" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" label="ShowInfo"/>
@@ -67,7 +69,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="eY7-Re-Ff6" kind="custom" identifier="showDetail" customClass="BlurryModalSegue" id="1Db-FS-EYa"/>
+                                    <segue destination="eY7-Re-Ff6" kind="custom" identifier="showDetail" customClass="BlurryModalSegue" id="0m0-yP-cmD"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -78,11 +80,19 @@
                         </accessibility>
                         <gestureRecognizers/>
                     </view>
-                    <navigationItem key="navigationItem" title="HUMID" id="AKi-YE-MOG"/>
+                    <navigationItem key="navigationItem" title="HUMID" id="AKi-YE-MOG">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="Y4K-5c-VEH">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="setupForecastInfo" destination="kzV-XV-JIB" id="8Hz-J2-F7B"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="degreeSymbol" destination="ejf-r1-SyS" id="e2V-VG-SsQ"/>
-                        <outlet property="infoButton" destination="FCE-yu-6fs" id="uia-FX-9wU"/>
+                        <outlet property="infoButton" destination="vk9-KT-SjB" id="Vf4-Y4-Hf8"/>
+                        <outlet property="refreshButton" destination="Y4K-5c-VEH" id="cnS-Ui-xQl"/>
                         <outlet property="weatherSummaryLabel" destination="hl9-G1-gBz" id="xdi-F9-QVd"/>
                     </connections>
                 </viewController>

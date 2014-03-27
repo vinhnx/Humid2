@@ -13,6 +13,7 @@
 #ifdef __OBJC__
 @import UIKit;
 @import Foundation;
+@import CoreLocation;
 #import "Logging.h"
 #import <AFNetworking/AFNetworking.h>
 #import <AFNetworking/AFNetworkActivityIndicatorManager.h>

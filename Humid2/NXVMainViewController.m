@@ -9,16 +9,15 @@
 #import "NXVMainViewController.h"
 #import "NXVWeatherDetailsViewController.h"
 #import "NXVForecastModel.h"
+#import "FCLocationManager.h"
 
-// testing location lat and long coordinate keys
-static double NXVLatitude = 10.7574;
-static double NXVLongitude = 106.6734;
-
-@interface NXVMainViewController ()
-@property (nonatomic, strong) NXVForecastModel       *forecastModel;
-@property (nonatomic, copy  ) NSString               *degreeSymbolString;
-@property (nonatomic, strong) Reachability           *internetReachability;
-@property (nonatomic, assign) BOOL                   connectionAvailable;
+@interface NXVMainViewController () <FCLocationManagerDelegate>
+@property (nonatomic, strong) NXVForecastModel  *forecastModel;
+@property (nonatomic, copy  ) NSString          *degreeSymbolString;
+@property (nonatomic, strong) Reachability      *internetReachability;
+@property (nonatomic, assign) BOOL              connectionAvailable;
+@property (nonatomic, strong) FCLocationManager *locationManager;
+@property (nonatomic, strong) Forecast *forecastManager;
 @end
 
 @implementation NXVMainViewController
@@ -29,8 +28,8 @@ static double NXVLongitude = 106.6734;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
         self.title = NSLocalizedString(@"Humid", nil);
+        self.degreeSymbolString = @"\u2103"; // set default degree symbol to ºC
     }
     return self;
 }
@@ -38,7 +37,7 @@ static double NXVLongitude = 106.6734;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setupForecastInfo];
+    [self startRequestingForecastInfo];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -51,7 +50,7 @@ static double NXVLongitude = 106.6734;
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-    [[Forecast sharedManager] cancelAllForecastRequests];
+    [self.forecastManager cancelAllForecastRequests];
 }
 
 - (void)viewDidLayoutSubviews
@@ -72,78 +71,160 @@ static double NXVLongitude = 106.6734;
 
 #pragma mark - Private Methods
 
-- (void)setupForecastInfo
+- (void)startRequestingForecastInfo
 {
-    Forecast *forecastManager = [Forecast sharedManager];
-    forecastManager.APIKey = @""._7._2.c.a._4._8.d._8.b.d._7.d._4.d._1._4._7.b.e.b.f._1.c._8.f.b._9._5._1.f.e._7;
+    if ([CLLocationManager locationServicesEnabled]) {
+        [self setupForecastInfo];
+        if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
+            [self.forecastManager cancelAllForecastRequests];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Location Authorization Denied", nil)
+                                                                    message:NSLocalizedString(@"You can allow Humid to use your location later in Privacy pane in the Settings app", nil)
+                                                                   delegate:self
+                                                          cancelButtonTitle:NSLocalizedString(@"Close", nil)
+                                                          otherButtonTitles:nil];
+                [alertView show];
+            });
+        }
+        else if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusRestricted) {
+            [self.forecastManager cancelAllForecastRequests];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Location Authorization Restricted", nil)
+                                                                    message:NSLocalizedString(@"Humid is not authorized to use location services.", nil)
+                                                                   delegate:self
+                                                          cancelButtonTitle:NSLocalizedString(@"Close", nil)
+                                                          otherButtonTitles:nil];
+                [alertView show];
+            });
+        }
+    }
+    else if (![CLLocationManager locationServicesEnabled]) {
+        [self.forecastManager cancelAllForecastRequests];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"You are currently not enable location services", nil)
+                                                                message:NSLocalizedString(@"Humid only use your location to retrieve weather forecast. You can enable this by enabling Location Services in Privacy pane in the Settings app", nil)
+                                                               delegate:self
+                                                      cancelButtonTitle:NSLocalizedString(@"Close", nil)
+                                                      otherButtonTitles:nil];
+            [alertView show];
+        });
+    }
+}
 
-    CLLocation *location = [[CLLocation alloc] initWithLatitude:NXVLatitude
-                                                      longitude:NXVLongitude];
-    @weakify(self);
-    [forecastManager getForecastForLocation:location
-                                    success:^(id JSON) {
-                                        @strongify(self);
-										if (!self.forecastModel) {
-											NSError *error = nil;
-											self.forecastModel = [MTLJSONAdapter modelOfClass:[NXVForecastModel class]
-											                               fromJSONDictionary:(NSDictionary *)JSON
-											                                            error:&error];
-                                            [self updateViewsWithCallbackResults];
-										}
-                                        else {
-                                            DDLogError(@"something could be wrong...");
-                                        }
-                                    } failure:^(NSError *error, id response) {
-                                        // handle error
-                                        DDLogError(@"ERROR: %@", error.localizedDescription);
-                                    }];
-    DDLogWarn(@"TEST: step++");
+- (IBAction)setupForecastInfo
+{
+    [UIView animateWithDuration:1.1
+                          delay:.3
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                         self.navigationItem.title = NSLocalizedString(@"loading...", nil);
+                         self.weatherSummaryLabel.alpha = .1;
+                         self.degreeSymbol.alpha = .1;
+                     } completion:nil];
+
+    self.locationManager = [FCLocationManager sharedManager];
+    self.locationManager.delegate = self;
+    [self.locationManager startUpdatingLocation];
+    self.forecastManager = [Forecast sharedManager];
+    self.forecastManager.APIKey = @""._7._2.c.a._4._8.d._8.b.d._7.d._4.d._1._4._7.b.e.b.f._1.c._8.f.b._9._5._1.f.e._7;
+}
+#warning lam cache?
+- (void)getForecastInfoForLocation:(CLLocation *)location
+{
+	@weakify(self);
+	[self.forecastManager getForecastForLocation:location
+	                                     success: ^(id JSON) {
+                                             @strongify(self);
+                                             NSError *error = nil;
+                                             self.forecastModel = [MTLJSONAdapter modelOfClass:[NXVForecastModel class]
+                                                                            fromJSONDictionary:(NSDictionary *)JSON
+                                                                                         error:&error];
+                                             [self updateViewsWithCallbackResults];
+                                             DDLogInfo(@"Reponse: %@", self.forecastModel.currentlySummary);
+                                         } failure: ^(NSError *error, id response) {
+                                             // handle error
+                                             DDLogError(@"ERROR: %@", error.localizedDescription);
+                                         }];
 }
 
 - (void)updateViewsWithCallbackResults
 {
-    ([self.forecastModel.unit isKindOfClass:[NSString class]] && [self.forecastModel.unit isEqualToString:@"us"])
-    ? (self.degreeSymbolString = @"\u2109")
-    : (self.degreeSymbolString = @"\u2103");
-    self.weatherSummaryLabel.text = self.forecastModel ? self.forecastModel.currentlySummary : @"";
-    self.degreeSymbol.text = [NSString stringWithFormat:@"%.f%@",
-                              ceilf(self.forecastModel.currentlyApparentTemperature),
-                              self.degreeSymbolString];
+	([self.forecastModel.unit isKindOfClass:[NSString class]] && [self.forecastModel.unit isEqualToString:@"us"])
+	? (self.degreeSymbolString = @"\u2109")
+	: (self.degreeSymbolString = @"\u2103");
+    [UIView animateWithDuration:1
+                          delay:.5
+                        options:UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         self.weatherSummaryLabel.text = self.forecastModel ? self.forecastModel.currentlySummary : @"";
+                         self.degreeSymbol.text = [NSString stringWithFormat:@"%.f%@",
+                                                   ceilf(self.forecastModel.currentlyApparentTemperature),
+                                                   self.degreeSymbolString];
+                     } completion:^(BOOL finished) {
+                         self.weatherSummaryLabel.alpha = 1;
+                         self.degreeSymbol.alpha = 1;
+                     }];
 }
 
 #pragma mark - Reachability handler
 
 - (void)setupReachabilityManager
 {
-
 #pragma clang diagnostic push // ignore clang warning
 #pragma clang diagnostic ignored "-Warc-retain-cycles"
-
     // Set the general internet connection availability to YES to avoid issues with lazy reachibility notifier
-    self.connectionAvailable = YES;
-
-    // allocate the internet reachability object
-    self.internetReachability = [Reachability reachabilityForInternetConnection];
-    self.internetReachability.unreachableBlock = ^(Reachability *reachability) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            // reachability status
-            // Unreachable
-            [[Forecast sharedManager] cancelAllForecastRequests];
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"NETWORK ERROR"
-                                                                message:@"Internet connection seems unreachable! %@\n%@"
-                                                               delegate:nil
-                                                      cancelButtonTitle:NSLocalizedString(@"Close", nil)
-                                                      otherButtonTitles:nil];
-            [alertView show];
-            DDLogError(@"NETWORK ERROR: %@\n%@",
-                       NSLocalizedString(@"Something is not quite right", nil),
-                       NSLocalizedString(@"Internet connection seems unreachable!", nil));
-
-        });
-    };
-    [self.internetReachability startNotifier];
-    self.connectionAvailable = [self.internetReachability isReachable];
+	self.connectionAvailable = YES;
+	// allocate the internet reachability object
+	self.internetReachability = [Reachability reachabilityForInternetConnection];
+	@weakify(self);
+	self.internetReachability.unreachableBlock = ^(Reachability *reachability) {
+		dispatch_async(dispatch_get_main_queue(), ^{
+		    @strongify(self);
+		    // reachability status
+		    // Unreachable
+		    [self.forecastManager cancelAllForecastRequests];
+		    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"NETWORK ERROR", nil)
+		                                                        message:NSLocalizedString(@"Internet connection seems unreachable!", nil)
+		                                                       delegate:nil
+		                                              cancelButtonTitle:NSLocalizedString(@"Close", nil)
+		                                              otherButtonTitles:nil];
+		    [alertView show];
+		    DDLogError(@"NETWORK ERROR: %@\n%@",
+		               NSLocalizedString(@"Something is not quite right", nil),
+		               NSLocalizedString(@"Internet connection seems unreachable!", nil));
+		});
+	};
+	[self.internetReachability startNotifier];
+	self.connectionAvailable = [self.internetReachability isReachable];
 #pragma clang diagnostic pop
+}
+
+#pragma mark - Location Manager Delegate
+
+- (void)didAcquireLocation:(CLLocation *)location
+{
+    DDLogWarn(@"didAcquireLocation:");
+    [self getForecastInfoForLocation:location];
+    [self.locationManager findNameForLocation:location];
+}
+
+- (void)didFailToAcquireLocationWithErrorMsg:(NSString *)errorMsg
+{
+    DDLogError(@"didFailToAcquireLocationWithErrorMsg: %@", errorMsg);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Request Timed Out", nil)
+                                                            message:errorMsg
+                                                           delegate:nil
+                                                  cancelButtonTitle:NSLocalizedString(@"Close", nil)
+                                                  otherButtonTitles:nil];
+        [alertView show];
+    });
+}
+
+- (void)didFindLocationName:(NSString *)locationName
+{
+    DDLogWarn(@"didFindLocationName: %@", locationName);
+    self.navigationItem.title = locationName ?: NSLocalizedString(@"Humid", nil);
 }
 
 @end

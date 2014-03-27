@@ -79,6 +79,9 @@
                             <bool key="isElement" value="YES"/>
                         </accessibility>
                         <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="Z2f-0z-FKo" appends="YES" id="Y4t-GR-NmR"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="HUMID" id="AKi-YE-MOG">
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="Y4K-5c-VEH">
@@ -97,6 +100,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZGk-KV-UNY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Z2f-0z-FKo" userLabel="tap">
+                    <connections>
+                        <segue destination="eY7-Re-Ff6" kind="custom" identifier="didTapViewToShowDetail" customClass="BlurryModalSegue" id="wcZ-b2-fBZ"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="448" y="93"/>
         </scene>
@@ -150,4 +158,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="wcZ-b2-fBZ"/>
+    </inferredMetricsTieBreakers>
 </document>

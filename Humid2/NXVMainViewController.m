@@ -61,7 +61,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"showDetail"]) {
+    if ([segue.identifier isEqualToString:@"showDetail"] || [segue.identifier isEqualToString:@"didTapViewToShowDetail"]) {
 		NXVWeatherDetailsViewController *detailsViewController = [segue destinationViewController];
 		detailsViewController.detailString = [NSString stringWithFormat:@"%@\n\n%@\n\n%@",
 		                                      self.forecastModel.minutelySummary ?: @"",

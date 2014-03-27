@@ -31,7 +31,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     if ([self.detailString rangeOfString:@"null"].location != NSNotFound) {
-        self.detailString = NSLocalizedString(@"No weather forecast found, you can try fetching it again.", nil);
+        self.detailString = NSLocalizedString(@"(No weather forecast found, you can try fetching it again.)", nil);
     }
     self.detailsTextView.text = self.detailString;
 }

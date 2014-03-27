@@ -39,7 +39,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7G1-jq-PZy" userLabel="CenterView">
-                                <rect key="frame" x="0.0" y="181" width="320" height="173"/>
+                                <rect key="frame" x="0.0" y="83" width="320" height="173"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0ºC" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ejf-r1-SyS" userLabel="DegreeLabel">
@@ -77,9 +77,6 @@
                             <bool key="isElement" value="YES"/>
                         </accessibility>
                         <gestureRecognizers/>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="GyP-rg-5t9" appends="YES" id="qCV-U7-lME"/>
-                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="HUMID" id="AKi-YE-MOG"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
@@ -90,11 +87,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZGk-KV-UNY" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="GyP-rg-5t9" userLabel="tapToShowDetailedWeatherForecastInfo">
-                    <connections>
-                        <segue destination="eY7-Re-Ff6" kind="custom" identifier="tapToShowDetails" customClass="BlurryModalSegue" id="8WJ-xN-uJE"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="448" y="93"/>
         </scene>
@@ -124,10 +116,9 @@
                                     <action selector="dismissDetailsViewController:" destination="eY7-Re-Ff6" eventType="touchUpInside" id="w3g-LD-TJP"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="8sZ-ug-4IV">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="a nice weather forecast detail goes here" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="8sZ-ug-4IV">
                                 <rect key="frame" x="20" y="181" width="280" height="233"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" red="0.74901960779999999" green="0.70196078429999997" blue="0.56078431370000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -149,7 +140,4 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="8WJ-xN-uJE"/>
-    </inferredMetricsTieBreakers>
 </document>

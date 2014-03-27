@@ -30,7 +30,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    NSLog(@"+ %@", self.forecastModel.currentlySummary);
     self.detailsTextView.text = self.detailString;
 }
 

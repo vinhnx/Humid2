@@ -11,14 +11,14 @@
 #import "NXVForecastModel.h"
 
 // testing location lat and long coordinate keys
-static double kNXVLATITUDE = 10.7574;
-static double kNXVLONGITUDE = 106.6734;
+static double NXVLatitude = 10.7574;
+static double NXVLongitude = 106.6734;
 
 @interface NXVMainViewController ()
-@property (nonatomic, strong) NXVForecastModel *forecastModel;
-@property (nonatomic, copy  ) NSString         *degreeSymbolString;
-@property (nonatomic, strong) Reachability     *internetReachability;
-@property (nonatomic, assign) BOOL             connectionAvailable;
+@property (nonatomic, strong) NXVForecastModel       *forecastModel;
+@property (nonatomic, copy  ) NSString               *degreeSymbolString;
+@property (nonatomic, strong) Reachability           *internetReachability;
+@property (nonatomic, assign) BOOL                   connectionAvailable;
 @end
 
 @implementation NXVMainViewController
@@ -31,7 +31,6 @@ static double kNXVLONGITUDE = 106.6734;
     if (self) {
         // Custom initialization
         self.title = NSLocalizedString(@"Humid", nil);
-        self.degreeSymbolString = @"\u00b0";
     }
     return self;
 }
@@ -62,7 +61,7 @@ static double kNXVLONGITUDE = 106.6734;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"showDetail"] || [segue.identifier isEqualToString:@"tapToShowDetails"]) {
+    if ([segue.identifier isEqualToString:@"showDetail"]) {
         NXVWeatherDetailsViewController *detailsViewController = [segue destinationViewController];
         detailsViewController.detailString = [NSString stringWithFormat:@"%@\n\n%@\n\n%@",
                                            self.forecastModel.minutelySummary ?: @"",
@@ -78,8 +77,8 @@ static double kNXVLONGITUDE = 106.6734;
     Forecast *forecastManager = [Forecast sharedManager];
     forecastManager.APIKey = @""._7._2.c.a._4._8.d._8.b.d._7.d._4.d._1._4._7.b.e.b.f._1.c._8.f.b._9._5._1.f.e._7;
 
-    CLLocation *location = [[CLLocation alloc] initWithLatitude:kNXVLATITUDE
-                                                      longitude:kNXVLONGITUDE];
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:NXVLatitude
+                                                      longitude:NXVLongitude];
     @weakify(self);
     [forecastManager getForecastForLocation:location
                                     success:^(id JSON) {
@@ -89,13 +88,7 @@ static double kNXVLONGITUDE = 106.6734;
 											self.forecastModel = [MTLJSONAdapter modelOfClass:[NXVForecastModel class]
 											                               fromJSONDictionary:(NSDictionary *)JSON
 											                                            error:&error];
-                                            self.weatherSummaryLabel.text = self.forecastModel ? self.forecastModel.currentlySummary : NSLocalizedString(@"...", nil);
-                                            ([self.forecastModel.unit isKindOfClass:[NSString class]] && [self.forecastModel.unit isEqualToString:@"us"])
-                                            ? (self.degreeSymbolString = @"\u2109")
-                                            : (self.degreeSymbolString = @"\u2103");
-                                            self.degreeSymbol.text = [NSString stringWithFormat:@"%.f%@",
-                                                                      floorf(self.forecastModel.currentlyApparentTemperature),
-                                                                      self.degreeSymbolString];
+                                            [self updateViewsWithCallbackResults];
 										}
                                         else {
                                             DDLogError(@"something could be wrong...");
@@ -107,6 +100,16 @@ static double kNXVLONGITUDE = 106.6734;
     DDLogWarn(@"TEST: step++");
 }
 
+- (void)updateViewsWithCallbackResults
+{
+    ([self.forecastModel.unit isKindOfClass:[NSString class]] && [self.forecastModel.unit isEqualToString:@"us"])
+    ? (self.degreeSymbolString = @"\u2109")
+    : (self.degreeSymbolString = @"\u2103");
+    self.weatherSummaryLabel.text = self.forecastModel ? self.forecastModel.currentlySummary : @"";
+    self.degreeSymbol.text = [NSString stringWithFormat:@"%.f%@",
+                              ceilf(self.forecastModel.currentlyApparentTemperature),
+                              self.degreeSymbolString];
+}
 
 #pragma mark - Reachability handler
 

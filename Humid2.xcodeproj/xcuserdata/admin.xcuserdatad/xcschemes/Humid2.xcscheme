@@ -90,7 +90,7 @@
       <AdditionalOptions>
       </AdditionalOptions>
       <LocationScenarioReference
-         identifier = "../Humid2/Ho Chi Minh.gpx"
+         identifier = "../Humid2/Ho Chi Minh city.gpx"
          referenceType = "0">
       </LocationScenarioReference>
    </LaunchAction>

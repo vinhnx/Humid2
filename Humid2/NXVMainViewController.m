@@ -34,6 +34,12 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self setupReachabilityManager];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -44,7 +50,6 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self setupReachabilityManager];
 }
 
 - (void)didReceiveMemoryWarning
@@ -122,7 +127,6 @@
                      animations:^{
                          self.weatherSummaryLabel.alpha = self.degreeSymbol.alpha = .1;
                      } completion:nil];
-
     self.locationManager = [FCLocationManager sharedManager];
     self.locationManager.delegate = self;
     [self.locationManager startUpdatingLocation];
@@ -135,7 +139,7 @@
     [SVProgressHUD dismiss];
 	@weakify(self);
 	[self.forecastManager getForecastForLocation:location
-	                                     success: ^(id JSON) {
+	                                     success:^(id JSON) {
                                              @strongify(self);
                                              NSError *error = nil;
                                              self.forecastModel = [MTLJSONAdapter modelOfClass:[NXVForecastModel class]
@@ -143,7 +147,7 @@
                                                                                          error:&error];
                                              [self updateViewsWithCallbackResults];
                                              DDLogInfo(@"Reponse: %@", self.forecastModel.currentlySummary);
-                                         } failure: ^(NSError *error, id response) {
+                                         } failure:^(NSError *error, id response) {
                                              // handle error
                                              DDLogError(@"ERROR: %@", error.localizedDescription);
                                          }];
@@ -198,6 +202,7 @@
 	[self.internetReachability startNotifier];
 	self.connectionAvailable = [self.internetReachability isReachable];
 #pragma clang diagnostic pop
+    DDLogError(@":::: connection? :%@", self.connectionAvailable ? @"YES" : @"NO");
 }
 
 #pragma mark - Location Manager Delegate
@@ -205,7 +210,9 @@
 - (void)didAcquireLocation:(CLLocation *)location
 {
     DDLogWarn(@"didAcquireLocation:");
-    [self getForecastInfoForLocation:location];
+    if (self.connectionAvailable == YES) {
+        [self getForecastInfoForLocation:location];
+    }
     [self.locationManager findNameForLocation:location];
 }
 
@@ -228,7 +235,7 @@
         [alertView show];
     });
 }
-#warning if failed request, don't show info button
+
 - (void)didFindLocationName:(NSString *)locationName
 {
     DDLogWarn(@"didFindLocationName: %@", locationName);

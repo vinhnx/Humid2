@@ -17,7 +17,7 @@
 @property (nonatomic, strong) Reachability      *internetReachability;
 @property (nonatomic, assign) BOOL              connectionAvailable;
 @property (nonatomic, strong) FCLocationManager *locationManager;
-@property (nonatomic, strong) Forecast *forecastManager;
+@property (nonatomic, strong) Forecast          *forecastManager;
 @end
 
 @implementation NXVMainViewController
@@ -37,6 +37,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [TSMessage defaultViewController];
     [self setupReachabilityManager];
 }
 
@@ -219,7 +220,9 @@
 - (void)didFailToAcquireLocationWithErrorMsg:(NSString *)errorMsg
 {
     DDLogError(@"didFailToAcquireLocationWithErrorMsg: %@", errorMsg);
-    [SVProgressHUD dismiss];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [SVProgressHUD dismiss];
+    });
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIView animateWithDuration:.8
                               delay:.4
@@ -227,12 +230,12 @@
                          animations:^{
                              self.weatherSummaryLabel.alpha = self.degreeSymbol.alpha = 1;
                          } completion:nil];
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Request Timed Out", nil)
-                                                            message:errorMsg
-                                                           delegate:nil
-                                                  cancelButtonTitle:NSLocalizedString(@"Close", nil)
-                                                  otherButtonTitles:nil];
-        [alertView show];
+        [TSMessage showNotificationInViewController:self
+                                              title:NSLocalizedString(@"Request Timed Out", nil)
+                                           subtitle:errorMsg
+                                               type:TSMessageNotificationTypeError
+                                           duration:5
+                               canBeDismissedByUser:YES];
     });
 }
 

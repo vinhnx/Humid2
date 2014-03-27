@@ -14,6 +14,7 @@ target :Humid2 do
     pod 'UIView+DebugQuickLook', '~> 1.0'
     pod 'SVProgressHUD', '~> 1.0'
     pod 'BlurryModalSegue'
+    pod 'TSMessages', '~> 0.9.6'
 end
 
 target :Humid2Tests, :exclusive => true do

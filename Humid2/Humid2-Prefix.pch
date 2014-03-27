@@ -24,6 +24,7 @@
 #import <Reachability/Reachability.h>
 #import <SVProgressHUD/SVProgressHUD.h>
 #import <BlurryModalSegue/BlurryModalSegue.h>
+#import <TSMessages/TSMessage.h>
 #import "NXVForecastModel.h"
 #import "Forecast.h"
 #import "Forecast+CLLocation.h"

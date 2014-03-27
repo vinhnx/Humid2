@@ -11,7 +11,9 @@
 #import "NXVForecastModel.h"
 #import "FCLocationManager.h"
 
-@interface NXVMainViewController () <FCLocationManagerDelegate>
+@interface NXVMainViewController () <FCLocationManagerDelegate> {
+    NSMutableArray *_chartValues;
+}
 @property (nonatomic, strong) NXVForecastModel  *forecastModel;
 @property (nonatomic, copy  ) NSString          *degreeSymbolString;
 @property (nonatomic, strong) Reachability      *internetReachability;
@@ -28,7 +30,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"HUMID", nil);
+        self.title = @"HUMID";
         self.degreeSymbolString = @"\u2103"; // set default degree symbol to ºC
     }
     return self;
@@ -73,7 +75,7 @@
 		                                      self.forecastModel.minutelySummary ?: @"",
 		                                      self.forecastModel.hourlySummary ?: @"",
 		                                      self.forecastModel.dailySummary] ?: @"";
-        detailsViewController.cityName.text = self.navigationItem.title;
+        detailsViewController.cityName = self.navigationItem.title;
     }
 }
 
@@ -150,6 +152,7 @@
                                                                             fromJSONDictionary:(NSDictionary *)JSON
                                                                                          error:&error];
                                              [self updateViewsWithCallbackResults];
+                                             [self processChartValues];
                                              DDLogInfo(@"Reponse: %@", self.forecastModel.currentlySummary);
                                          } failure:^(NSError *error, id response) {
                                              // handle error
@@ -175,6 +178,20 @@
                      }];
 }
 
+- (void)processChartValues
+{
+    _chartValues = [NSMutableArray new];
+    [self.forecastModel.hourlyData enumerateObjectsWithOptions:NSEnumerationConcurrent
+                                                    usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                                                        @autoreleasepool {
+                                                            [_chartValues addObject:obj[@"temperature"]];
+                                                        }
+                                                        if (idx == 23) {
+                                                            *stop = YES;
+                                                        }
+                                                    }];
+}
+
 #pragma mark - Reachability handler
 
 - (void)setupReachabilityManager
@@ -192,12 +209,12 @@
 		    // reachability status
 		    // Unreachable
 		    [self.forecastManager cancelAllForecastRequests];
-		    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"NETWORK ERROR", nil)
-		                                                        message:NSLocalizedString(@"Internet connection seems unreachable!", nil)
-		                                                       delegate:nil
-		                                              cancelButtonTitle:NSLocalizedString(@"Close", nil)
-		                                              otherButtonTitles:nil];
-		    [alertView show];
+            [TSMessage showNotificationInViewController:self
+                                                  title:NSLocalizedString(@"NETWORK ERROR", nil)
+                                               subtitle:NSLocalizedString(@"Internet connection seems unreachable!", nil)
+                                                   type:TSMessageNotificationTypeWarning
+                                               duration:3
+                                   canBeDismissedByUser:YES];
 		    DDLogError(@"NETWORK ERROR: %@\n%@",
 		               NSLocalizedString(@"Something is not quite right", nil),
 		               NSLocalizedString(@"Internet connection seems unreachable!", nil));
@@ -245,7 +262,7 @@
 - (void)didFindLocationName:(NSString *)locationName
 {
     DDLogWarn(@"didFindLocationName: %@", locationName);
-    self.navigationItem.title = locationName ?: NSLocalizedString(@"HUMID", nil);
+    self.navigationItem.title = locationName ?: @"HUMID";
 }
 
 @end

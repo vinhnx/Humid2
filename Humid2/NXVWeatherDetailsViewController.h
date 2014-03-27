@@ -10,7 +10,8 @@
 
 @interface NXVWeatherDetailsViewController : UIViewController
 @property (nonatomic, copy) NSString *detailString;
-@property (weak, nonatomic) IBOutlet UILabel *cityName;
+@property (nonatomic, copy) NSString *cityName;
+@property (weak, nonatomic) IBOutlet UILabel *cityLabel;
 @property (weak, nonatomic) IBOutlet UITextView *detailsTextView;
 
 - (IBAction)dismissDetailsViewController:(id)sender;

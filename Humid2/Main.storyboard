@@ -69,6 +69,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="setupForecastInfo" destination="kzV-XV-JIB" eventType="touchUpInside" id="PIq-kS-H5b"/>
                                     <segue destination="eY7-Re-Ff6" kind="custom" identifier="showDetail" customClass="BlurryModalSegue" id="0m0-yP-cmD"/>
                                 </connections>
                             </button>
@@ -152,7 +153,7 @@
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="cityName" destination="IhC-HM-xsh" id="o4I-Md-Qvm"/>
+                        <outlet property="cityLabel" destination="IhC-HM-xsh" id="R8J-DT-daX"/>
                         <outlet property="detailsTextView" destination="8sZ-ug-4IV" id="a2c-3i-lYZ"/>
                     </connections>
                 </viewController>

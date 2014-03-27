@@ -32,6 +32,7 @@
         self.detailString = NSLocalizedString(@"(No weather forecast found, you can try fetching it again.)", nil);
     }
     self.detailsTextView.text = self.detailString;
+    self.cityLabel.text = self.cityName;
 }
 
 - (void)didReceiveMemoryWarning

@@ -21,6 +21,7 @@ target :Humid2Tests, :exclusive => true do
     # pod 'Specta'
     # pod 'Expecta'
     # pod 'OHHTTPStubs', '~> 3.1.0'
+    # pod 'Nocilla'
 end
 
 target :Humid2UITests, :exclusive => true do

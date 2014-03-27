@@ -7,13 +7,16 @@
 //
 
 #import <Kiwi/Kiwi.h>
-//#import "NXVForecastModel.h"
 
 SPEC_BEGIN(TestEvaluateForecastData)
 
 describe(@"it takes a while", ^{
-    beforeAll(^{
+    it(@"should return the proper JSON", ^{
+        beforeEach(^{
+        });
 
+        afterEach(^{
+        });
     });
 });
 

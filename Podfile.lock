@@ -49,6 +49,7 @@ PODS:
     - Mantle/extobjc
   - Mantle/extobjc (1.4.1)
   - MZAppearance (1.1.1)
+  - Nocilla (0.8.1)
   - NXVLogFormatter (0.0.1):
     - CocoaLumberjack (~> 1.8.1)
   - ProgressHUD (1.1)
@@ -66,6 +67,7 @@ DEPENDENCIES:
   - Kiwi-KIF (~> 1.0.1)
   - libextobjc/EXTScope (~> 0.4)
   - Mantle (~> 1.4.1)
+  - Nocilla
   - NXVLogFormatter (~> 0.0.1)
   - ProgressHUD (~> 1.1)
   - Reachability (~> 3.1.1)
@@ -83,6 +85,7 @@ SPEC CHECKSUMS:
   libextobjc: 2c9fc8226f0f38e562587f65172f93f0c9b4a47a
   Mantle: 0714cdb2b8559d9e6c2410d6a8529e3307bff189
   MZAppearance: 8b02683f0019f725557ae9839ed6cab153fff669
+  Nocilla: 0c8075046df476b1bc6482caa7f6a69db1a9b277
   NXVLogFormatter: 5708990cb7002e8d2ea4beb2cf6b7f6ff0da64c3
   ProgressHUD: 9b41c9416b3ba4f9c5661afe9efa7938198ba810
   Reachability: be4883bb93f31e38266ae3365e5600a317aae735

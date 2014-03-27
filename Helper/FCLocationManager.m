@@ -69,7 +69,7 @@ static NSString *kFCTimeoutError = @"There was a timeout while attempting to det
 
 - (void)startUpdatingLocation
 {
-    NSLog(@"Started updating location.");
+    DDLogWarn(@"Started updating location.");
 
     // Reset the last best effort (otherwise it might hang the next time it tries to find a GPS location)
     bestEffortAtLocation = nil;
@@ -89,7 +89,7 @@ static NSString *kFCTimeoutError = @"There was a timeout while attempting to det
 // Stops the location manager from updating the location (to preserve power consumption)
 - (void)stopUpdatingLocation
 {
-    NSLog(@"Stopped updating location.");
+    DDLogWarn(@"Stopped updating location.");
 
     [locationManager stopUpdatingLocation];
     locationManager.delegate = nil;
@@ -127,11 +127,11 @@ static NSString *kFCTimeoutError = @"There was a timeout while attempting to det
             break;
 
         case kCLErrorLocationUnknown:
-            NSLog(@"Error retrieving location.  Retrying...");
+            DDLogError(@"Error retrieving location.  Retrying...");
             break;
 
         default:
-            NSLog(@"We had an unknown error while trying to retrieve the user location: %@", error.localizedDescription);
+            DDLogError(@"We had an unknown error while trying to retrieve the user location: %@", error.localizedDescription);
             break;
     }
 }

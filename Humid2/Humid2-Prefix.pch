@@ -22,7 +22,7 @@
 #import <Mantle/Mantle.h>
 #import <libextobjc/EXTScope.h>
 #import <Reachability/Reachability.h>
-#import <ProgressHUD/ProgressHUD.h>
+#import <SVProgressHUD/SVProgressHUD.h>
 #import <BlurryModalSegue/BlurryModalSegue.h>
 #import "NXVForecastModel.h"
 #import "Forecast.h"

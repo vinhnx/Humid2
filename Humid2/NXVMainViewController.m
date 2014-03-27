@@ -28,7 +28,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"Humid", nil);
+        self.title = NSLocalizedString(@"HUMID", nil);
         self.degreeSymbolString = @"\u2103"; // set default degree symbol to ºC
     }
     return self;
@@ -37,6 +37,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[SVProgressHUD appearance] setHudFont:[UIFont fontWithName:@"AvenirNext-Medium" size:13]];
     [self startRequestingForecastInfo];
 }
 
@@ -61,11 +62,11 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"showDetail"]) {
-        NXVWeatherDetailsViewController *detailsViewController = [segue destinationViewController];
-        detailsViewController.detailString = [NSString stringWithFormat:@"%@\n\n%@\n\n%@",
-                                           self.forecastModel.minutelySummary ?: @"",
-                                           self.forecastModel.hourlySummary,
-                                           self.forecastModel.dailySummary];
+		NXVWeatherDetailsViewController *detailsViewController = [segue destinationViewController];
+		detailsViewController.detailString = [NSString stringWithFormat:@"%@\n\n%@\n\n%@",
+		                                      self.forecastModel.minutelySummary ?: @"",
+		                                      self.forecastModel.hourlySummary ?: @"",
+		                                      self.forecastModel.dailySummary] ?: @"";
     }
 }
 
@@ -113,13 +114,13 @@
 
 - (IBAction)setupForecastInfo
 {
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"Please wait...", nil)
+                         maskType:SVProgressHUDMaskTypeGradient];
     [UIView animateWithDuration:1.1
                           delay:.3
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^{
-                         self.navigationItem.title = NSLocalizedString(@"loading...", nil);
-                         self.weatherSummaryLabel.alpha = .1;
-                         self.degreeSymbol.alpha = .1;
+                         self.weatherSummaryLabel.alpha = self.degreeSymbol.alpha = .1;
                      } completion:nil];
 
     self.locationManager = [FCLocationManager sharedManager];
@@ -131,6 +132,7 @@
 #warning lam cache?
 - (void)getForecastInfoForLocation:(CLLocation *)location
 {
+    [SVProgressHUD dismiss];
 	@weakify(self);
 	[self.forecastManager getForecastForLocation:location
 	                                     success: ^(id JSON) {
@@ -161,8 +163,7 @@
                                                    ceilf(self.forecastModel.currentlyApparentTemperature),
                                                    self.degreeSymbolString];
                      } completion:^(BOOL finished) {
-                         self.weatherSummaryLabel.alpha = 1;
-                         self.degreeSymbol.alpha = 1;
+                         self.weatherSummaryLabel.alpha = self.degreeSymbol.alpha = 1;
                      }];
 }
 
@@ -211,7 +212,14 @@
 - (void)didFailToAcquireLocationWithErrorMsg:(NSString *)errorMsg
 {
     DDLogError(@"didFailToAcquireLocationWithErrorMsg: %@", errorMsg);
+    [SVProgressHUD dismiss];
     dispatch_async(dispatch_get_main_queue(), ^{
+        [UIView animateWithDuration:.8
+                              delay:.4
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+                             self.weatherSummaryLabel.alpha = self.degreeSymbol.alpha = 1;
+                         } completion:nil];
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Request Timed Out", nil)
                                                             message:errorMsg
                                                            delegate:nil
@@ -220,11 +228,11 @@
         [alertView show];
     });
 }
-
+#warning if failed request, don't show info button
 - (void)didFindLocationName:(NSString *)locationName
 {
     DDLogWarn(@"didFindLocationName: %@", locationName);
-    self.navigationItem.title = locationName ?: NSLocalizedString(@"Humid", nil);
+    self.navigationItem.title = locationName ?: NSLocalizedString(@"HUMID", nil);
 }
 
 @end

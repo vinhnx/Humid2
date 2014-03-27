@@ -76,6 +76,7 @@
 		8477D51C18DC4650006240CF /* NXVForecastModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXVForecastModel.m; sourceTree = "<group>"; };
 		84E80DFB18E3F3750054C6C9 /* FCLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCLocationManager.h; sourceTree = "<group>"; };
 		84E80DFC18E3F3750054C6C9 /* FCLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCLocationManager.m; sourceTree = "<group>"; };
+		84E80DFE18E408F60054C6C9 /* Ho Chi Minh.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Ho Chi Minh.gpx"; sourceTree = "<group>"; };
 		84F998DB18D6D8A500899921 /* Humid2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Humid2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84F998DE18D6D8A500899921 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		84F998E018D6D8A500899921 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -247,6 +248,7 @@
 		84F998E518D6D8A500899921 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				84E80DFE18E408F60054C6C9 /* Ho Chi Minh.gpx */,
 				84F998E618D6D8A500899921 /* Humid2-Info.plist */,
 				84F998E718D6D8A500899921 /* InfoPlist.strings */,
 				84F998EA18D6D8A500899921 /* main.m */,

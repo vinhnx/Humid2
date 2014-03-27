@@ -11,8 +11,8 @@ target :Humid2 do
     pod 'Mantle', '~> 1.4.1'
     pod 'libextobjc/EXTScope', '~> 0.4'
     pod 'Reachability', '~> 3.1.1'
-    pod 'ProgressHUD', '~> 1.1'
     pod 'UIView+DebugQuickLook', '~> 1.0'
+    pod 'SVProgressHUD', '~> 1.0'
     pod 'BlurryModalSegue'
 end
 

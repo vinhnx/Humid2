@@ -7,10 +7,8 @@
 //
 
 #import "NXVWeatherDetailsViewController.h"
-#import "NXVForecastModel.h"
 
 @interface NXVWeatherDetailsViewController ()
-@property (nonatomic, strong) NXVForecastModel *forecastModel;
 @end
 
 @implementation NXVWeatherDetailsViewController

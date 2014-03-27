@@ -37,13 +37,13 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [TSMessage defaultViewController];
     [self setupReachabilityManager];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [TSMessage defaultViewController];
     [[SVProgressHUD appearance] setHudFont:[UIFont fontWithName:@"AvenirNext-Medium" size:13]];
     [self startRequestingForecastInfo];
 }
@@ -73,6 +73,7 @@
 		                                      self.forecastModel.minutelySummary ?: @"",
 		                                      self.forecastModel.hourlySummary ?: @"",
 		                                      self.forecastModel.dailySummary] ?: @"";
+        detailsViewController.cityName.text = self.navigationItem.title;
     }
 }
 
@@ -135,6 +136,8 @@
     self.forecastManager.APIKey = @""._7._2.c.a._4._8.d._8.b.d._7.d._4.d._1._4._7.b.e.b.f._1.c._8.f.b._9._5._1.f.e._7;
 }
 #warning lam cache?
+#warning chart view
+#warning test
 - (void)getForecastInfoForLocation:(CLLocation *)location
 {
     [SVProgressHUD dismiss];
@@ -165,7 +168,7 @@
                      animations:^{
                          self.weatherSummaryLabel.text = self.forecastModel ? self.forecastModel.currentlySummary : @"";
                          self.degreeSymbol.text = [NSString stringWithFormat:@"%.f%@",
-                                                   ceilf(self.forecastModel.currentlyApparentTemperature),
+                                                   ceilf(self.forecastModel.currentlyTemperature),
                                                    self.degreeSymbolString];
                      } completion:^(BOOL finished) {
                          self.weatherSummaryLabel.alpha = self.degreeSymbol.alpha = 1;

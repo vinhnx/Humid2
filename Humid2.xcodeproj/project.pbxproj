@@ -19,6 +19,7 @@
 		8466F5F418DD640800164908 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8466F5F218DD640800164908 /* InfoPlist.strings */; };
 		8471B80C18E289480095673E /* FunctionalTestingSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471B80B18E289480095673E /* FunctionalTestingSpec.m */; };
 		8477D51D18DC4650006240CF /* NXVForecastModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8477D51C18DC4650006240CF /* NXVForecastModel.m */; };
+		84E80DFD18E3F3750054C6C9 /* FCLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E80DFC18E3F3750054C6C9 /* FCLocationManager.m */; };
 		84F998DF18D6D8A500899921 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F998DE18D6D8A500899921 /* Foundation.framework */; };
 		84F998E118D6D8A500899921 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F998E018D6D8A500899921 /* CoreGraphics.framework */; };
 		84F998E318D6D8A500899921 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F998E218D6D8A500899921 /* UIKit.framework */; };
@@ -73,6 +74,8 @@
 		8471B80B18E289480095673E /* FunctionalTestingSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FunctionalTestingSpec.m; sourceTree = "<group>"; };
 		8477D51B18DC4650006240CF /* NXVForecastModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXVForecastModel.h; sourceTree = "<group>"; };
 		8477D51C18DC4650006240CF /* NXVForecastModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXVForecastModel.m; sourceTree = "<group>"; };
+		84E80DFB18E3F3750054C6C9 /* FCLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCLocationManager.h; sourceTree = "<group>"; };
+		84E80DFC18E3F3750054C6C9 /* FCLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCLocationManager.m; sourceTree = "<group>"; };
 		84F998DB18D6D8A500899921 /* Humid2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Humid2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84F998DE18D6D8A500899921 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		84F998E018D6D8A500899921 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -176,6 +179,15 @@
 				8433DFD518D7FE0A00576C22 /* Forecast+CLLocation.m */,
 			);
 			name = Singleton;
+			sourceTree = "<group>";
+		};
+		84E80DFA18E3F33B0054C6C9 /* LocationManager */ = {
+			isa = PBXGroup;
+			children = (
+				84E80DFB18E3F3750054C6C9 /* FCLocationManager.h */,
+				84E80DFC18E3F3750054C6C9 /* FCLocationManager.m */,
+			);
+			name = LocationManager;
 			sourceTree = "<group>";
 		};
 		84F998D218D6D8A500899921 = {
@@ -329,6 +341,7 @@
 		84F9995818D70A4A00899921 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				84E80DFA18E3F33B0054C6C9 /* LocationManager */,
 				84F9995918D70A4A00899921 /* UIKit-Block */,
 			);
 			path = Helper;
@@ -599,6 +612,7 @@
 				845CC78718E2C0F10046E9F4 /* NXVWeatherDetailsViewController.m in Sources */,
 				843AFD9C18D7F9D900E17047 /* ForecastAPIClient.m in Sources */,
 				84F9991A18D6E95A00899921 /* NXVAppDelegate.m in Sources */,
+				84E80DFD18E3F3750054C6C9 /* FCLocationManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

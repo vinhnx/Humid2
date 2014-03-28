@@ -46,7 +46,7 @@
 {
     [super viewDidLoad];
     [self startRequestingForecastInfo];
-    [TSMessage defaultViewController];
+    [TSMessage setDefaultViewController:self];
     [[SVProgressHUD appearance] setHudFont:[UIFont fontWithName:@"AvenirNext-Medium" size:13]];
 }
 

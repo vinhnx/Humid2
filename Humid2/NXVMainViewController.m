@@ -45,9 +45,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self startRequestingForecastInfo];
     [TSMessage defaultViewController];
     [[SVProgressHUD appearance] setHudFont:[UIFont fontWithName:@"AvenirNext-Medium" size:13]];
-    [self startRequestingForecastInfo];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -137,9 +137,7 @@
     self.forecastManager = [Forecast sharedManager];
     self.forecastManager.APIKey = @""._7._2.c.a._4._8.d._8.b.d._7.d._4.d._1._4._7.b.e.b.f._1.c._8.f.b._9._5._1.f.e._7;
 }
-#warning lam cache?
-#warning chart view
-#warning test
+
 - (void)getForecastInfoForLocation:(CLLocation *)location
 {
     [SVProgressHUD dismiss];
@@ -152,7 +150,6 @@
                                                                             fromJSONDictionary:(NSDictionary *)JSON
                                                                                          error:&error];
                                              [self updateViewsWithCallbackResults];
-                                             [self processChartValues];
                                              DDLogInfo(@"Reponse: %@", self.forecastModel.currentlySummary);
                                          } failure:^(NSError *error, id response) {
                                              // handle error
@@ -176,20 +173,6 @@
                      } completion:^(BOOL finished) {
                          self.weatherSummaryLabel.alpha = self.degreeSymbol.alpha = 1;
                      }];
-}
-
-- (void)processChartValues
-{
-    _chartValues = [NSMutableArray new];
-    [self.forecastModel.hourlyData enumerateObjectsWithOptions:NSEnumerationConcurrent
-                                                    usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                                                        @autoreleasepool {
-                                                            [_chartValues addObject:obj[@"temperature"]];
-                                                        }
-                                                        if (idx == 23) {
-                                                            *stop = YES;
-                                                        }
-                                                    }];
 }
 
 #pragma mark - Reachability handler
@@ -261,8 +244,12 @@
 
 - (void)didFindLocationName:(NSString *)locationName
 {
-    DDLogWarn(@"didFindLocationName: %@", locationName);
-    self.navigationItem.title = locationName ?: @"HUMID";
+    // first, we must check if locationManager delegate can reponse to
+    // didFindLocationName: optional protocol
+    if ([_locationManager.delegate respondsToSelector:@selector(didFindLocationName:)]) {
+        DDLogWarn(@"didFindLocationName: %@", locationName);
+        self.navigationItem.title = locationName ?: @"HUMID";
+    }
 }
 
 @end

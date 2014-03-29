@@ -37,10 +37,10 @@
 
 #pragma mark - Instance methods
 
-- (void)getForecastForLatitude:(double)latitude
-                     longitude:(double)longitude
-                       success:(void (^)(id))success
-                       failure:(void (^)(NSError *, id))failure
+- (void)getWeatherForLatitude:(double)latitude
+                    longitude:(double)longitude
+                      success:(void (^)(id))success
+                      failure:(void (^)(NSError *, id))failure
 {
     // IMPORTANT, we have to check if API key was set
     [self checkAPIKey];
@@ -48,8 +48,8 @@
     // generate the URL string based on the passed in params
     NSString *urlString = [self URLStringForLatitude:latitude longitude:longitude];
 
-#ifndef NDEBUG
-    NSLog(@"-- Checking forecast for %@", urlString);
+#ifdef DEBUG
+    NSLog(@"[Forecast.io] Checking forecast for %@", urlString);
 #endif
 
     // call GET request on the API for the URL
@@ -61,6 +61,7 @@
                                   failure:^(NSURLSessionDataTask *task, NSError *error) {
                                       NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
                                       failure(error, response);
+                                      DDLogError(@"%s. API call error: %@", __PRETTY_FUNCTION__, error.localizedDescription);
                                   }];
 }
 
@@ -79,16 +80,16 @@
 {
     // check for the existence of APIkey
     if (!self.APIKey || !self.APIKey.length) {
-        [NSException raise:@"Forecast"
+        [NSException raise:@"API not found"
                     format:@"Forecast.io API key must be set"];
     }
 }
 
 - (NSString *)URLStringForLatitude:(double)latitude longitude:(double)longitude
 {
-    // API call pattern: https://api.forecast.io/forecast/APIKEY/LATITUDE,LONGITUDE
+    // forecast.io API call pattern: https://api.forecast.io/forecast/APIKEY/latitude,longitude
     return [[NSString stringWithFormat:@"%@/%.6f,%.6f",
-            self.APIKey, latitude, longitude] stringByAppendingString:@"?units=auto"];
+            self.APIKey, latitude, longitude] stringByAppendingString:@"?units=auto"]; // auto unit, for us and non-us
 }
 
 @end

@@ -1,26 +1,19 @@
 //
-//  Forecast.h
+//  Wunderground.h
 //  Humid2
 //
-//  Created by Vinh Nguyen on 3/17/14.
+//  Created by Vinh Nguyen on 3/29/14.
 //  Copyright (c) 2014 Vinh Nguyen. All rights reserved.
 //
 
-#import "ForecastAPIClient.h"
+#import <Foundation/Foundation.h>
 
-@interface Forecast : NSObject
+@interface Wunderground : NSObject
 
-@property (nonatomic, copy) NSString *APIKey; // Forecast.io service API key
-
-/**
- *  Initialize and return a new Forecast singleton object
- *
- *  @return A new singleton object
- */
-+ (instancetype)sharedManager;
+@property (nonatomic, copy) NSString *APIKey; // Wunderground service API key
 
 /**
- *  Fetch forecast info for the given location with success and failure block
+ *  Fetch Wunderground info for the given location with success and failure block
  *
  *  @return JSON repsonse
  *

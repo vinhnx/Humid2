@@ -10,16 +10,16 @@
 #import "NXVWeatherDetailsViewController.h"
 #import "NXVForecastModel.h"
 #import "FCLocationManager.h"
+#import "Wunderground.h"
 
-@interface NXVMainViewController () <FCLocationManagerDelegate> {
-    NSMutableArray *_chartValues;
-}
-@property (nonatomic, strong) NXVForecastModel  *forecastModel;
-@property (nonatomic, copy  ) NSString          *degreeSymbolString;
-@property (nonatomic, strong) Reachability      *internetReachability;
-@property (nonatomic, assign) BOOL              connectionAvailable;
+@interface NXVMainViewController () <FCLocationManagerDelegate>
+//@property (nonatomic, strong) Forecast          *forecastManager;
 @property (nonatomic, strong) FCLocationManager *locationManager;
-@property (nonatomic, strong) Forecast          *forecastManager;
+@property (nonatomic, strong) NXVForecastModel  *forecastModel;
+@property (nonatomic, strong) Reachability      *internetReachability;
+@property (nonatomic, strong) Wunderground      *wundergroundService;
+@property (nonatomic, copy  ) NSString          *degreeSymbolString;
+@property (nonatomic, assign) BOOL              connectionAvailable;
 @end
 
 @implementation NXVMainViewController
@@ -31,7 +31,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = @"HUMID";
-        self.degreeSymbolString = @"\u2103"; // set default degree symbol to ºC
+        self.degreeSymbolString = self.degreeSymbolString ?: @"\u2103"; // set default degree symbol to ºC
     }
     return self;
 }
@@ -59,7 +59,7 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-    [self.forecastManager cancelAllForecastRequests];
+//    [self.forecastManager cancelAllForecastRequests];
 }
 
 - (void)viewDidLayoutSubviews
@@ -86,7 +86,7 @@
     if ([CLLocationManager locationServicesEnabled]) {
         [self setupForecastInfo];
         if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
-            [self.forecastManager cancelAllForecastRequests];
+            // TODO: call cancel request here...
             dispatch_async(dispatch_get_main_queue(), ^{
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Location Authorization Denied", nil)
                                                                     message:NSLocalizedString(@"You can allow Humid to use your location later in Privacy pane in the Settings app", nil)
@@ -97,7 +97,7 @@
             });
         }
         else if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusRestricted) {
-            [self.forecastManager cancelAllForecastRequests];
+            // TODO: call cancel request here...
             dispatch_async(dispatch_get_main_queue(), ^{
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Location Authorization Restricted", nil)
                                                                     message:NSLocalizedString(@"Humid is not authorized to use location services.", nil)
@@ -109,7 +109,7 @@
         }
     }
     else if (![CLLocationManager locationServicesEnabled]) {
-        [self.forecastManager cancelAllForecastRequests];
+        // TODO: call cancel request here...
         dispatch_async(dispatch_get_main_queue(), ^{
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"You are currently not enable location services", nil)
                                                                 message:NSLocalizedString(@"Humid only use your location to retrieve weather forecast. You can enable this by enabling Location Services in Privacy pane in the Settings app", nil)
@@ -134,27 +134,39 @@
     self.locationManager = [FCLocationManager sharedManager];
     self.locationManager.delegate = self;
     [self.locationManager startUpdatingLocation];
-    self.forecastManager = [Forecast sharedManager];
-    self.forecastManager.APIKey = @""._7._2.c.a._4._8.d._8.b.d._7.d._4.d._1._4._7.b.e.b.f._1.c._8.f.b._9._5._1.f.e._7;
+//    self.forecastManager = [Forecast sharedManager];
+//    self.forecastManager.APIKey = @""._7._2.c.a._4._8.d._8.b.d._7.d._4.d._1._4._7.b.e.b.f._1.c._8.f.b._9._5._1.f.e._7;
+    self.wundergroundService = [[Wunderground alloc] init];
+    self.wundergroundService.APIKey = @"4633d1a9e6d028b3";
 }
 
 - (void)getForecastInfoForLocation:(CLLocation *)location
 {
     [SVProgressHUD dismiss];
-	@weakify(self);
-	[self.forecastManager getForecastForLocation:location
-	                                     success:^(id JSON) {
-                                             @strongify(self);
-                                             NSError *error = nil;
-                                             self.forecastModel = [MTLJSONAdapter modelOfClass:[NXVForecastModel class]
-                                                                            fromJSONDictionary:(NSDictionary *)JSON
-                                                                                         error:&error];
-                                             [self updateViewsWithCallbackResults];
-                                             DDLogInfo(@"Reponse: %@", self.forecastModel.currentlySummary);
-                                         } failure:^(NSError *error, id response) {
-                                             // handle error
-                                             DDLogError(@"ERROR: %@", error.localizedDescription);
-                                         }];
+//	@weakify(self);
+    double lat = location.coordinate.latitude;
+    double longi = location.coordinate.longitude;
+    [self.wundergroundService getWeatherForLatitude:lat
+                                          longitude:longi
+                                            success:^(id JSON) {
+//                                                @strongify(self);
+                                                DDLogWarn(@"%@", JSON);
+                                            } failure:^(NSError *error, id response) {
+                                                //
+                                            }];;
+//	[self.forecastManager getForecastForLocation:location
+//	                                     success:^(id JSON) {
+//                                             @strongify(self);
+//                                             NSError *error = nil;
+//                                             self.forecastModel = [MTLJSONAdapter modelOfClass:[NXVForecastModel class]
+//                                                                            fromJSONDictionary:(NSDictionary *)JSON
+//                                                                                         error:&error];
+//                                             [self updateViewsWithCallbackResults];
+//                                             DDLogInfo(@"Reponse: %@", self.forecastModel.currentlySummary);
+//                                         } failure:^(NSError *error, id response) {
+//                                             // handle error
+//                                             DDLogError(@"ERROR: %@", error.localizedDescription);
+//                                         }];
 }
 
 - (void)updateViewsWithCallbackResults
@@ -191,7 +203,7 @@
 		    @strongify(self);
 		    // reachability status
 		    // Unreachable
-		    [self.forecastManager cancelAllForecastRequests];
+//		    [self.forecastManager cancelAllForecastRequests];
             [TSMessage showNotificationInViewController:self
                                                   title:NSLocalizedString(@"NETWORK ERROR", nil)
                                                subtitle:NSLocalizedString(@"Internet connection seems unreachable!", nil)

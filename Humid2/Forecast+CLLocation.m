@@ -16,13 +16,13 @@
 {
     float latitude = location.coordinate.latitude;
     float longitude = location.coordinate.longitude;
-    [self getForecastForLatitude:latitude
-                       longitude:longitude
-                         success:^(id JSON) {
-                             success(JSON);
-                         } failure:^(NSError *error, id response) {
-                             failure(error, response);
-                         }];
+    [self getWeatherForLatitude:latitude
+                      longitude:longitude
+                        success:^(id JSON) {
+                            success(JSON);
+                        } failure:^(NSError *error, id response) {
+                            failure(error, response);
+                        }];
 }
 
 @end

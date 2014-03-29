@@ -12,6 +12,8 @@
 		8415CDB418DD9C940056690B /* forecast.json in Resources */ = {isa = PBXBuildFile; fileRef = 8415CDB318DD9C940056690B /* forecast.json */; };
 		8433DFD618D7FE0A00576C22 /* Forecast+CLLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8433DFD518D7FE0A00576C22 /* Forecast+CLLocation.m */; };
 		843AFD9C18D7F9D900E17047 /* ForecastAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 843AFD9B18D7F9D900E17047 /* ForecastAPIClient.m */; };
+		84538FDF18E694BA00EA3966 /* WeatherService.m in Sources */ = {isa = PBXBuildFile; fileRef = 84538FDE18E694BA00EA3966 /* WeatherService.m */; };
+		84538FE418E6A2C200EA3966 /* Wunderground.m in Sources */ = {isa = PBXBuildFile; fileRef = 84538FE318E6A2C200EA3966 /* Wunderground.m */; };
 		845CC78718E2C0F10046E9F4 /* NXVWeatherDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 845CC78618E2C0F10046E9F4 /* NXVWeatherDetailsViewController.m */; };
 		8466F5EC18DD640800164908 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F998F718D6D8A600899921 /* XCTest.framework */; };
 		8466F5ED18DD640800164908 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F998DE18D6D8A500899921 /* Foundation.framework */; };
@@ -65,6 +67,10 @@
 		8433DFD518D7FE0A00576C22 /* Forecast+CLLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Forecast+CLLocation.m"; sourceTree = "<group>"; };
 		843AFD9A18D7F9D900E17047 /* ForecastAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForecastAPIClient.h; sourceTree = "<group>"; };
 		843AFD9B18D7F9D900E17047 /* ForecastAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForecastAPIClient.m; sourceTree = "<group>"; };
+		84538FDD18E694BA00EA3966 /* WeatherService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherService.h; sourceTree = "<group>"; };
+		84538FDE18E694BA00EA3966 /* WeatherService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherService.m; sourceTree = "<group>"; };
+		84538FE218E6A2C200EA3966 /* Wunderground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wunderground.h; sourceTree = "<group>"; };
+		84538FE318E6A2C200EA3966 /* Wunderground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Wunderground.m; sourceTree = "<group>"; };
 		845CC78518E2C0F10046E9F4 /* NXVWeatherDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXVWeatherDetailsViewController.h; sourceTree = "<group>"; };
 		845CC78618E2C0F10046E9F4 /* NXVWeatherDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXVWeatherDetailsViewController.m; sourceTree = "<group>"; };
 		8466F5EB18DD640800164908 /* Humid2UITests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Humid2UITests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,6 +156,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		84538FDC18E6948C00EA3966 /* Facade */ = {
+			isa = PBXGroup;
+			children = (
+				84538FDD18E694BA00EA3966 /* WeatherService.h */,
+				84538FDE18E694BA00EA3966 /* WeatherService.m */,
+			);
+			name = Facade;
+			sourceTree = "<group>";
+		};
+		84538FE018E6A24B00EA3966 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				8433DFD418D7FE0A00576C22 /* Forecast+CLLocation.h */,
+				8433DFD518D7FE0A00576C22 /* Forecast+CLLocation.m */,
+			);
+			name = Category;
+			sourceTree = "<group>";
+		};
+		84538FE118E6A29F00EA3966 /* OpenWeatherMap */ = {
+			isa = PBXGroup;
+			children = (
+				84538FE218E6A2C200EA3966 /* Wunderground.h */,
+				84538FE318E6A2C200EA3966 /* Wunderground.m */,
+			);
+			name = OpenWeatherMap;
+			sourceTree = "<group>";
+		};
 		8466F5EF18DD640800164908 /* Humid2UITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -167,19 +200,6 @@
 				8466F5F718DD640800164908 /* Humid2UITests-Prefix.pch */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		84B0750B18DBE8A600FDD820 /* Singleton */ = {
-			isa = PBXGroup;
-			children = (
-				84F9996118D70E5200899921 /* Forecast.h */,
-				84F9996218D70E5200899921 /* Forecast.m */,
-				843AFD9A18D7F9D900E17047 /* ForecastAPIClient.h */,
-				843AFD9B18D7F9D900E17047 /* ForecastAPIClient.m */,
-				8433DFD418D7FE0A00576C22 /* Forecast+CLLocation.h */,
-				8433DFD518D7FE0A00576C22 /* Forecast+CLLocation.m */,
-			);
-			name = Singleton;
 			sourceTree = "<group>";
 		};
 		84E80DFA18E3F33B0054C6C9 /* LocationManager */ = {
@@ -233,6 +253,7 @@
 		84F998E418D6D8A500899921 /* Humid2 */ = {
 			isa = PBXGroup;
 			children = (
+				84F9991B18D6E99D00899921 /* Services */,
 				84F9991718D6E94C00899921 /* App */,
 				84F9991518D6DF9100899921 /* Models */,
 				84F9991618D6DF9C00899921 /* Views */,
@@ -323,7 +344,6 @@
 		84F9991718D6E94C00899921 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				84F9991B18D6E99D00899921 /* Services */,
 				84F998ED18D6D8A500899921 /* SOAppDelegate.h */,
 				84F998EE18D6D8A500899921 /* SOAppDelegate.m */,
 				84F9991818D6E95A00899921 /* NXVAppDelegate.h */,
@@ -335,7 +355,9 @@
 		84F9991B18D6E99D00899921 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				84F9996018D70E2700899921 /* ForecastIO */,
+				84538FE118E6A29F00EA3966 /* OpenWeatherMap */,
+				84538FDC18E6948C00EA3966 /* Facade */,
+				84F9996018D70E2700899921 /* Forecast.io */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -360,12 +382,16 @@
 			path = "UIKit-Block";
 			sourceTree = "<group>";
 		};
-		84F9996018D70E2700899921 /* ForecastIO */ = {
+		84F9996018D70E2700899921 /* Forecast.io */ = {
 			isa = PBXGroup;
 			children = (
-				84B0750B18DBE8A600FDD820 /* Singleton */,
+				84F9996118D70E5200899921 /* Forecast.h */,
+				84F9996218D70E5200899921 /* Forecast.m */,
+				843AFD9A18D7F9D900E17047 /* ForecastAPIClient.h */,
+				843AFD9B18D7F9D900E17047 /* ForecastAPIClient.m */,
+				84538FE018E6A24B00EA3966 /* Category */,
 			);
-			name = ForecastIO;
+			name = Forecast.io;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -605,11 +631,13 @@
 			files = (
 				84F9995E18D70A4A00899921 /* CustomActionSheet.m in Sources */,
 				84F9991118D6DF4700899921 /* NXVMainViewController.m in Sources */,
+				84538FE418E6A2C200EA3966 /* Wunderground.m in Sources */,
 				84F998EB18D6D8A500899921 /* main.m in Sources */,
 				84F9996318D70E5200899921 /* Forecast.m in Sources */,
 				84F9995F18D70A4A00899921 /* UIAlertView+Block.m in Sources */,
 				8477D51D18DC4650006240CF /* NXVForecastModel.m in Sources */,
 				84F998EF18D6D8A500899921 /* SOAppDelegate.m in Sources */,
+				84538FDF18E694BA00EA3966 /* WeatherService.m in Sources */,
 				8433DFD618D7FE0A00576C22 /* Forecast+CLLocation.m in Sources */,
 				845CC78718E2C0F10046E9F4 /* NXVWeatherDetailsViewController.m in Sources */,
 				843AFD9C18D7F9D900E17047 /* ForecastAPIClient.m in Sources */,

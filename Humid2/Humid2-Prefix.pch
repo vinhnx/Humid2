@@ -32,4 +32,6 @@
 #import "UIAlertView+Block.h"
 #endif
 
-#warning lam cache!
+#warning lam cache! (TMCache), xem https://github.com/Ruenzuo/ios-facade-example
+#warning lam Model cho Wunderground, add them 1 so api khác
+#warning lam background fetch

@@ -30,6 +30,6 @@
 /**
  *  Cancel all requests that are currently being executed
  */
-- (void)cancelAllForecastRequests;
+- (void)cancelAllWundergroundRequests;
 
 @end

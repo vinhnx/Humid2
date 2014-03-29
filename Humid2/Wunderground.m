@@ -61,7 +61,7 @@
     [self.dataTask resume];
 }
 
-- (void)cancelAllForecastRequests
+- (void)cancelAllWundergroundRequests
 {
     if ([self.dataTask respondsToSelector:@selector(cancel)]) {
         [self.dataTask cancel];
@@ -81,7 +81,7 @@
 
 - (NSString *)URLStringForLatitude:(double)latitude longitude:(double)longitude
 {
-    // Wunderground API call pattern: http://api.wunderground.com/api/4633d1a9e6d028b3/geolookup/q/10.7794,106.6675.json
+    // Wunderground API call pattern: http://api.wunderground.com/api/APIKEY/geolookup/q/LAT,LONGI.json
 	return [NSString stringWithFormat:@"http://api.wunderground.com/api/%@/geolookup/q/%.6f,%.6f.json", self.APIKey, latitude, longitude];
 }
 

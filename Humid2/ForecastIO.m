@@ -15,6 +15,8 @@
 
 @implementation ForecastIO
 
+#pragma mark - Object Initialize
+
 - (instancetype)init
 {
     self = [super init];
@@ -79,7 +81,7 @@
 
 - (NSString *)URLStringForLatitude:(double)latitude longitude:(double)longitude
 {
-    // forecast.io API call pattern: https://api.forecast.io/forecast/APIKEY/latitude,longitude
+    // Forecast.io API call pattern: https://api.forecast.io/forecast/APIKEY/LAT,LONGI
     return [[NSString stringWithFormat:@"https://api.forecast.io/forecast/%@/%.6f,%.6f",
              self.APIKey, latitude, longitude] stringByAppendingString:@"?units=auto"]; // auto unit, for us and non-us
 }

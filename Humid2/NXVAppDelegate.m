@@ -8,10 +8,10 @@
 
 #import "NXVAppDelegate.h"
 #import "NXVMainViewController.h"
-#import "ForecastIO.h"
+//#import "ForecastIO.h"
+#import "WeatherService.h"
 
 @interface NXVAppDelegate ()
-@property (nonatomic, strong) ForecastIO *forecastIO;
 @end
 
 @implementation NXVAppDelegate
@@ -23,7 +23,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
 //        _services = @[[Forecast sharedManager]];
-        _services = @[[ForecastIO new]];
+        _services = @[[WeatherService new]];
     });
 
     return _services;

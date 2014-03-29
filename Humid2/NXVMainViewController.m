@@ -9,7 +9,8 @@
 #import "NXVMainViewController.h"
 #import "NXVWeatherDetailsViewController.h"
 //#import "Wunderground.h"
-#import "ForecastIO.h"
+//#import "ForecastIO.h"
+#import "WeatherService.h"
 
 @interface NXVMainViewController () <FCLocationManagerDelegate>
 //@property (nonatomic, strong) Forecast          *forecastManager;
@@ -17,7 +18,8 @@
 @property (nonatomic, strong) NXVForecastModel  *forecastModel;
 @property (nonatomic, strong) Reachability      *internetReachability;
 //@property (nonatomic, strong) Wunderground      *wundergroundService;
-@property (nonatomic, strong) ForecastIO *forecastIO;
+//@property (nonatomic, strong) ForecastIO *forecastIO;
+@property (nonatomic, strong) WeatherService *weatherService;
 @property (nonatomic, copy  ) NSString          *degreeSymbolString;
 @property (nonatomic, assign) BOOL              connectionAvailable;
 @end
@@ -59,7 +61,7 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-//    [self.forecastManager cancelAllForecastRequests];
+    [self.weatherService cancelAllRequests];
 }
 
 - (void)viewDidLayoutSubviews
@@ -86,7 +88,7 @@
     if ([CLLocationManager locationServicesEnabled]) {
         [self setupForecastInfo];
         if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
-            // TODO: call cancel request here...
+            [self.weatherService cancelAllRequests];
             dispatch_async(dispatch_get_main_queue(), ^{
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Location Authorization Denied", nil)
                                                                     message:NSLocalizedString(@"You can allow Humid to use your location later in Privacy pane in the Settings app", nil)
@@ -97,7 +99,7 @@
             });
         }
         else if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusRestricted) {
-            // TODO: call cancel request here...
+            [self.weatherService cancelAllRequests];
             dispatch_async(dispatch_get_main_queue(), ^{
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Location Authorization Restricted", nil)
                                                                     message:NSLocalizedString(@"Humid is not authorized to use location services.", nil)
@@ -109,7 +111,7 @@
         }
     }
     else if (![CLLocationManager locationServicesEnabled]) {
-        // TODO: call cancel request here...
+        [self.weatherService cancelAllRequests];
         dispatch_async(dispatch_get_main_queue(), ^{
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"You are currently not enable location services", nil)
                                                                 message:NSLocalizedString(@"Humid only use your location to retrieve weather forecast. You can enable this by enabling Location Services in Privacy pane in the Settings app", nil)
@@ -137,9 +139,14 @@
 //    self.forecastManager = [Forecast sharedManager];
 //    self.forecastManager.APIKey = @""._7._2.c.a._4._8.d._8.b.d._7.d._4.d._1._4._7.b.e.b.f._1.c._8.f.b._9._5._1.f.e._7;
 //    self.wundergroundService = [[Wunderground alloc] init];
-//    self.wundergroundService.APIKey = @""._4._6._3._3.d._1.a._9.e._6.d._0._2._8.b._3";
-    self.forecastIO = [[ForecastIO alloc] init];
-    self.forecastIO.APIKey = @""._7._2.c.a._4._8.d._8.b.d._7.d._4.d._1._4._7.b.e.b.f._1.c._8.f.b._9._5._1.f.e._7;
+//    self.wundergroundService.APIKey = @""._4._6._3._3.d._1.a._9.e._6.d._0._2._8.b._3;
+//    self.forecastIO = [[ForecastIO alloc] init];
+//    self.forecastIO.APIKey = @""._7._2.c.a._4._8.d._8.b.d._7.d._4.d._1._4._7.b.e.b.f._1.c._8.f.b._9._5._1.f.e._7;
+    self.weatherService = [[WeatherService alloc] init];
+//    self.weatherService.urlStringPattern = @"https://api.forecast.io/forecast/%@/%.6f,%.6f";
+//    self.weatherService.APIKey = @""._7._2.c.a._4._8.d._8.b.d._7.d._4.d._1._4._7.b.e.b.f._1.c._8.f.b._9._5._1.f.e._7;
+    self.weatherService.urlStringPattern = @"http://api.wunderground.com/api/%@/geolookup/q/%.6f,%.6f.json";
+    self.weatherService.APIKey = @""._4._6._3._3.d._1.a._9.e._6.d._0._2._8.b._3;
 }
 
 - (void)getForecastInfoForLocation:(CLLocation *)location
@@ -148,14 +155,21 @@
 //	@weakify(self);
     double lat = location.coordinate.latitude;
     double longi = location.coordinate.longitude;
-    [self.forecastIO getWeatherForLatitude:lat
-                                 longitude:longi
-                                   success:^(id JSON) {
-//                                       @strongify(self);
-                                       DDLogWarn(@"%@", JSON);
-                                   } failure:^(NSError *error, id response) {
-                                       //
-                                   }];
+    [self.weatherService getWeatherForLatitude:lat
+                                     longitude:longi
+                                       success:^(id JSON) {
+                                           DDLogWarn(@"%@", JSON);
+                                       } failure:^(NSError *error, id response) {
+                                           //
+                                       }];
+//    [self.forecastIO getWeatherForLatitude:lat
+//                                 longitude:longi
+//                                   success:^(id JSON) {
+////                                       @strongify(self);
+//                                       DDLogWarn(@"%@", JSON);
+//                                   } failure:^(NSError *error, id response) {
+//                                       //
+//                                   }];
 //    [self.wundergroundService getWeatherForLatitude:lat
 //                                          longitude:longi
 //                                            success:^(id JSON) {
@@ -213,7 +227,7 @@
 		    @strongify(self);
 		    // reachability status
 		    // Unreachable
-//		    [self.forecastManager cancelAllForecastRequests];
+            [self.weatherService cancelAllRequests];
             [TSMessage showNotificationInViewController:self
                                                   title:NSLocalizedString(@"NETWORK ERROR", nil)
                                                subtitle:NSLocalizedString(@"Internet connection seems unreachable!", nil)

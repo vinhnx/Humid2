@@ -21,6 +21,7 @@
 		8466F5F418DD640800164908 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8466F5F218DD640800164908 /* InfoPlist.strings */; };
 		8471B80C18E289480095673E /* FunctionalTestingSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471B80B18E289480095673E /* FunctionalTestingSpec.m */; };
 		8477D51D18DC4650006240CF /* NXVForecastModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8477D51C18DC4650006240CF /* NXVForecastModel.m */; };
+		849F619C18E6CAEB0011746E /* ForecastIO.m in Sources */ = {isa = PBXBuildFile; fileRef = 849F619B18E6CAEB0011746E /* ForecastIO.m */; };
 		84E80DFD18E3F3750054C6C9 /* FCLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E80DFC18E3F3750054C6C9 /* FCLocationManager.m */; };
 		84F998DF18D6D8A500899921 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F998DE18D6D8A500899921 /* Foundation.framework */; };
 		84F998E118D6D8A500899921 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F998E018D6D8A500899921 /* CoreGraphics.framework */; };
@@ -80,6 +81,8 @@
 		8471B80B18E289480095673E /* FunctionalTestingSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FunctionalTestingSpec.m; sourceTree = "<group>"; };
 		8477D51B18DC4650006240CF /* NXVForecastModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NXVForecastModel.h; sourceTree = "<group>"; };
 		8477D51C18DC4650006240CF /* NXVForecastModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXVForecastModel.m; sourceTree = "<group>"; };
+		849F619A18E6CAEB0011746E /* ForecastIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForecastIO.h; sourceTree = "<group>"; };
+		849F619B18E6CAEB0011746E /* ForecastIO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForecastIO.m; sourceTree = "<group>"; };
 		84E80DFB18E3F3750054C6C9 /* FCLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCLocationManager.h; sourceTree = "<group>"; };
 		84E80DFC18E3F3750054C6C9 /* FCLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCLocationManager.m; sourceTree = "<group>"; };
 		84E80DFE18E408F60054C6C9 /* Ho Chi Minh city.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Ho Chi Minh city.gpx"; sourceTree = "<group>"; };
@@ -200,6 +203,26 @@
 				8466F5F718DD640800164908 /* Humid2UITests-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		849F619818E6CA2A0011746E /* Singleton */ = {
+			isa = PBXGroup;
+			children = (
+				84F9996118D70E5200899921 /* Forecast.h */,
+				84F9996218D70E5200899921 /* Forecast.m */,
+				843AFD9A18D7F9D900E17047 /* ForecastAPIClient.h */,
+				843AFD9B18D7F9D900E17047 /* ForecastAPIClient.m */,
+			);
+			name = Singleton;
+			sourceTree = "<group>";
+		};
+		849F619918E6CA2F0011746E /* NSURLSession */ = {
+			isa = PBXGroup;
+			children = (
+				849F619A18E6CAEB0011746E /* ForecastIO.h */,
+				849F619B18E6CAEB0011746E /* ForecastIO.m */,
+			);
+			name = NSURLSession;
 			sourceTree = "<group>";
 		};
 		84E80DFA18E3F33B0054C6C9 /* LocationManager */ = {
@@ -385,10 +408,8 @@
 		84F9996018D70E2700899921 /* Forecast.io */ = {
 			isa = PBXGroup;
 			children = (
-				84F9996118D70E5200899921 /* Forecast.h */,
-				84F9996218D70E5200899921 /* Forecast.m */,
-				843AFD9A18D7F9D900E17047 /* ForecastAPIClient.h */,
-				843AFD9B18D7F9D900E17047 /* ForecastAPIClient.m */,
+				849F619918E6CA2F0011746E /* NSURLSession */,
+				849F619818E6CA2A0011746E /* Singleton */,
 				84538FE018E6A24B00EA3966 /* Category */,
 			);
 			name = Forecast.io;
@@ -642,6 +663,7 @@
 				845CC78718E2C0F10046E9F4 /* NXVWeatherDetailsViewController.m in Sources */,
 				843AFD9C18D7F9D900E17047 /* ForecastAPIClient.m in Sources */,
 				84F9991A18D6E95A00899921 /* NXVAppDelegate.m in Sources */,
+				849F619C18E6CAEB0011746E /* ForecastIO.m in Sources */,
 				84E80DFD18E3F3750054C6C9 /* FCLocationManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

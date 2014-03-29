@@ -8,15 +8,22 @@
 
 #import "NXVAppDelegate.h"
 #import "NXVMainViewController.h"
+#import "ForecastIO.h"
+
+@interface NXVAppDelegate ()
+@property (nonatomic, strong) ForecastIO *forecastIO;
+@end
 
 @implementation NXVAppDelegate
+
 // the service are only initizlized once
 + (NSArray *)services
 {
     static NSArray *_services = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _services = @[[Forecast sharedManager]];
+//        _services = @[[Forecast sharedManager]];
+        _services = @[[ForecastIO new]];
     });
 
     return _services;

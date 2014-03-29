@@ -26,8 +26,9 @@
 #import <BlurryModalSegue/BlurryModalSegue.h>
 #import <TSMessages/TSMessage.h>
 #import "NXVForecastModel.h"
-#import "Forecast.h"
-#import "Forecast+CLLocation.h"
+//#import "Forecast.h"
+//#import "Forecast+CLLocation.h"
+#import "FCLocationManager.h"
 #import "CustomActionSheet.h"
 #import "UIAlertView+Block.h"
 #endif

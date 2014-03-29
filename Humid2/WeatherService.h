@@ -9,13 +9,4 @@
 #import <Foundation/Foundation.h>
 
 @interface WeatherService : NSObject
-@property (nonatomic, strong) NSString *APIKey;
-
-+ (instancetype)sharedInstance;
-
-- (void)getForecastForURL:(NSString *)URL
-                 latitude:(double)lat
-                longitude:(double)longi
-                  success:(void (^)(id JSON))success
-                  failure:(void (^)(NSError *error, id repsonse))failure;
 @end

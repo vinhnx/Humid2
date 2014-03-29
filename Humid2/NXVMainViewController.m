@@ -8,16 +8,16 @@
 
 #import "NXVMainViewController.h"
 #import "NXVWeatherDetailsViewController.h"
-#import "NXVForecastModel.h"
-#import "FCLocationManager.h"
-#import "Wunderground.h"
+//#import "Wunderground.h"
+#import "ForecastIO.h"
 
 @interface NXVMainViewController () <FCLocationManagerDelegate>
 //@property (nonatomic, strong) Forecast          *forecastManager;
 @property (nonatomic, strong) FCLocationManager *locationManager;
 @property (nonatomic, strong) NXVForecastModel  *forecastModel;
 @property (nonatomic, strong) Reachability      *internetReachability;
-@property (nonatomic, strong) Wunderground      *wundergroundService;
+//@property (nonatomic, strong) Wunderground      *wundergroundService;
+@property (nonatomic, strong) ForecastIO *forecastIO;
 @property (nonatomic, copy  ) NSString          *degreeSymbolString;
 @property (nonatomic, assign) BOOL              connectionAvailable;
 @end
@@ -136,8 +136,10 @@
     [self.locationManager startUpdatingLocation];
 //    self.forecastManager = [Forecast sharedManager];
 //    self.forecastManager.APIKey = @""._7._2.c.a._4._8.d._8.b.d._7.d._4.d._1._4._7.b.e.b.f._1.c._8.f.b._9._5._1.f.e._7;
-    self.wundergroundService = [[Wunderground alloc] init];
-    self.wundergroundService.APIKey = @"4633d1a9e6d028b3";
+//    self.wundergroundService = [[Wunderground alloc] init];
+//    self.wundergroundService.APIKey = @""._4._6._3._3.d._1.a._9.e._6.d._0._2._8.b._3";
+    self.forecastIO = [[ForecastIO alloc] init];
+    self.forecastIO.APIKey = @""._7._2.c.a._4._8.d._8.b.d._7.d._4.d._1._4._7.b.e.b.f._1.c._8.f.b._9._5._1.f.e._7;
 }
 
 - (void)getForecastInfoForLocation:(CLLocation *)location
@@ -146,14 +148,22 @@
 //	@weakify(self);
     double lat = location.coordinate.latitude;
     double longi = location.coordinate.longitude;
-    [self.wundergroundService getWeatherForLatitude:lat
-                                          longitude:longi
-                                            success:^(id JSON) {
-//                                                @strongify(self);
-                                                DDLogWarn(@"%@", JSON);
-                                            } failure:^(NSError *error, id response) {
-                                                //
-                                            }];;
+    [self.forecastIO getWeatherForLatitude:lat
+                                 longitude:longi
+                                   success:^(id JSON) {
+//                                       @strongify(self);
+                                       DDLogWarn(@"%@", JSON);
+                                   } failure:^(NSError *error, id response) {
+                                       //
+                                   }];
+//    [self.wundergroundService getWeatherForLatitude:lat
+//                                          longitude:longi
+//                                            success:^(id JSON) {
+////                                                @strongify(self);
+//                                                DDLogWarn(@"%@", JSON);
+//                                            } failure:^(NSError *error, id response) {
+//                                                //
+//                                            }];;
 //	[self.forecastManager getForecastForLocation:location
 //	                                     success:^(id JSON) {
 //                                             @strongify(self);

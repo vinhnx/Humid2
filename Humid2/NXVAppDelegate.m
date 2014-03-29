@@ -8,8 +8,6 @@
 
 #import "NXVAppDelegate.h"
 #import "NXVMainViewController.h"
-//#import "ForecastIO.h"
-#import "WeatherService.h"
 
 @interface NXVAppDelegate ()
 @end
@@ -22,18 +20,14 @@
     static NSArray *_services = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-//        _services = @[[Forecast sharedManager]];
         _services = @[[WeatherService new]];
     });
-
     return _services;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [super application:application didFinishLaunchingWithOptions:launchOptions];
-    [[BlurryModalSegue appearance] setBackingImageBlurRadius:@(20)];
-    [[BlurryModalSegue appearance] setBackingImageSaturationDeltaFactor:@(.45)];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];

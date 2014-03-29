@@ -14,7 +14,23 @@
 @property (nonatomic, copy) NSString *urlStringPattern; // service API call pattern
 
 /**
- *  Fetch JSON info for the given location with success and failure block
+ *  Fetch JSON info for the given location
+ *  coordinate with success and failure block
+ *
+ *  @return JSON repsonse
+ *
+ *  @param latitude  the latitude of the location
+ *  @param longitude the longitude of the location
+ *  @param success   the block object to be executed when the operation finishes successfully
+ *  @param failure   the block object to be executed when the operation finishes unsuccessfully
+ */
+- (void)getWeatherForLocation:(CLLocation *)location
+                      success:(void (^)(id JSON))success
+                      failure:(void (^)(NSError *error, id response))failure;
+
+/**
+ *  Fetch JSON info for the given location's latitude, longitude 
+ *  coordinate with success and failure block
  *
  *  @return JSON repsonse
  *

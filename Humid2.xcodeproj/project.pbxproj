@@ -159,13 +159,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		84538FDC18E6948C00EA3966 /* Facade */ = {
+		84538FDC18E6948C00EA3966 /* Facade Service */ = {
 			isa = PBXGroup;
 			children = (
 				84538FDD18E694BA00EA3966 /* WeatherService.h */,
 				84538FDE18E694BA00EA3966 /* WeatherService.m */,
 			);
-			name = Facade;
+			name = "Facade Service";
 			sourceTree = "<group>";
 		};
 		84538FE018E6A24B00EA3966 /* Category */ = {
@@ -180,8 +180,7 @@
 		84538FE118E6A29F00EA3966 /* OpenWeatherMap */ = {
 			isa = PBXGroup;
 			children = (
-				84538FE218E6A2C200EA3966 /* Wunderground.h */,
-				84538FE318E6A2C200EA3966 /* Wunderground.m */,
+				849F619D18E6F0920011746E /* NSURLSession */,
 			);
 			name = OpenWeatherMap;
 			sourceTree = "<group>";
@@ -223,6 +222,24 @@
 				849F619B18E6CAEB0011746E /* ForecastIO.m */,
 			);
 			name = NSURLSession;
+			sourceTree = "<group>";
+		};
+		849F619D18E6F0920011746E /* NSURLSession */ = {
+			isa = PBXGroup;
+			children = (
+				84538FE218E6A2C200EA3966 /* Wunderground.h */,
+				84538FE318E6A2C200EA3966 /* Wunderground.m */,
+			);
+			name = NSURLSession;
+			sourceTree = "<group>";
+		};
+		849F619E18E6F09C0011746E /* AFHTTPSessionManager */ = {
+			isa = PBXGroup;
+			children = (
+				849F619818E6CA2A0011746E /* Singleton */,
+				84538FE018E6A24B00EA3966 /* Category */,
+			);
+			name = AFHTTPSessionManager;
 			sourceTree = "<group>";
 		};
 		84E80DFA18E3F33B0054C6C9 /* LocationManager */ = {
@@ -379,7 +396,7 @@
 			isa = PBXGroup;
 			children = (
 				84538FE118E6A29F00EA3966 /* OpenWeatherMap */,
-				84538FDC18E6948C00EA3966 /* Facade */,
+				84538FDC18E6948C00EA3966 /* Facade Service */,
 				84F9996018D70E2700899921 /* Forecast.io */,
 			);
 			name = Services;
@@ -409,8 +426,7 @@
 			isa = PBXGroup;
 			children = (
 				849F619918E6CA2F0011746E /* NSURLSession */,
-				849F619818E6CA2A0011746E /* Singleton */,
-				84538FE018E6A24B00EA3966 /* Category */,
+				849F619E18E6F09C0011746E /* AFHTTPSessionManager */,
 			);
 			name = Forecast.io;
 			sourceTree = "<group>";

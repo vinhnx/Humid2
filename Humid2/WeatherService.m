@@ -9,8 +9,7 @@
 #import "WeatherService.h"
 
 @interface WeatherService ()
-@property (nonatomic, strong) NSURLSession     *session;
-@property (nonatomic, strong) NSURLSessionTask *dataTask;
+@property (nonatomic, strong) AFHTTPSessionManager *session;
 @end
 
 @implementation WeatherService
@@ -21,7 +20,9 @@
 {
     self = [super init];
     if (self) {
-        _session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+        NSURL *baseURL = [NSURL URLWithString:self.urlStringPattern];
+        _session = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL
+                                            sessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     }
     return self;
 }
@@ -33,7 +34,8 @@
                       success:(void (^)(id))success
                       failure:(void (^)(NSError *, id))failure
 {
-    // IMPORTANT, we have to check if API key was set
+    // IMPORTANT, we have to check if API key was set!
+    // else, we raise a NSException flag
     [self checkAPIKey];
 
     // generate the URL string based on the passed in params
@@ -44,27 +46,41 @@
 #endif
 
     // call GET request on the API for the URL
-    self.dataTask = [self.session dataTaskWithURL:[NSURL URLWithString:urlString]
-                                completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-									if (!data) {
-                                        failure(error, response);
-                                        DDLogError(@"%s. API call error: %@", __PRETTY_FUNCTION__, error.localizedDescription);
-									}
-									else {
-										NSError *jsonError = nil;
-										id JSON = [NSJSONSerialization JSONObjectWithData:data
-										                                          options:kNilOptions
-										                                            error:&jsonError];
-                                        success(JSON);
-									}
-                                }];
-    [self.dataTask resume];
+    [self.session GET:urlString
+           parameters:nil
+              success:^(NSURLSessionDataTask *task, id JSON) {
+                  success(JSON);
+              }
+              failure:^(NSURLSessionDataTask *task, NSError *error) {
+                  NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
+                  failure(error, response);
+                  DDLogError(@"%s. API call error: %@", __PRETTY_FUNCTION__, error.localizedDescription);
+              }];
+}
+
+- (void)getWeatherForLocation:(CLLocation *)location
+                      success:(void (^)(id JSON))success
+                      failure:(void (^)(NSError *error, id response))failure
+{
+    double lat = location.coordinate.latitude;
+    double longi = location.coordinate.longitude;
+    [self getWeatherForLatitude:lat
+                      longitude:longi
+                        success:^(id JSON) {
+                            success(JSON);
+                        }
+                        failure:^(NSError *error, id response) {
+                            failure(error, response);
+                            DDLogError(@"%s. API call error: %@", __PRETTY_FUNCTION__, error.localizedDescription);
+                        }];
 }
 
 - (void)cancelAllRequests
 {
-    if ([self.dataTask respondsToSelector:@selector(cancel)]) {
-        [self.dataTask cancel];
+    for (id task in [self.session tasks]) { // loop through all NSURLSession tasks
+        if ([task respondsToSelector:@selector(cancel)]) {
+            [task cancel];
+        }
     }
 }
 
@@ -75,17 +91,21 @@
     // check for the existence of APIkey
     if (!self.APIKey || !self.APIKey.length) {
 		[NSException raise:@"API not found"
-		            format:@"API key must be set"];
+		            format:@"API key must be set. Please check if it was set up properly."];
     }
 }
 
 - (NSString *)URLStringForLatitude:(double)latitude longitude:(double)longitude
 {
-    // Wunderground API call pattern: http://api.wunderground.com/api/APIKEY/geolookup/q/LAT,LONGI.json
+    // Wunderground API call pattern: http://api.wunderground.com/api/APIKEY/conditions/q/LAT,LONGI.json
     // Forecast.io API call pattern: https://api.forecast.io/forecast/APIKEY/LAT,LONGI
     NSString *url = @"";
     if (self.urlStringPattern.length && self.urlStringPattern) {
         url = [NSString stringWithFormat:self.urlStringPattern, self.APIKey, latitude, longitude];
+    } else {
+        [NSException raise:@"Service URL pattern not found"
+                    format:@"Please check your URL set up again."];
+
     }
 	return url;
 }

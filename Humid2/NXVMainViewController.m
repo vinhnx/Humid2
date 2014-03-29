@@ -8,18 +8,21 @@
 
 #import "NXVMainViewController.h"
 #import "NXVWeatherDetailsViewController.h"
-//#import "Wunderground.h"
-//#import "ForecastIO.h"
-#import "WeatherService.h"
+
+// strings
+NSString *const kHMAppTitle = @"HUMID";
+
+// numerics
+CGFloat const kHMDurationFastest = .9;
+CGFloat const kHMDurationFaster = .7;
+CGFloat const kHMDurationLower = .3;
+CGFloat const kHMDurationLowest = .1;
 
 @interface NXVMainViewController () <FCLocationManagerDelegate>
-//@property (nonatomic, strong) Forecast          *forecastManager;
+@property (nonatomic, strong) WeatherService    *weatherService;
 @property (nonatomic, strong) FCLocationManager *locationManager;
 @property (nonatomic, strong) NXVForecastModel  *forecastModel;
 @property (nonatomic, strong) Reachability      *internetReachability;
-//@property (nonatomic, strong) Wunderground      *wundergroundService;
-//@property (nonatomic, strong) ForecastIO *forecastIO;
-@property (nonatomic, strong) WeatherService *weatherService;
 @property (nonatomic, copy  ) NSString          *degreeSymbolString;
 @property (nonatomic, assign) BOOL              connectionAvailable;
 @end
@@ -32,7 +35,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = @"HUMID";
+        self.title = kHMAppTitle;
         self.degreeSymbolString = self.degreeSymbolString ?: @"\u2103"; // set default degree symbol to ºC
     }
     return self;
@@ -47,9 +50,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[SVProgressHUD appearance] setHudFont:[UIFont fontWithName:@"AvenirNext-Medium" size:13]];
     [self startRequestingForecastInfo];
     [TSMessage setDefaultViewController:self];
-    [[SVProgressHUD appearance] setHudFont:[UIFont fontWithName:@"AvenirNext-Medium" size:13]];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -61,7 +64,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-    [self.weatherService cancelAllRequests];
 }
 
 - (void)viewDidLayoutSubviews
@@ -89,37 +91,28 @@
         [self setupForecastInfo];
         if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
             [self.weatherService cancelAllRequests];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Location Authorization Denied", nil)
-                                                                    message:NSLocalizedString(@"You can allow Humid to use your location later in Privacy pane in the Settings app", nil)
-                                                                   delegate:self
-                                                          cancelButtonTitle:NSLocalizedString(@"Close", nil)
-                                                          otherButtonTitles:nil];
-                [alertView show];
-            });
+            [self showAlertViewWithTitle:NSLocalizedString(@"Location Authorization Denied", nil)
+                                 message:NSLocalizedString(@"You can allow Humid to use your location later in Privacy pane in the Settings app", nil)
+                       cancelButtonTitle:NSLocalizedString(@"Close", nil)
+                       otherButtonTitles:nil
+                             useDelegate:NO];
         }
         else if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusRestricted) {
             [self.weatherService cancelAllRequests];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Location Authorization Restricted", nil)
-                                                                    message:NSLocalizedString(@"Humid is not authorized to use location services.", nil)
-                                                                   delegate:self
-                                                          cancelButtonTitle:NSLocalizedString(@"Close", nil)
-                                                          otherButtonTitles:nil];
-                [alertView show];
-            });
+            [self showAlertViewWithTitle:NSLocalizedString(@"Location Authorization Restricted", nil)
+                                 message:NSLocalizedString(@"Humid is not authorized to use location services.", nil)
+                       cancelButtonTitle:NSLocalizedString(@"Close", nil)
+                       otherButtonTitles:nil
+                             useDelegate:NO];
         }
     }
     else if (![CLLocationManager locationServicesEnabled]) {
         [self.weatherService cancelAllRequests];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"You are currently not enable location services", nil)
-                                                                message:NSLocalizedString(@"Humid only use your location to retrieve weather forecast. You can enable this by enabling Location Services in Privacy pane in the Settings app", nil)
-                                                               delegate:self
-                                                      cancelButtonTitle:NSLocalizedString(@"Close", nil)
-                                                      otherButtonTitles:nil];
-            [alertView show];
-        });
+        [self showAlertViewWithTitle:NSLocalizedString(@"You are currently not enable location services", nil)
+                             message:NSLocalizedString(@"Humid only use your location to retrieve weather forecast. You can enable this by enabling Location Services in Privacy pane in the Settings app", nil)
+                   cancelButtonTitle:NSLocalizedString(@"Close", nil)
+                   otherButtonTitles:nil
+                         useDelegate:NO];
     }
 }
 
@@ -127,8 +120,8 @@
 {
     [SVProgressHUD showWithStatus:NSLocalizedString(@"Please wait...", nil)
                          maskType:SVProgressHUDMaskTypeGradient];
-    [UIView animateWithDuration:1.1
-                          delay:.3
+    [UIView animateWithDuration:kHMDurationFaster
+                          delay:kHMDurationLower
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^{
                          self.weatherSummaryLabel.alpha = self.degreeSymbol.alpha = .1;
@@ -136,32 +129,58 @@
     self.locationManager = [FCLocationManager sharedManager];
     self.locationManager.delegate = self;
     [self.locationManager startUpdatingLocation];
-//    self.forecastManager = [Forecast sharedManager];
-//    self.forecastManager.APIKey = @""._7._2.c.a._4._8.d._8.b.d._7.d._4.d._1._4._7.b.e.b.f._1.c._8.f.b._9._5._1.f.e._7;
-//    self.wundergroundService = [[Wunderground alloc] init];
-//    self.wundergroundService.APIKey = @""._4._6._3._3.d._1.a._9.e._6.d._0._2._8.b._3;
-//    self.forecastIO = [[ForecastIO alloc] init];
-//    self.forecastIO.APIKey = @""._7._2.c.a._4._8.d._8.b.d._7.d._4.d._1._4._7.b.e.b.f._1.c._8.f.b._9._5._1.f.e._7;
     self.weatherService = [[WeatherService alloc] init];
-//    self.weatherService.urlStringPattern = @"https://api.forecast.io/forecast/%@/%.6f,%.6f";
-//    self.weatherService.APIKey = @""._7._2.c.a._4._8.d._8.b.d._7.d._4.d._1._4._7.b.e.b.f._1.c._8.f.b._9._5._1.f.e._7;
-    self.weatherService.urlStringPattern = @"http://api.wunderground.com/api/%@/geolookup/q/%.6f,%.6f.json";
-    self.weatherService.APIKey = @""._4._6._3._3.d._1.a._9.e._6.d._0._2._8.b._3;
+
+    // -- Forecast.io service
+    self.weatherService.urlStringPattern = @"https://api.forecast.io/forecast/%@/%.6f,%.6f";
+    self.weatherService.APIKey = @""._7._2.c.a._4._8.d._8.b.d._7.d._4.d._1._4._7.b.e.b.f._1.c._8.f.b._9._5._1.f.e._7;
+
+    // -- Wunderground service
+//    self.weatherService.urlStringPattern = @"http://api.wunderground.com/api/%@/conditions/q/%.6f,%.6f.json";
+//    self.weatherService.APIKey = @""._4._6._3._3.d._1.a._9.e._6.d._0._2._8.b._3;
 }
 
 - (void)getForecastInfoForLocation:(CLLocation *)location
 {
-    [SVProgressHUD dismiss];
-//	@weakify(self);
-    double lat = location.coordinate.latitude;
-    double longi = location.coordinate.longitude;
-    [self.weatherService getWeatherForLatitude:lat
-                                     longitude:longi
+	@weakify(self);
+    [self.weatherService getWeatherForLocation:location
                                        success:^(id JSON) {
+                                           @strongify(self);
                                            DDLogWarn(@"%@", JSON);
+                                           NSError *error = nil;
+                                           self.forecastModel = [MTLJSONAdapter modelOfClass:[NXVForecastModel class]
+                                                                          fromJSONDictionary:(NSDictionary *)JSON
+                                                                                       error:&error];
+                                           [self updateViewsWithCallbackResults];
                                        } failure:^(NSError *error, id response) {
-                                           //
+                                           DDLogError(@"ERROR: %@", error.localizedDescription);
+                                           [self showAlertViewWithTitle:NSLocalizedString(@"Parsing Error", nil)
+                                                                message:NSLocalizedString(@"%@", error.localizedDescription)
+                                                      cancelButtonTitle:NSLocalizedString(@"Close", nil)
+                                                      otherButtonTitles:nil
+                                                            useDelegate:NO];
                                        }];
+
+//    double lat = location.coordinate.latitude;
+//    double longi = location.coordinate.longitude;
+//    [self.weatherService getWeatherForLatitude:lat
+//                                     longitude:longi
+//                                       success:^(id JSON) {
+//                                           @strongify(self);
+//                                           NSError *error = nil;
+//                                           self.forecastModel = [MTLJSONAdapter modelOfClass:[NXVForecastModel class]
+//                                                                          fromJSONDictionary:(NSDictionary *)JSON
+//                                                                                       error:&error];
+//                                           [self updateViewsWithCallbackResults];
+//                                       } failure:^(NSError *error, id response) {
+//                                           DDLogError(@"ERROR: %@", error.localizedDescription);
+//                                           [self showAlertViewWithTitle:NSLocalizedString(@"Parsing Error", nil)
+//                                                                message:NSLocalizedString(@"%@", error.localizedDescription)
+//                                                      cancelButtonTitle:NSLocalizedString(@"Close", nil)
+//                                                      otherButtonTitles:nil
+//                                                            useDelegate:NO];
+//                                       }];
+
 //    [self.forecastIO getWeatherForLatitude:lat
 //                                 longitude:longi
 //                                   success:^(id JSON) {
@@ -170,6 +189,7 @@
 //                                   } failure:^(NSError *error, id response) {
 //                                       //
 //                                   }];
+
 //    [self.wundergroundService getWeatherForLatitude:lat
 //                                          longitude:longi
 //                                            success:^(id JSON) {
@@ -177,7 +197,8 @@
 //                                                DDLogWarn(@"%@", JSON);
 //                                            } failure:^(NSError *error, id response) {
 //                                                //
-//                                            }];;
+//                                            }];
+    
 //	[self.forecastManager getForecastForLocation:location
 //	                                     success:^(id JSON) {
 //                                             @strongify(self);
@@ -198,17 +219,38 @@
 	([self.forecastModel.unit isKindOfClass:[NSString class]] && [self.forecastModel.unit isEqualToString:@"us"])
 	? (self.degreeSymbolString = @"\u2109")
 	: (self.degreeSymbolString = @"\u2103");
-    [UIView animateWithDuration:1
-                          delay:.5
+    [UIView animateWithDuration:kHMDurationLower
+                          delay:kHMDurationLowest
                         options:UIViewAnimationOptionCurveEaseIn
                      animations:^{
+                         self.weatherSummaryLabel.alpha = self.degreeSymbol.alpha = 1;
                          self.weatherSummaryLabel.text = self.forecastModel ? self.forecastModel.currentlySummary : @"";
                          self.degreeSymbol.text = [NSString stringWithFormat:@"%.f%@",
                                                    ceilf(self.forecastModel.currentlyTemperature),
                                                    self.degreeSymbolString];
-                     } completion:^(BOOL finished) {
-                         self.weatherSummaryLabel.alpha = self.degreeSymbol.alpha = 1;
+                     } completion:^(BOOL finish){
+                         if (finish) {
+                             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                 [SVProgressHUD dismiss];
+                             });
+                         }
                      }];
+}
+
+- (void)showAlertViewWithTitle:(NSString *)title
+                       message:(NSString *)message
+             cancelButtonTitle:(NSString *)cancelTitle
+             otherButtonTitles:(NSString *)otherButtons
+                   useDelegate:(BOOL)useSelf
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title ?: nil
+                                                            message:message ?: NSLocalizedString(@"Some Message", nil)
+                                                           delegate:YES ? self : nil
+                                                  cancelButtonTitle:cancelTitle ?: NSLocalizedString(@"Close", nil)
+                                                  otherButtonTitles:otherButtons, nil];
+        [alertView show];
+    });
 }
 
 #pragma mark - Reachability handler
@@ -232,7 +274,7 @@
                                                   title:NSLocalizedString(@"NETWORK ERROR", nil)
                                                subtitle:NSLocalizedString(@"Internet connection seems unreachable!", nil)
                                                    type:TSMessageNotificationTypeWarning
-                                               duration:3
+                                               duration:kHMDurationFastest * 3
                                    canBeDismissedByUser:YES];
 		    DDLogError(@"NETWORK ERROR: %@\n%@",
 		               NSLocalizedString(@"Something is not quite right", nil),
@@ -242,7 +284,7 @@
 	[self.internetReachability startNotifier];
 	self.connectionAvailable = [self.internetReachability isReachable];
 #pragma clang diagnostic pop
-    DDLogError(@":::: connection? :%@", self.connectionAvailable ? @"YES" : @"NO");
+    DDLogError(@":::: connection: %@", self.connectionAvailable ? @"YES" : @"NO");
 }
 
 #pragma mark - Location Manager Delegate
@@ -259,12 +301,12 @@
 - (void)didFailToAcquireLocationWithErrorMsg:(NSString *)errorMsg
 {
     DDLogError(@"didFailToAcquireLocationWithErrorMsg: %@", errorMsg);
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(kHMDurationLower * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [SVProgressHUD dismiss];
     });
     dispatch_async(dispatch_get_main_queue(), ^{
-        [UIView animateWithDuration:.8
-                              delay:.4
+        [UIView animateWithDuration:kHMDurationFaster
+                              delay:kHMDurationLower
                             options:UIViewAnimationOptionCurveEaseOut
                          animations:^{
                              self.weatherSummaryLabel.alpha = self.degreeSymbol.alpha = 1;
@@ -273,7 +315,7 @@
                                               title:NSLocalizedString(@"Request Timed Out", nil)
                                            subtitle:errorMsg
                                                type:TSMessageNotificationTypeError
-                                           duration:5
+                                           duration:kHMDurationFastest * 6
                                canBeDismissedByUser:YES];
     });
 }
@@ -284,7 +326,7 @@
     // didFindLocationName: optional protocol
     if ([_locationManager.delegate respondsToSelector:@selector(didFindLocationName:)]) {
         DDLogWarn(@"didFindLocationName: %@", locationName);
-        self.navigationItem.title = locationName ?: @"HUMID";
+        self.navigationItem.title = locationName ?: kHMAppTitle;
     }
 }
 

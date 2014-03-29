@@ -26,9 +26,10 @@
 #import <BlurryModalSegue/BlurryModalSegue.h>
 #import <TSMessages/TSMessage.h>
 #import "NXVForecastModel.h"
-//#import "Forecast.h"
-//#import "Forecast+CLLocation.h"
+#import "WeatherService.h"
 #import "FCLocationManager.h"
 #import "CustomActionSheet.h"
 #import "UIAlertView+Block.h"
 #endif
+
+#warning lam cache!

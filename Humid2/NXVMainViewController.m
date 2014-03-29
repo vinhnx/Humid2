@@ -14,9 +14,9 @@ NSString *const kHMAppTitle = @"HUMID";
 
 // numerics
 CGFloat const kHMDurationFastest = .9;
-CGFloat const kHMDurationFaster = .7;
-CGFloat const kHMDurationLower = .3;
-CGFloat const kHMDurationLowest = .1;
+CGFloat const kHMDurationFaster  = .7;
+CGFloat const kHMDurationLower   = .3;
+CGFloat const kHMDurationLowest  = .1;
 
 @interface NXVMainViewController () <FCLocationManagerDelegate>
 @property (nonatomic, strong) WeatherService    *weatherService;
@@ -50,7 +50,7 @@ CGFloat const kHMDurationLowest = .1;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[SVProgressHUD appearance] setHudFont:[UIFont fontWithName:@"AvenirNext-Medium" size:13]];
+//    [[SVProgressHUD appearance] setHudFont:[UIFont fontWithName:@"AvenirNext-Medium" size:13]];
     [self startRequestingForecastInfo];
     [TSMessage setDefaultViewController:self];
 }
@@ -118,8 +118,8 @@ CGFloat const kHMDurationLowest = .1;
 
 - (IBAction)setupForecastInfo
 {
-    [SVProgressHUD showWithStatus:NSLocalizedString(@"Please wait...", nil)
-                         maskType:SVProgressHUDMaskTypeGradient];
+//    [SVProgressHUD showWithStatus:NSLocalizedString(@"Please wait...", nil)
+//                         maskType:SVProgressHUDMaskTypeGradient];
     [UIView animateWithDuration:kHMDurationFaster
                           delay:kHMDurationLower
                         options:UIViewAnimationOptionCurveEaseOut
@@ -142,11 +142,12 @@ CGFloat const kHMDurationLowest = .1;
 
 - (void)getForecastInfoForLocation:(CLLocation *)location
 {
+//    [SVProgressHUD dismiss];
 	@weakify(self);
     [self.weatherService getWeatherForLocation:location
                                        success:^(id JSON) {
                                            @strongify(self);
-                                           DDLogWarn(@"%@", JSON);
+//                                           DDLogWarn(@"%@", JSON);
                                            NSError *error = nil;
                                            self.forecastModel = [MTLJSONAdapter modelOfClass:[NXVForecastModel class]
                                                                           fromJSONDictionary:(NSDictionary *)JSON
@@ -228,13 +229,7 @@ CGFloat const kHMDurationLowest = .1;
                          self.degreeSymbol.text = [NSString stringWithFormat:@"%.f%@",
                                                    ceilf(self.forecastModel.currentlyTemperature),
                                                    self.degreeSymbolString];
-                     } completion:^(BOOL finish){
-                         if (finish) {
-                             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                                 [SVProgressHUD dismiss];
-                             });
-                         }
-                     }];
+                     } completion:nil];
 }
 
 - (void)showAlertViewWithTitle:(NSString *)title
@@ -301,9 +296,6 @@ CGFloat const kHMDurationLowest = .1;
 - (void)didFailToAcquireLocationWithErrorMsg:(NSString *)errorMsg
 {
     DDLogError(@"didFailToAcquireLocationWithErrorMsg: %@", errorMsg);
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(kHMDurationLower * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [SVProgressHUD dismiss];
-    });
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIView animateWithDuration:kHMDurationFaster
                               delay:kHMDurationLower

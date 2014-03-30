@@ -10,8 +10,8 @@
 
 @interface WeatherService : NSObject
 
-@property (nonatomic, copy) NSString *APIKey; // service API key
-@property (nonatomic, copy) NSString *urlStringPattern; // service API call pattern
+@property (nonatomic, copy) NSString *APIKey; // service's API key
+@property (nonatomic, copy) NSString *urlStringPattern; // service's URL call pattern
 
 /**
  *  Fetch JSON info for the given location

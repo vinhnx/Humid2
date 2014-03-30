@@ -50,7 +50,7 @@ CGFloat const kHMDurationLowest  = .1;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    [[SVProgressHUD appearance] setHudFont:[UIFont fontWithName:@"AvenirNext-Medium" size:13]];
+    [[SVProgressHUD appearance] setHudFont:[UIFont fontWithName:@"AvenirNext-Medium" size:13]];
     [self startRequestingForecastInfo];
     [TSMessage setDefaultViewController:self];
 }
@@ -118,8 +118,8 @@ CGFloat const kHMDurationLowest  = .1;
 
 - (IBAction)setupForecastInfo
 {
-//    [SVProgressHUD showWithStatus:NSLocalizedString(@"Please wait...", nil)
-//                         maskType:SVProgressHUDMaskTypeGradient];
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"Please wait...", nil)
+                         maskType:SVProgressHUDMaskTypeGradient];
     [UIView animateWithDuration:kHMDurationFaster
                           delay:kHMDurationLower
                         options:UIViewAnimationOptionCurveEaseOut
@@ -142,7 +142,7 @@ CGFloat const kHMDurationLowest  = .1;
 
 - (void)getForecastInfoForLocation:(CLLocation *)location
 {
-//    [SVProgressHUD dismiss];
+    [SVProgressHUD dismiss];
 	@weakify(self);
     [self.weatherService getWeatherForLocation:location
                                        success:^(id JSON) {

@@ -21,6 +21,10 @@
     self = [super init];
     if (self) {
         NSURL *baseURL = [NSURL URLWithString:self.urlStringPattern];
+<<<<<<< HEAD
+=======
+        NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+>>>>>>> 3dbb196... Fix missing semicolon in WeatherService
         _session = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL
                                             sessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     }
@@ -90,8 +94,8 @@
 {
     // check for the existence of APIkey
     if (!self.APIKey || !self.APIKey.length) {
-		[NSException raise:@"API not found"
-		            format:@"API key must be set. Please check if it was set up properly."];
+		[NSException raise:@"Please check if API key was set up properly."
+		            format:@"API not found"];
     }
 }
 
@@ -103,9 +107,14 @@
     if (self.urlStringPattern.length && self.urlStringPattern) {
         url = [NSString stringWithFormat:self.urlStringPattern, self.APIKey, latitude, longitude];
     } else {
+<<<<<<< HEAD
         [NSException raise:@"Service URL pattern not found"
                     format:@"Please check your URL set up again."];
 
+=======
+        [NSException raise:@"Please check your URL set up again."
+                    format:@"Service URL pattern not found."];
+>>>>>>> 3dbb196... Fix missing semicolon in WeatherService
     }
 	return url;
 }

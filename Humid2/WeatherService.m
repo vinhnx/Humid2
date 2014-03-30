@@ -21,12 +21,9 @@
     self = [super init];
     if (self) {
         NSURL *baseURL = [NSURL URLWithString:self.urlStringPattern];
-<<<<<<< HEAD
-=======
         NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
->>>>>>> 3dbb196... Fix missing semicolon in WeatherService
         _session = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL
-                                            sessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+                                            sessionConfiguration:config];
     }
     return self;
 }
@@ -94,8 +91,8 @@
 {
     // check for the existence of APIkey
     if (!self.APIKey || !self.APIKey.length) {
-		[NSException raise:@"Please check if API key was set up properly."
-		            format:@"API not found"];
+		[NSException raise:@"API not found"
+		            format:@"Please check if API key was set up properly."];
     }
 }
 
@@ -103,20 +100,13 @@
 {
     // Wunderground API call pattern: http://api.wunderground.com/api/APIKEY/conditions/q/LAT,LONGI.json
     // Forecast.io API call pattern: https://api.forecast.io/forecast/APIKEY/LAT,LONGI
-    NSString *url = @"";
     if (self.urlStringPattern.length && self.urlStringPattern) {
-        url = [NSString stringWithFormat:self.urlStringPattern, self.APIKey, latitude, longitude];
+        return [NSString stringWithFormat:self.urlStringPattern, self.APIKey, latitude, longitude];
     } else {
-<<<<<<< HEAD
         [NSException raise:@"Service URL pattern not found"
                     format:@"Please check your URL set up again."];
-
-=======
-        [NSException raise:@"Please check your URL set up again."
-                    format:@"Service URL pattern not found."];
->>>>>>> 3dbb196... Fix missing semicolon in WeatherService
     }
-	return url;
+	return nil;
 }
 
 @end

@@ -16,31 +16,9 @@
 	return nil;
 }
 
-#pragma mark - CocoaLumberjack logging configuration
-
-- (void)setupLogging
-{
-	[DDLog addLogger:[DDTTYLogger sharedInstance]];
-	// custom Log Formmater
-	[[DDTTYLogger sharedInstance] setLogFormatter:[NXVLogFormatter new]];
-	// enable colors
-	[[DDTTYLogger sharedInstance] setColorsEnabled:YES];
-
-    // network
-    [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
-    [[AFNetworkActivityLogger sharedLogger] startLogging];
-}
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // initialize log
-    [self setupLogging];
-    NSURLCache *URLCache = [[NSURLCache alloc] initWithMemoryCapacity:4 * 1024 * 1024
-                                                         diskCapacity:20 * 1024 * 1024
-                                                             diskPath:nil];
-    [NSURLCache setSharedURLCache:URLCache];
-
-	id <UIApplicationDelegate> service;
+    id <UIApplicationDelegate> service;
 	// loop through the current services and proxy the delegate call
 	for (service in self.services) {
 		if ([service respondsToSelector:@selector(application:didFinishLaunchingWithOptions:)]) {

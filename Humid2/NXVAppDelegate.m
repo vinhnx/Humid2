@@ -28,6 +28,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [super application:application didFinishLaunchingWithOptions:launchOptions];
+    // initialize log
+    [self setupLogging];
+    NSURLCache *URLCache = [[NSURLCache alloc] initWithMemoryCapacity:4 * 1024 * 1024
+                                                         diskCapacity:20 * 1024 * 1024
+                                                             diskPath:nil];
+    [NSURLCache setSharedURLCache:URLCache];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
@@ -36,6 +42,21 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+#pragma mark - CocoaLumberjack logging configuration
+
+- (void)setupLogging
+{
+	[DDLog addLogger:[DDTTYLogger sharedInstance]];
+	// custom Log Formmater
+	[[DDTTYLogger sharedInstance] setLogFormatter:[NXVLogFormatter new]];
+	// enable colors
+	[[DDTTYLogger sharedInstance] setColorsEnabled:YES];
+
+    // network
+    [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
+    [[AFNetworkActivityLogger sharedLogger] startLogging];
 }
 
 @end

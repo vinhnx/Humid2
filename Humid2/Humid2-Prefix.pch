@@ -25,8 +25,8 @@
 #import <BlurryModalSegue/BlurryModalSegue.h>
 #import <TSMessages/TSMessage.h>
 #import <TMCache/TMCache.h>
-//#import "NXVForecastModel.h"
-#import "NXVWundergroundModel.h"
+#import "NXVForecastModel.h"
+//#import "NXVWundergroundModel.h"
 #import "WeatherService.h"
 #import "WeatherService+Location.h"
 #import "FCLocationManager.h"

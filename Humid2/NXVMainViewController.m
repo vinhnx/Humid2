@@ -21,8 +21,8 @@ CGFloat const kHMDurationLowest  = .1;
 @interface NXVMainViewController () <FCLocationManagerDelegate>
 @property (nonatomic, strong) WeatherService    *weatherService;
 @property (nonatomic, strong) FCLocationManager *locationManager;
-//@property (nonatomic, strong) NXVForecastModel  *forecastModel;
-@property (nonatomic, strong) NXVWundergroundModel *wundergroundModel;
+@property (nonatomic, strong) NXVForecastModel  *forecastModel;
+//@property (nonatomic, strong) NXVWundergroundModel *wundergroundModel;
 @property (nonatomic, strong) Reachability      *internetReachability;
 @property (nonatomic, copy  ) NSString          *degreeSymbolString;
 @property (nonatomic, assign) BOOL              connectionAvailable;
@@ -75,9 +75,9 @@ CGFloat const kHMDurationLowest  = .1;
     if ([segue.identifier isEqualToString:@"showDetail"] || [segue.identifier isEqualToString:@"didTapViewToShowDetail"]) {
 		NXVWeatherDetailsViewController *detailsViewController = [segue destinationViewController];
 		detailsViewController.detailString = [NSString stringWithFormat:@"%@\n\n%@\n\n%@",
-		                                      self.wundergroundModel.currentlyWeatherSummary ?: @"",
-		                                      self.wundergroundModel.currentlyTemperatureString ?: @"",
-		                                      self.wundergroundModel.currentlyForecastURL] ?: @"";
+		                                      self.forecastModel.minutelySummary ?: @"",
+		                                      self.forecastModel.hourlySummary ?: @"",
+		                                      self.forecastModel.dailySummary] ?: @"";
         detailsViewController.cityName = self.navigationItem.title;
     }
 }
@@ -149,10 +149,10 @@ CGFloat const kHMDurationLowest  = .1;
                                            @strongify(self);
                                            NSDictionary *JSONdictionary = (NSDictionary *)JSON;
                                            NSError *error = nil;
-                                           self.wundergroundModel = [MTLJSONAdapter modelOfClass:[NXVWundergroundModel class]
+                                           self.forecastModel = [MTLJSONAdapter modelOfClass:[NXVForecastModel class]
                                                                           fromJSONDictionary:JSONdictionary
                                                                                        error:&error];
-                                           if (self.wundergroundModel) {
+                                           if (self.forecastModel) {
                                                [self updateViewsWithCallbackResults];
                                            } else if (error) {
                                                DDLogError(@"ERROR: %@", error.localizedDescription);
@@ -171,9 +171,9 @@ CGFloat const kHMDurationLowest  = .1;
 - (void)updateViewsWithCallbackResults
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-//	([self.forecastModel.unit isKindOfClass:[NSString class]] && [self.forecastModel.unit isEqualToString:@"us"])
-//	? (self.degreeSymbolString = @"\u2109")
-//	: (self.degreeSymbolString = @"\u2103");
+	([self.forecastModel.unit isKindOfClass:[NSString class]] && [self.forecastModel.unit isEqualToString:@"us"])
+	? (self.degreeSymbolString = @"\u2109")
+	: (self.degreeSymbolString = @"\u2103");
     @weakify(self);
     [UIView animateWithDuration:kHMDurationLower
                           delay:kHMDurationLowest
@@ -181,9 +181,9 @@ CGFloat const kHMDurationLowest  = .1;
                      animations:^{
                          @strongify(self);
                          self.weatherSummaryLabel.alpha = self.degreeSymbol.alpha = 1;
-                         self.weatherSummaryLabel.text = self.wundergroundModel ? self.wundergroundModel.currentlyWeatherSummary : @"Model objects not found";
-                         self.degreeSymbol.text = [NSString stringWithFormat:@"%@\u2103",
-                                                   self.wundergroundModel.currentlyTemperatureC];
+                         self.weatherSummaryLabel.text = self.forecastModel ? self.forecastModel.currentlySummary : @"Model objects not found";
+                         self.degreeSymbol.text = [NSString stringWithFormat:@"%.f%@",
+                                                   ceilf(self.forecastModel.currentlyTemperature), self.degreeSymbolString];
                      } completion:nil];
 
 }

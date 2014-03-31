@@ -21,7 +21,8 @@ CGFloat const kHMDurationLowest  = .1;
 @interface NXVMainViewController () <FCLocationManagerDelegate>
 @property (nonatomic, strong) WeatherService    *weatherService;
 @property (nonatomic, strong) FCLocationManager *locationManager;
-@property (nonatomic, strong) NXVForecastModel  *forecastModel;
+//@property (nonatomic, strong) NXVForecastModel  *forecastModel;
+@property (nonatomic, strong) NXVWundergroundModel *wundergroundModel;
 @property (nonatomic, strong) Reachability      *internetReachability;
 @property (nonatomic, copy  ) NSString          *degreeSymbolString;
 @property (nonatomic, assign) BOOL              connectionAvailable;
@@ -36,7 +37,6 @@ CGFloat const kHMDurationLowest  = .1;
     self = [super init];
     if (self) {
         self.title = kHMAppTitle;
-        _degreeSymbolString = _degreeSymbolString ?: @"\u2103"; // set default degree symbol to ºC
     }
     return self;
 }
@@ -75,9 +75,9 @@ CGFloat const kHMDurationLowest  = .1;
     if ([segue.identifier isEqualToString:@"showDetail"] || [segue.identifier isEqualToString:@"didTapViewToShowDetail"]) {
 		NXVWeatherDetailsViewController *detailsViewController = [segue destinationViewController];
 		detailsViewController.detailString = [NSString stringWithFormat:@"%@\n\n%@\n\n%@",
-		                                      self.forecastModel.minutelySummary ?: @"",
-		                                      self.forecastModel.hourlySummary ?: @"",
-		                                      self.forecastModel.dailySummary] ?: @"";
+		                                      self.wundergroundModel.currentlyWeatherSummary ?: @"",
+		                                      self.wundergroundModel.currentlyTemperatureString ?: @"",
+		                                      self.wundergroundModel.currentlyForecastURL] ?: @"";
         detailsViewController.cityName = self.navigationItem.title;
     }
 }
@@ -133,12 +133,12 @@ CGFloat const kHMDurationLowest  = .1;
     self.weatherService.cacheExpirationInMinutes = 30;
 
     // -- Forecast.io service
-    self.weatherService.urlStringPattern = @"https://api.forecast.io/forecast/%@/%.6f,%.6f?units=auto";
-    self.weatherService.APIKey = @""._7._2.c.a._4._8.d._8.b.d._7.d._4.d._1._4._7.b.e.b.f._1.c._8.f.b._9._5._1.f.e._7;
+//    self.weatherService.urlStringPattern = @"https://api.forecast.io/forecast/%@/%.6f,%.6f?units=auto";
+//    self.weatherService.APIKey = @""._7._2.c.a._4._8.d._8.b.d._7.d._4.d._1._4._7.b.e.b.f._1.c._8.f.b._9._5._1.f.e._7;
 
     // -- Wunderground service
-//    self.weatherService.urlStringPattern = @"http://api.wunderground.com/api/%@/conditions/q/%.6f,%.6f.json";
-//    self.weatherService.APIKey = @""._4._6._3._3.d._1.a._9.e._6.d._0._2._8.b._3;
+    self.weatherService.urlStringPattern = @"http://api.wunderground.com/api/%@/conditions/q/%.6f,%.6f.json";
+    self.weatherService.APIKey = @""._4._6._3._3.d._1.a._9.e._6.d._0._2._8.b._3;
 }
 
 - (void)getForecastInfoForLocation:(CLLocation *)location
@@ -149,10 +149,10 @@ CGFloat const kHMDurationLowest  = .1;
                                            @strongify(self);
                                            NSDictionary *JSONdictionary = (NSDictionary *)JSON;
                                            NSError *error = nil;
-                                           self.forecastModel = [MTLJSONAdapter modelOfClass:[NXVForecastModel class]
+                                           self.wundergroundModel = [MTLJSONAdapter modelOfClass:[NXVWundergroundModel class]
                                                                           fromJSONDictionary:JSONdictionary
                                                                                        error:&error];
-                                           if (self.forecastModel) {
+                                           if (self.wundergroundModel) {
                                                [self updateViewsWithCallbackResults];
                                            } else if (error) {
                                                DDLogError(@"ERROR: %@", error.localizedDescription);
@@ -227,9 +227,10 @@ CGFloat const kHMDurationLowest  = .1;
 
 - (void)updateViewsWithCallbackResults
 {
-	([self.forecastModel.unit isKindOfClass:[NSString class]] && [self.forecastModel.unit isEqualToString:@"us"])
-	? (self.degreeSymbolString = @"\u2109")
-	: (self.degreeSymbolString = @"\u2103");
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+//	([self.forecastModel.unit isKindOfClass:[NSString class]] && [self.forecastModel.unit isEqualToString:@"us"])
+//	? (self.degreeSymbolString = @"\u2109")
+//	: (self.degreeSymbolString = @"\u2103");
     @weakify(self);
     [UIView animateWithDuration:kHMDurationLower
                           delay:kHMDurationLowest
@@ -237,11 +238,11 @@ CGFloat const kHMDurationLowest  = .1;
                      animations:^{
                          @strongify(self);
                          self.weatherSummaryLabel.alpha = self.degreeSymbol.alpha = 1;
-                         self.weatherSummaryLabel.text = self.forecastModel ? self.forecastModel.currentlySummary : @"";
-                         self.degreeSymbol.text = [NSString stringWithFormat:@"%.f%@",
-                                                   ceilf(self.forecastModel.currentlyTemperature),
-                                                   self.degreeSymbolString];
+                         self.weatherSummaryLabel.text = self.wundergroundModel ? self.wundergroundModel.currentlyWeatherSummary : @"Model objects not found";
+                         self.degreeSymbol.text = [NSString stringWithFormat:@"%@\u2103",
+                                                   self.wundergroundModel.currentlyTemperatureC];
                      } completion:nil];
+
 }
 
 - (void)showAlertViewWithTitle:(NSString *)title

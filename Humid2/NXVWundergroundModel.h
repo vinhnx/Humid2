@@ -10,8 +10,8 @@
 
 @interface NXVWundergroundModel : MTLModel <MTLJSONSerializing>
 
-@property (nonatomic, copy, readonly) NSString *currentlyWeatherSummary;
-@property (nonatomic, copy, readonly) NSString *currentlyTemperatureString;
+@property (nonatomic, copy, readonly  ) NSString *currentlyWeatherSummary;
+@property (nonatomic, copy, readonly  ) NSString *currentlyTemperatureString;
 @property (nonatomic, assign, readonly) NSNumber *currentlyTemperatureF;
 @property (nonatomic, assign, readonly) NSNumber *currentlyTemperatureC;
 @property (nonatomic, strong, readonly) NSString *currentlyForecastURL;

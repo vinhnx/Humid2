@@ -9,8 +9,8 @@
 #import "NXVWundergroundModel.h"
 
 @interface NXVWundergroundModel ()
-@property (nonatomic, copy, readwrite) NSString *currentlyWeatherSummary;
-@property (nonatomic, copy, readwrite) NSString *currentlyTemperatureString;
+@property (nonatomic, copy, readwrite  ) NSString *currentlyWeatherSummary;
+@property (nonatomic, copy, readwrite  ) NSString *currentlyTemperatureString;
 @property (nonatomic, assign, readwrite) NSNumber *currentlyTemperatureF;
 @property (nonatomic, assign, readwrite) NSNumber *currentlyTemperatureC;
 @property (nonatomic, strong, readwrite) NSString *currentlyForecastURL;
@@ -21,13 +21,12 @@
 + (NSDictionary *)JSONKeyPathsByPropertyKey
 {
     return @{
-             // Model property      :       JSON value
-//             @"currentObservation" : @"current_observation",
-             @"currentlyWeatherSummary" : @"current_observation.weather",
+             // Model property              : JSON value
+             @"currentlyWeatherSummary"    : @"current_observation.weather",
              @"currentlyTemperatureString" : @"current_observation.temperature_string",
-             @"currentlyTemperatureF" : @"current_observation.temp_f",
-             @"currentlyTemperatureC" : @"current_observation.temp_c",
-             @"currentlyForecastURL" : @"current_observation.forecast_url"
+             @"currentlyTemperatureF"      : @"current_observation.temp_f",
+             @"currentlyTemperatureC"      : @"current_observation.temp_c",
+             @"currentlyForecastURL"       : @"current_observation.forecast_url"
              };
 }
 

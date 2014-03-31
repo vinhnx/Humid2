@@ -33,9 +33,3 @@
 #import "CustomActionSheet.h"
 #import "UIAlertView+Block.h"
 #endif
-
-#warning map overlay
-#warning them params cho URL call
-#warning date picker, location search
-#warning add them 1 so api khác
-#warning lam background fetch

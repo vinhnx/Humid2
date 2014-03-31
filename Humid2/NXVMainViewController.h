@@ -7,9 +7,9 @@
 //
 
 @interface NXVMainViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UILabel *weatherSummaryLabel;
-@property (weak, nonatomic) IBOutlet UILabel *degreeSymbol;
+@property (weak, nonatomic) IBOutlet UILabel         *weatherSummaryLabel;
+@property (weak, nonatomic) IBOutlet UILabel         *degreeSymbol;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *refreshButton;
-@property (weak, nonatomic) IBOutlet UIButton *infoButton;
+@property (weak, nonatomic) IBOutlet UIButton        *infoButton;
 - (IBAction)setupForecastInfo;
 @end

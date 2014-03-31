@@ -31,12 +31,12 @@ CGFloat const kHMDurationLowest  = .1;
 
 #pragma mark - View Lifecycle
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)init
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super init];
     if (self) {
         self.title = kHMAppTitle;
-        self.degreeSymbolString = self.degreeSymbolString ?: @"\u2103"; // set default degree symbol to ºC
+        _degreeSymbolString = _degreeSymbolString ?: @"\u2103"; // set default degree symbol to ºC
     }
     return self;
 }
@@ -50,7 +50,6 @@ CGFloat const kHMDurationLowest  = .1;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[SVProgressHUD appearance] setHudFont:[UIFont fontWithName:@"AvenirNext-Medium" size:13]];
     [self startRequestingForecastInfo];
     [TSMessage setDefaultViewController:self];
 }
@@ -118,21 +117,23 @@ CGFloat const kHMDurationLowest  = .1;
 
 - (IBAction)setupForecastInfo
 {
-    [SVProgressHUD showWithStatus:NSLocalizedString(@"Please wait...", nil)
-                         maskType:SVProgressHUDMaskTypeGradient];
+    @weakify(self);
     [UIView animateWithDuration:kHMDurationFaster
                           delay:kHMDurationLower
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^{
+                         @strongify(self);
                          self.weatherSummaryLabel.alpha = self.degreeSymbol.alpha = .1;
                      } completion:nil];
     self.locationManager = [FCLocationManager sharedManager];
     self.locationManager.delegate = self;
     [self.locationManager startUpdatingLocation];
-    self.weatherService = [[WeatherService alloc] init];
+    self.weatherService = [WeatherService sharedService];
+    self.weatherService.cacheEnabled = YES;
+    self.weatherService.cacheExpirationInMinutes = 30;
 
     // -- Forecast.io service
-    self.weatherService.urlStringPattern = @"https://api.forecast.io/forecast/%@/%.6f,%.6f";
+    self.weatherService.urlStringPattern = @"https://api.forecast.io/forecast/%@/%.6f,%.6f?units=auto";
     self.weatherService.APIKey = @""._7._2.c.a._4._8.d._8.b.d._7.d._4.d._1._4._7.b.e.b.f._1.c._8.f.b._9._5._1.f.e._7;
 
     // -- Wunderground service
@@ -142,18 +143,22 @@ CGFloat const kHMDurationLowest  = .1;
 
 - (void)getForecastInfoForLocation:(CLLocation *)location
 {
-    [SVProgressHUD dismiss];
 	@weakify(self);
     [self.weatherService getWeatherForLocation:location
                                        success:^(id JSON) {
                                            @strongify(self);
-//                                           DDLogWarn(@"%@", JSON);
+                                           NSDictionary *JSONdictionary = (NSDictionary *)JSON;
                                            NSError *error = nil;
                                            self.forecastModel = [MTLJSONAdapter modelOfClass:[NXVForecastModel class]
-                                                                          fromJSONDictionary:(NSDictionary *)JSON
+                                                                          fromJSONDictionary:JSONdictionary
                                                                                        error:&error];
-                                           [self updateViewsWithCallbackResults];
+                                           if (self.forecastModel) {
+                                               [self updateViewsWithCallbackResults];
+                                           } else if (error) {
+                                               DDLogError(@"ERROR: %@", error.localizedDescription);
+                                           }
                                        } failure:^(NSError *error, id response) {
+                                           @strongify(self);
                                            DDLogError(@"ERROR: %@", error.localizedDescription);
                                            [self showAlertViewWithTitle:NSLocalizedString(@"Parsing Error", nil)
                                                                 message:NSLocalizedString(@"%@", error.localizedDescription)
@@ -168,11 +173,16 @@ CGFloat const kHMDurationLowest  = .1;
 //                                     longitude:longi
 //                                       success:^(id JSON) {
 //                                           @strongify(self);
+//                                           NSDictionary *JSONdictionary = (NSDictionary *)JSON;
 //                                           NSError *error = nil;
 //                                           self.forecastModel = [MTLJSONAdapter modelOfClass:[NXVForecastModel class]
-//                                                                          fromJSONDictionary:(NSDictionary *)JSON
+//                                                                          fromJSONDictionary:JSONdictionary
 //                                                                                       error:&error];
-//                                           [self updateViewsWithCallbackResults];
+//                                           if (self.forecastModel) {
+//                                               [self updateViewsWithCallbackResults];
+//                                           } else if (error) {
+//                                               DDLogError(@"ERROR: %@", error.localizedDescription);
+//                                           }
 //                                       } failure:^(NSError *error, id response) {
 //                                           DDLogError(@"ERROR: %@", error.localizedDescription);
 //                                           [self showAlertViewWithTitle:NSLocalizedString(@"Parsing Error", nil)
@@ -220,10 +230,12 @@ CGFloat const kHMDurationLowest  = .1;
 	([self.forecastModel.unit isKindOfClass:[NSString class]] && [self.forecastModel.unit isEqualToString:@"us"])
 	? (self.degreeSymbolString = @"\u2109")
 	: (self.degreeSymbolString = @"\u2103");
+    @weakify(self);
     [UIView animateWithDuration:kHMDurationLower
                           delay:kHMDurationLowest
                         options:UIViewAnimationOptionCurveEaseIn
                      animations:^{
+                         @strongify(self);
                          self.weatherSummaryLabel.alpha = self.degreeSymbol.alpha = 1;
                          self.weatherSummaryLabel.text = self.forecastModel ? self.forecastModel.currentlySummary : @"";
                          self.degreeSymbol.text = [NSString stringWithFormat:@"%.f%@",
@@ -279,7 +291,7 @@ CGFloat const kHMDurationLowest  = .1;
 	[self.internetReachability startNotifier];
 	self.connectionAvailable = [self.internetReachability isReachable];
 #pragma clang diagnostic pop
-    DDLogError(@":::: connection: %@", self.connectionAvailable ? @"YES" : @"NO");
+    DDLogWarn(@":::: connection available: %@", self.connectionAvailable ? @"YES" : @"NO");
 }
 
 #pragma mark - Location Manager Delegate
@@ -296,19 +308,25 @@ CGFloat const kHMDurationLowest  = .1;
 - (void)didFailToAcquireLocationWithErrorMsg:(NSString *)errorMsg
 {
     DDLogError(@"didFailToAcquireLocationWithErrorMsg: %@", errorMsg);
+    @weakify(self);
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIView animateWithDuration:kHMDurationFaster
                               delay:kHMDurationLower
                             options:UIViewAnimationOptionCurveEaseOut
                          animations:^{
-                             self.weatherSummaryLabel.alpha = self.degreeSymbol.alpha = 1;
-                         } completion:nil];
-        [TSMessage showNotificationInViewController:self
-                                              title:NSLocalizedString(@"Request Timed Out", nil)
-                                           subtitle:errorMsg
-                                               type:TSMessageNotificationTypeError
-                                           duration:kHMDurationFastest * 6
-                               canBeDismissedByUser:YES];
+                             @strongify(self);
+                             [TSMessage showNotificationInViewController:self
+                                                                   title:NSLocalizedString(@"Request Timed Out", nil)
+                                                                subtitle:errorMsg
+                                                                    type:TSMessageNotificationTypeError
+                                                                duration:kHMDurationFastest * 6
+                                                    canBeDismissedByUser:YES];
+                         } completion:^(BOOL finish) {
+                             @strongify(self);
+                             if (finish) {
+                                 self.weatherSummaryLabel.alpha = self.degreeSymbol.alpha = 1;
+                             }
+                         }];
     });
 }
 

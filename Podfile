@@ -3,6 +3,7 @@ platform :ios, "7.0"
 inhibit_all_warnings!
 
 target :Humid2 do
+# ultilities
     pod 'NXVLogFormatter', '~> 0.0.1'
     pod 'CocoaLumberjack', '~> 1.8.1'
     pod 'AFNetworking', '~> 2.2.1'
@@ -11,8 +12,11 @@ target :Humid2 do
     pod 'Mantle', '~> 1.4.1'
     pod 'libextobjc/EXTScope', '~> 0.4'
     pod 'Reachability', '~> 3.1.1'
+    pod 'TMCache', '~> 1.2.0'
+
+# views
     pod 'UIView+DebugQuickLook', '~> 1.0'
-    pod 'SVProgressHUD', '~> 1.0'
+    # pod 'SVProgressHUD', '~> 1.0'
     pod 'BlurryModalSegue'
     pod 'TSMessages', '~> 0.9.6'
 end

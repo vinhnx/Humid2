@@ -22,16 +22,19 @@
 #import <Mantle/Mantle.h>
 #import <libextobjc/EXTScope.h>
 #import <Reachability/Reachability.h>
-#import <SVProgressHUD/SVProgressHUD.h>
 #import <BlurryModalSegue/BlurryModalSegue.h>
 #import <TSMessages/TSMessage.h>
+#import <TMCache/TMCache.h>
 #import "NXVForecastModel.h"
 #import "WeatherService.h"
+#import "WeatherService+Location.h"
 #import "FCLocationManager.h"
 #import "CustomActionSheet.h"
 #import "UIAlertView+Block.h"
 #endif
 
-#warning lam cache! (TMCache), xem https://github.com/Ruenzuo/ios-facade-example
+#warning map overlay
+#warning them params cho URL call
+#warning date picker, location search
 #warning lam Model cho Wunderground, add them 1 so api khác
 #warning lam background fetch

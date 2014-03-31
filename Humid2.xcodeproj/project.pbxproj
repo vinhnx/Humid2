@@ -22,6 +22,7 @@
 		8471B80C18E289480095673E /* FunctionalTestingSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471B80B18E289480095673E /* FunctionalTestingSpec.m */; };
 		8477D51D18DC4650006240CF /* NXVForecastModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8477D51C18DC4650006240CF /* NXVForecastModel.m */; };
 		849F619C18E6CAEB0011746E /* ForecastIO.m in Sources */ = {isa = PBXBuildFile; fileRef = 849F619B18E6CAEB0011746E /* ForecastIO.m */; };
+		84BC108D18E92A4800A963C4 /* WeatherService+Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BC108C18E92A4800A963C4 /* WeatherService+Location.m */; };
 		84E80DFD18E3F3750054C6C9 /* FCLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E80DFC18E3F3750054C6C9 /* FCLocationManager.m */; };
 		84F998DF18D6D8A500899921 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F998DE18D6D8A500899921 /* Foundation.framework */; };
 		84F998E118D6D8A500899921 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F998E018D6D8A500899921 /* CoreGraphics.framework */; };
@@ -83,6 +84,8 @@
 		8477D51C18DC4650006240CF /* NXVForecastModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NXVForecastModel.m; sourceTree = "<group>"; };
 		849F619A18E6CAEB0011746E /* ForecastIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForecastIO.h; sourceTree = "<group>"; };
 		849F619B18E6CAEB0011746E /* ForecastIO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForecastIO.m; sourceTree = "<group>"; };
+		84BC108B18E92A4800A963C4 /* WeatherService+Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WeatherService+Location.h"; sourceTree = "<group>"; };
+		84BC108C18E92A4800A963C4 /* WeatherService+Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WeatherService+Location.m"; sourceTree = "<group>"; };
 		84E80DFB18E3F3750054C6C9 /* FCLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCLocationManager.h; sourceTree = "<group>"; };
 		84E80DFC18E3F3750054C6C9 /* FCLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCLocationManager.m; sourceTree = "<group>"; };
 		84E80DFE18E408F60054C6C9 /* Ho Chi Minh city.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Ho Chi Minh city.gpx"; sourceTree = "<group>"; };
@@ -164,6 +167,8 @@
 			children = (
 				84538FDD18E694BA00EA3966 /* WeatherService.h */,
 				84538FDE18E694BA00EA3966 /* WeatherService.m */,
+				84BC108B18E92A4800A963C4 /* WeatherService+Location.h */,
+				84BC108C18E92A4800A963C4 /* WeatherService+Location.m */,
 			);
 			name = "Facade Service";
 			sourceTree = "<group>";
@@ -395,8 +400,8 @@
 		84F9991B18D6E99D00899921 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				84538FE118E6A29F00EA3966 /* OpenWeatherMap */,
 				84538FDC18E6948C00EA3966 /* Facade Service */,
+				84538FE118E6A29F00EA3966 /* OpenWeatherMap */,
 				84F9996018D70E2700899921 /* Forecast.io */,
 			);
 			name = Services;
@@ -675,6 +680,7 @@
 				8477D51D18DC4650006240CF /* NXVForecastModel.m in Sources */,
 				84F998EF18D6D8A500899921 /* SOAppDelegate.m in Sources */,
 				84538FDF18E694BA00EA3966 /* WeatherService.m in Sources */,
+				84BC108D18E92A4800A963C4 /* WeatherService+Location.m in Sources */,
 				8433DFD618D7FE0A00576C22 /* Forecast+CLLocation.m in Sources */,
 				845CC78718E2C0F10046E9F4 /* NXVWeatherDetailsViewController.m in Sources */,
 				843AFD9C18D7F9D900E17047 /* ForecastAPIClient.m in Sources */,

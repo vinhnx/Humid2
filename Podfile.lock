@@ -53,7 +53,7 @@ PODS:
   - NXVLogFormatter (0.0.1):
     - CocoaLumberjack (~> 1.8.1)
   - Reachability (3.1.1)
-  - SVProgressHUD (1.0)
+  - TMCache (1.2.0)
   - TSMessages (0.9.6):
     - HexColors
   - UAObfuscatedString (0.2)
@@ -71,7 +71,7 @@ DEPENDENCIES:
   - Mantle (~> 1.4.1)
   - NXVLogFormatter (~> 0.0.1)
   - Reachability (~> 3.1.1)
-  - SVProgressHUD (~> 1.0)
+  - TMCache (~> 1.2.0)
   - TSMessages (~> 0.9.6)
   - UAObfuscatedString (~> 0.2)
   - UIView+DebugQuickLook (~> 1.0)
@@ -90,7 +90,7 @@ SPEC CHECKSUMS:
   MZAppearance: 8b02683f0019f725557ae9839ed6cab153fff669
   NXVLogFormatter: 5708990cb7002e8d2ea4beb2cf6b7f6ff0da64c3
   Reachability: be4883bb93f31e38266ae3365e5600a317aae735
-  SVProgressHUD: 5e10939a296debf5fe5a5895eda9539b8b2114f1
+  TMCache: 4b05e1b124d9f7e8d449640e059cff4cda17ed27
   TSMessages: 839edc3164b99ced48c30af9dde9710cd67bea4d
   UAObfuscatedString: 40473fc35590e0170992afb88147214d76c7ce34
   UIImage+BlurredFrame: 9f29c4796105b50742abc31a69e18e37afb080a0

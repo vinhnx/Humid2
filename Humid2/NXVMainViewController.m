@@ -133,12 +133,12 @@ CGFloat const kHMDurationLowest  = .1;
     self.weatherService.cacheExpirationInMinutes = 30;
 
     // -- Forecast.io service
-//    self.weatherService.urlStringPattern = @"https://api.forecast.io/forecast/%@/%.6f,%.6f?units=auto";
-//    self.weatherService.APIKey = @""._7._2.c.a._4._8.d._8.b.d._7.d._4.d._1._4._7.b.e.b.f._1.c._8.f.b._9._5._1.f.e._7;
+    self.weatherService.urlStringPattern = @"https://api.forecast.io/forecast/%@/%.6f,%.6f?units=auto";
+    self.weatherService.APIKey = @""._7._2.c.a._4._8.d._8.b.d._7.d._4.d._1._4._7.b.e.b.f._1.c._8.f.b._9._5._1.f.e._7;
 
     // -- Wunderground service
-    self.weatherService.urlStringPattern = @"http://api.wunderground.com/api/%@/conditions/q/%.6f,%.6f.json";
-    self.weatherService.APIKey = @""._4._6._3._3.d._1.a._9.e._6.d._0._2._8.b._3;
+//    self.weatherService.urlStringPattern = @"http://api.wunderground.com/api/%@/conditions/q/%.6f,%.6f.json";
+//    self.weatherService.APIKey = @""._4._6._3._3.d._1.a._9.e._6.d._0._2._8.b._3;
 }
 
 - (void)getForecastInfoForLocation:(CLLocation *)location

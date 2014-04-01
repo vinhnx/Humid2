@@ -31,9 +31,4 @@
                         }];
 }
 
-- (void)removeCachedForecastForLocation:(CLLocation *)location time:(NSNumber *)time
-{
-    [self removeCachedForecastForLocation:location time:time];
-}
-
 @end

@@ -115,14 +115,14 @@ NSString *const kHMCacheForecastKey = @"Forecast";
                       }
                       success(JSON);
                   }
-                  failure:^(NSURLSessionDataTask *task, NSError *error) {
+                  failure:^(NSURLSessionDataTask *task, NSError *requestError) {
 
 #ifdef DEBUG
-                      DDLogError(@"%s. API call error: %@", __PRETTY_FUNCTION__, error.localizedDescription);
+                      DDLogError(@"%s. API call error: %@", __PRETTY_FUNCTION__, requestError.localizedDescription);
 #endif
 
                       NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
-                      failure(error, response);
+                      failure(requestError, response);
                   }];
     }];
 }
@@ -174,7 +174,7 @@ NSString *const kHMCacheForecastKey = @"Forecast";
         dispatch_async(async_queue, ^{
             BOOL cachedItemWasFound = NO;
             @try {
-                NSDictionary *cachedForecasts = [userDefaults dictionaryForKey:kHMCacheKey];
+                NSDictionary *cachedForecasts = [self->userDefaults dictionaryForKey:kHMCacheKey];
                 if (cachedForecasts) {
                     // Create an NSString object from the coordinates as the dictionary key
                     NSData *archivedCacheItem = [cachedForecasts objectForKey:urlString];
@@ -231,7 +231,7 @@ NSString *const kHMCacheForecastKey = @"Forecast";
 
     // Save to cache on a background thread
     dispatch_async(async_queue, ^{
-        NSMutableDictionary *cachedForecasts = [[userDefaults dictionaryForKey:kHMCacheKey] mutableCopy];
+        NSMutableDictionary *cachedForecasts = [[self->userDefaults dictionaryForKey:kHMCacheKey] mutableCopy];
         if (!cachedForecasts) cachedForecasts = [[NSMutableDictionary alloc] initWithCapacity:1];
 
         // Set up the new dictionary we are going to cache
@@ -242,8 +242,8 @@ NSString *const kHMCacheForecastKey = @"Forecast";
 
         // Save the new cache item and sync the user defaults
         [cachedForecasts setObject:[self archivedObject:newCacheItem] forKey:urlString];
-        [userDefaults setObject:cachedForecasts forKey:kHMCacheKey];
-        [userDefaults synchronize];
+        [self->userDefaults setObject:cachedForecasts forKey:kHMCacheKey];
+        [self->userDefaults synchronize];
     });
 }
 

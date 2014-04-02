@@ -13,10 +13,10 @@
 NSString *const kHMAppTitle = @"HUMID";
 
 // numerics
-CGFloat const kHMDurationFastest = .9;
-CGFloat const kHMDurationFaster  = .7;
-CGFloat const kHMDurationLower   = .3;
-CGFloat const kHMDurationLowest  = .1;
+float const kHMDurationFastest = .9f;
+float const kHMDurationFaster  = .7f;
+float const kHMDurationLower   = .3f;
+float const kHMDurationLowest  = .1f;
 
 @interface NXVMainViewController () <FCLocationManagerDelegate>
 @property (nonatomic, strong) WeatherService    *weatherService;
@@ -123,7 +123,7 @@ CGFloat const kHMDurationLowest  = .1;
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^{
                          @strongify(self);
-                         self.weatherSummaryLabel.alpha = self.degreeSymbol.alpha = .1;
+                         self.weatherSummaryLabel.alpha = self.degreeSymbol.alpha = kHMDurationLowest;
                      } completion:nil];
     self.locationManager = [FCLocationManager sharedManager];
     self.locationManager.delegate = self;

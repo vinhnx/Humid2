@@ -43,7 +43,7 @@ static NSString *kFCTimeoutError = @"There was a timeout while attempting to det
 
 # pragma mark - Singleton Methods
 
-+ (id)sharedManager
++ (FCLocationManager *)sharedManager
 {
     static FCLocationManager *_sharedManager;
     static dispatch_once_t onceToken;
@@ -53,7 +53,7 @@ static NSString *kFCTimeoutError = @"There was a timeout while attempting to det
     return _sharedManager;
 }
 
-- (id)init {
+- (FCLocationManager *)init {
     if (self = [super init]) {
         // Init code here
 

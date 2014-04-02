@@ -92,16 +92,5 @@
 //-- Alerts
 /// An array of alert objects, which, if present, contains any severe weather alerts, issued by a governmental weather authority, pertinent to the requested location.
 @property (nonatomic, copy, readonly  ) NSArray      *alerts;
-/// A short text summary of the alert.
-//@property (nonatomic, copy, readonly) NSString *alertTitle;
-///// A detailed text description of the alert from the appropriate weather service.
-//@property (nonatomic, copy, readonly) NSString *alertDescription;
-///// The UNIX beginning time of alert
-//@property (nonatomic, assign, readonly) NSInteger alertTimeBegin;
-///// The UNIX time (that is, seconds since midnight GMT on 1 Jan 1970) at which the alert will cease to be valid.
-//@property (nonatomic, assign, readonly) NSInteger alertTimeExpires;
-//
-///// An HTTP(S) URI that contains detailed information about the alert.
-//@property (nonatomic, copy, readonly) NSString *alertURL;
 
 @end

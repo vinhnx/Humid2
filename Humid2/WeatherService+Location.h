@@ -21,8 +21,6 @@
  *  @param success   the block object to be executed when the operation finishes successfully
  *  @param failure   the block object to be executed when the operation finishes unsuccessfully
  */
-- (void)getWeatherForLocation:(CLLocation *)location
-                      success:(void (^)(id JSON))success
-                      failure:(void (^)(NSError *error, id response))failure;
+- (void)getWeatherForLocation:(CLLocation *)location success:(void (^)(id JSON))success failure:(void (^)(NSError *error, id response))failure;
 
 @end

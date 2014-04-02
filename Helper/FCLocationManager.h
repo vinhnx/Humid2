@@ -38,7 +38,7 @@
 
 @property (nonatomic, weak) id <FCLocationManagerDelegate>delegate;
 
-+ (id)sharedManager;
++ (FCLocationManager *)sharedManager;
 - (void)startUpdatingLocation;
 - (void)findNameForLocation:(CLLocation *)location;
 

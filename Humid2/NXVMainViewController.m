@@ -32,7 +32,7 @@ CGFloat const kHMDurationLowest  = .1;
 
 #pragma mark - View Lifecycle
 
-- (id)init
+- (instancetype)init
 {
     self = [super init];
     if (self) {
@@ -152,11 +152,11 @@ CGFloat const kHMDurationLowest  = .1;
                                            self.forecastModel = [MTLJSONAdapter modelOfClass:[NXVForecastModel class]
                                                                           fromJSONDictionary:JSONdictionary
                                                                                        error:&error];
-                                           if (self.forecastModel) {
-                                               [self updateViewsWithCallbackResults];
-                                           } else if (error) {
+                                           if (!self.forecastModel) {
                                                DDLogError(@"ERROR: %@", error.localizedDescription);
                                            }
+
+                                           [self updateViewsWithCallbackResults];
                                        } failure:^(NSError *error, id response) {
                                            @strongify(self);
                                            DDLogError(@"ERROR: %@", error.localizedDescription);
@@ -276,8 +276,6 @@ CGFloat const kHMDurationLowest  = .1;
 
 - (void)didFindLocationName:(NSString *)locationName
 {
-    // first, we must check if locationManager delegate can reponse to
-    // didFindLocationName: optional protocol
     if ([_locationManager.delegate respondsToSelector:@selector(didFindLocationName:)]) {
         DDLogWarn(@"didFindLocationName: %@", locationName);
         self.navigationItem.title = locationName ?: kHMAppTitle;

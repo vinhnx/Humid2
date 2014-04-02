@@ -23,11 +23,7 @@ typedef void(^CompletionBlock)(NSString *buttonTitle, NSInteger buttonIndex);
  *
  *  @return return the action sheet object!
  */
-- (instancetype)initWithTitle:(NSString *)title
-                     delegate:(id)delegate
-            cancelButtonTitle:(NSString *)cancelButtonTitle
-       destructiveButtonTitle:(NSString *)destructiveButtonTitle
-            otherButtonTitles:(NSString *)otherButtonTitles, ...;
+- (CustomActionSheet *)initWithTitle:(NSString *)title delegate:(id)delegate cancelButtonTitle:(NSString *)cancelButtonTitle destructiveButtonTitle:(NSString *)destructiveButtonTitle otherButtonTitles:(NSString *)otherButtonTitles, ...;
 
 /**
  *  Showing the action sheet object.
@@ -35,7 +31,6 @@ typedef void(^CompletionBlock)(NSString *buttonTitle, NSInteger buttonIndex);
  *  @param view              the view calling action sheet
  *  @param completionHanlder the completion hanlder to perform something
  */
-- (void)       showInView:(UIView *)view
-    withCompletionHandler:(CompletionBlock)completionHanlder;
+- (void)showInView:(UIView *)view withCompletionHandler:(CompletionBlock)completionHanlder;
 
 @end

@@ -15,7 +15,7 @@
 
 #pragma mark - View Lifecycles
 
-- (id)init
+- (instancetype)init
 {
     self = [super init];
     if (self) {

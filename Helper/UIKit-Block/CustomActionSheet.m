@@ -14,7 +14,7 @@
 @end
 @implementation CustomActionSheet
 
-- (instancetype)initWithTitle:(NSString *)title
+- (CustomActionSheet *)initWithTitle:(NSString *)title
                      delegate:(id)delegate
             cancelButtonTitle:(NSString *)cancelButtonTitle
        destructiveButtonTitle:(NSString *)destructiveButtonTitle

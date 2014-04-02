@@ -51,7 +51,7 @@ NSString *const kHMCacheForecastKey = @"Forecast";
 
 #pragma mark - Object Initialize
 
-+ (instancetype)sharedService
++ (WeatherService *)sharedService
 {
     static WeatherService *_sharedService = nil;
     static dispatch_once_t onceToken;

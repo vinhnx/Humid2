@@ -38,7 +38,7 @@
  *  
  * @return A new singleton object
  */
-+ (instancetype)sharedService;
++ (WeatherService *)sharedService;
 
 /**
  *  Fetch JSON info for the given location's latitude, longitude 
@@ -51,10 +51,7 @@
  *  @param success   the block object to be executed when the operation finishes successfully
  *  @param failure   the block object to be executed when the operation finishes unsuccessfully
  */
-- (void)getWeatherForLatitude:(double)latitude
-                    longitude:(double)longitude
-                      success:(void (^)(id JSON))success
-                      failure:(void (^)(NSError *error, id response))failure;
+- (void)getWeatherForLatitude:(double)latitude longitude:(double)longitude success:(void (^)(id JSON))success failure:(void (^)(NSError *error, id response))failure;
 
 /**
  *  Cancel all requests that are currently being executed
@@ -71,9 +68,7 @@
  * @param forecast The returned JSON or JSONP for the forecast you wish to cache
  * @param urlString The original URL string used to make the request (this assumes your API key doesn't change)
  */
-- (void)checkForecastCacheForURLString:(NSString *)urlString
-                               success:(void (^)(id cachedForecast))success
-                               failure:(void (^)(NSError *error))failure;
+- (void)checkForecastCacheForURLString:(NSString *)urlString success:(void (^)(id cachedForecast))success failure:(void (^)(NSError *error))failure;
 
 /**
  * Caches a forecast, on a background thread, in NSUserDefaults based on the original URL string used to request it
@@ -93,9 +88,7 @@
  * @param exclusions (Optional) An array which specifies which data blocks you would like left off the response
  * @param extend (Optional) Extra commands that are sent to the server
  */
-- (void)removeCachedForecastForLatitude:(double)lat
-                              longitude:(double)longi
-                                   time:(NSNumber *)time;
+- (void)removeCachedForecastForLatitude:(double)lat longitude:(double)longi time:(NSNumber *)time;
 
 /**
  * Flushes all forecasts from the cache

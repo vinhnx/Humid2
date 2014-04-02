@@ -143,9 +143,11 @@ float const kHMDurationLowest  = .1f;
 
 - (void)getForecastInfoForLocation:(CLLocation *)location
 {
+    [ZAActivityBar showWithStatus:NSLocalizedString(@"Loading...", nil)];
 	@weakify(self);
     [self.weatherService getWeatherForLocation:location
                                        success:^(id JSON) {
+                                           [ZAActivityBar dismiss];
                                            @strongify(self);
                                            NSDictionary *JSONdictionary = (NSDictionary *)JSON;
                                            NSError *error = nil;
@@ -158,6 +160,7 @@ float const kHMDurationLowest  = .1f;
 
                                            [self updateViewsWithCallbackResults];
                                        } failure:^(NSError *error, id response) {
+                                           [ZAActivityBar dismiss];
                                            @strongify(self);
                                            DDLogError(@"ERROR: %@", error.localizedDescription);
                                            [self showAlertViewWithTitle:NSLocalizedString(@"Parsing Error", nil)

@@ -16,6 +16,7 @@ target :Humid2 do
 
 # views
     pod 'UIView+DebugQuickLook', '~> 1.0'
+    pod 'ZAActivityBar', '~> 0.1.1'
     # pod 'SVProgressHUD', '~> 1.0'
     pod 'BlurryModalSegue'
     pod 'TSMessages', '~> 0.9.6'

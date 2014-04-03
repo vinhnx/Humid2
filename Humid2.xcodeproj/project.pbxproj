@@ -234,14 +234,14 @@
 		84F998E418D6D8A500899921 /* Humid2 */ = {
 			isa = PBXGroup;
 			children = (
-				84F9991B18D6E99D00899921 /* Services */,
 				84F9991718D6E94C00899921 /* App */,
+				84F9991218D6DF5E00899921 /* Storyboard */,
 				84F9991518D6DF9100899921 /* Models */,
 				84F9991618D6DF9C00899921 /* Views */,
 				84F9991318D6DF6600899921 /* Controllers */,
-				84F9991218D6DF5E00899921 /* Storyboard */,
+				84F9991B18D6E99D00899921 /* Managers */,
 				84F9991418D6DF8200899921 /* Resources */,
-				84F9995818D70A4A00899921 /* Helper */,
+				84F9995818D70A4A00899921 /* Helpers */,
 				84F998E518D6D8A500899921 /* Supporting Files */,
 			);
 			path = Humid2;
@@ -335,20 +335,21 @@
 			name = App;
 			sourceTree = "<group>";
 		};
-		84F9991B18D6E99D00899921 /* Services */ = {
+		84F9991B18D6E99D00899921 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
 				84538FDC18E6948C00EA3966 /* Facade Service */,
 			);
-			name = Services;
+			name = Managers;
 			sourceTree = "<group>";
 		};
-		84F9995818D70A4A00899921 /* Helper */ = {
+		84F9995818D70A4A00899921 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
 				84E80DFA18E3F33B0054C6C9 /* LocationManager */,
 				84F9995918D70A4A00899921 /* UIKit-Block */,
 			);
+			name = Helpers;
 			path = Helper;
 			sourceTree = SOURCE_ROOT;
 		};

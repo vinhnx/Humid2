@@ -186,7 +186,7 @@ float const kHMDurationLowest  = .1f;
                          self.weatherSummaryLabel.alpha = self.degreeSymbol.alpha = 1;
                          self.weatherSummaryLabel.text = self.forecastModel ? self.forecastModel.currentlySummary : @"Model objects not found";
                          self.degreeSymbol.text = [NSString stringWithFormat:@"%.f%@",
-                                                   ceilf(self.forecastModel.currentlyTemperature), self.degreeSymbolString];
+                                                   self.forecastModel.currentlyTemperature, self.degreeSymbolString];
                      } completion:nil];
 
 }

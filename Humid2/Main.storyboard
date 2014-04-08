@@ -38,28 +38,44 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7G1-jq-PZy" userLabel="CenterView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7G1-jq-PZy" userLabel="CenterView">
                                 <rect key="frame" x="0.0" y="197" width="320" height="173"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ejf-r1-SyS" userLabel="DegreeLabel">
+                                    <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ejf-r1-SyS" userLabel="DegreeLabel">
                                         <rect key="frame" x="180" y="20" width="127" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="127" id="dSg-23-D7O"/>
+                                            <constraint firstAttribute="height" constant="128" id="gG4-YU-7AS"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="53"/>
                                         <color key="textColor" red="0.74901960784313726" green="0.70196078431372544" blue="0.5607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="nice day" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="162" translatesAutoresizingMaskIntoConstraints="NO" id="hl9-G1-gBz" userLabel="WeatherDetailsLabel">
+                                    <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="nice day" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="162" translatesAutoresizingMaskIntoConstraints="NO" id="hl9-G1-gBz" userLabel="WeatherDetailsLabel">
                                         <rect key="frame" x="10" y="0.0" width="162" height="173"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="173" id="HYe-gd-LNq"/>
+                                            <constraint firstAttribute="width" constant="162" id="g0m-w5-sLf"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="30"/>
                                         <color key="textColor" red="0.74901960779999999" green="0.70196078429999997" blue="0.56078431370000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.15294117647058825" green="0.24705882352941178" blue="0.24705882352941178" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="173" id="3Kr-PK-Axc"/>
+                                    <constraint firstAttribute="bottom" secondItem="hl9-G1-gBz" secondAttribute="bottom" id="9sd-2Y-9D6"/>
+                                    <constraint firstAttribute="trailing" secondItem="ejf-r1-SyS" secondAttribute="trailing" constant="13" id="NIs-zz-20C"/>
+                                    <constraint firstItem="ejf-r1-SyS" firstAttribute="top" secondItem="7G1-jq-PZy" secondAttribute="top" constant="20" symbolic="YES" id="Onl-xc-E0c"/>
+                                    <constraint firstItem="hl9-G1-gBz" firstAttribute="top" secondItem="7G1-jq-PZy" secondAttribute="top" id="Uci-Dh-VRk"/>
+                                    <constraint firstItem="hl9-G1-gBz" firstAttribute="leading" secondItem="7G1-jq-PZy" secondAttribute="leading" constant="10" id="w04-pj-HNW"/>
+                                </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vk9-KT-SjB" userLabel="InfoButton">
                                 <rect key="frame" x="278" y="526" width="22" height="22"/>
@@ -81,6 +97,11 @@
                             <bool key="isElement" value="YES"/>
                         </accessibility>
                         <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="7G1-jq-PZy" firstAttribute="leading" secondItem="zWy-6v-QnQ" secondAttribute="leading" id="AaZ-px-9ww"/>
+                            <constraint firstItem="7G1-jq-PZy" firstAttribute="top" secondItem="geV-9k-Liw" secondAttribute="bottom" constant="133" id="fDQ-bU-G9a"/>
+                            <constraint firstAttribute="trailing" secondItem="7G1-jq-PZy" secondAttribute="trailing" id="hnQ-2l-T5d"/>
+                        </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="Z2f-0z-FKo" appends="YES" id="Y4t-GR-NmR"/>
                         </connections>

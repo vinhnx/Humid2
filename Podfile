@@ -1,7 +1,5 @@
 platform :ios, "7.0"
-
 inhibit_all_warnings!
-
 target :Humid2 do
 # ultilities
     pod 'NXVLogFormatter', '~> 0.0.1'

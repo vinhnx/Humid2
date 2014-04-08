@@ -159,11 +159,11 @@
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.69999999999999996" contentMode="scaleToFill" editable="NO" text="a nice weather forecast detail goes here" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="8sZ-ug-4IV">
-                                <rect key="frame" x="20" y="181" width="280" height="190"/>
+                                <rect key="frame" x="20" y="156" width="280" height="240"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="190" id="uHc-Pr-RP1"/>
+                                    <constraint firstAttribute="height" constant="240" id="uHc-Pr-RP1"/>
                                 </constraints>
                                 <color key="textColor" red="0.74901960779999999" green="0.70196078429999997" blue="0.56078431370000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
@@ -193,6 +193,7 @@
                     <connections>
                         <outlet property="cityLabel" destination="IhC-HM-xsh" id="R8J-DT-daX"/>
                         <outlet property="detailsTextView" destination="8sZ-ug-4IV" id="a2c-3i-lYZ"/>
+                        <outlet property="detailsTextView_Constraint_Height" destination="uHc-Pr-RP1" id="6xv-Cq-XAI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FyO-CI-cBU" userLabel="First Responder" sceneMemberID="firstResponder"/>

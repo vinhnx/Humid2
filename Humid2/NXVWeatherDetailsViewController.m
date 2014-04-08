@@ -9,6 +9,7 @@
 #import "NXVWeatherDetailsViewController.h"
 
 @interface NXVWeatherDetailsViewController ()
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *detailsTextView_Constraint_Height;
 @end
 
 @implementation NXVWeatherDetailsViewController
@@ -47,5 +48,20 @@
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+#pragma mark - Auto Layout helper
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
+        self.detailsTextView_Constraint_Height.constant = 190;
+    }
+    else {
+        self.detailsTextView_Constraint_Height.constant = 240;
+    }
+
+    [self.detailsTextView updateConstraintsIfNeeded];
+}
+
 
 @end

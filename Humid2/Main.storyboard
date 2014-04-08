@@ -139,7 +139,7 @@
                         <viewControllerLayoutGuide type="top" id="ufR-04-K0Z"/>
                         <viewControllerLayoutGuide type="bottom" id="1cY-4g-NoK"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="TnS-Oa-2pb">
+                    <view key="view" contentMode="scaleToFill" id="TnS-Oa-2pb" userLabel="Blur View">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>

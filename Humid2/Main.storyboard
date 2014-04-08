@@ -87,7 +87,7 @@
                                 </state>
                                 <connections>
                                     <action selector="setupForecastInfo" destination="kzV-XV-JIB" eventType="touchUpInside" id="PIq-kS-H5b"/>
-                                    <segue destination="eY7-Re-Ff6" kind="custom" identifier="showDetail" customClass="BlurryModalSegue" id="0m0-yP-cmD"/>
+                                    <segue destination="eY7-Re-Ff6" kind="modal" identifier="showDetail" customClass="BlurryModalSegue" modalTransitionStyle="crossDissolve" id="0m0-yP-cmD"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -125,7 +125,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZGk-KV-UNY" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="Z2f-0z-FKo" userLabel="tap">
                     <connections>
-                        <segue destination="eY7-Re-Ff6" kind="custom" identifier="didTapViewToShowDetail" customClass="BlurryModalSegue" id="wcZ-b2-fBZ"/>
+                        <segue destination="eY7-Re-Ff6" kind="modal" identifier="didTapViewToShowDetail" customClass="BlurryModalSegue" modalTransitionStyle="crossDissolve" id="wcZ-b2-fBZ"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

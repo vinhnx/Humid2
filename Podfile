@@ -3,7 +3,6 @@ inhibit_all_warnings!
 target :Humid2 do
 # ultilities
     pod 'NXVLogFormatter', '~> 0.0.1'
-    pod 'CocoaLumberjack', '~> 1.8.1'
     pod 'AFNetworking', '~> 2.2.1'
     pod 'AFNetworkActivityLogger', '~> 2.0.1'
     pod 'UAObfuscatedString', '~> 0.2'

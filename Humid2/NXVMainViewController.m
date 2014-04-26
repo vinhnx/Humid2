@@ -54,31 +54,16 @@ float const kHMDurationLowest  = .1f;
     [TSMessage setDefaultViewController:self];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
-}
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"showDetail"] || [segue.identifier isEqualToString:@"didTapViewToShowDetail"]) {
-		NXVWeatherDetailsViewController *detailsViewController = [segue destinationViewController];
+    if ([segue.identifier isEqualToString:@"showDetail"] ||
+        [segue.identifier isEqualToString:@"didTapViewToShowDetail"]) {
+        NXVWeatherDetailsViewController *detailsViewController = [segue destinationViewController];
+        detailsViewController.cityName = self.navigationItem.title;
 		detailsViewController.detailString = [NSString stringWithFormat:@"%@\n\n%@\n\n%@",
 		                                      self.forecastModel.minutelySummary ?: @"",
 		                                      self.forecastModel.hourlySummary ?: @"",
 		                                      self.forecastModel.dailySummary] ?: @"";
-        detailsViewController.cityName = self.navigationItem.title;
     }
 }
 
@@ -89,7 +74,6 @@ float const kHMDurationLowest  = .1f;
     if ([CLLocationManager locationServicesEnabled]) {
         [self setupForecastInfo];
         if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
-            [self.weatherService cancelAllRequests];
             [self showAlertViewWithTitle:NSLocalizedString(@"Location Authorization Denied", nil)
                                  message:NSLocalizedString(@"You can allow Humid to use your location later in Privacy pane in the Settings app", nil)
                        cancelButtonTitle:NSLocalizedString(@"Close", nil)
@@ -104,8 +88,9 @@ float const kHMDurationLowest  = .1f;
                        otherButtonTitles:nil
                              useDelegate:NO];
         }
+
     }
-    else if (![CLLocationManager locationServicesEnabled]) {
+    else {
         [self.weatherService cancelAllRequests];
         [self showAlertViewWithTitle:NSLocalizedString(@"You are currently not enable location services", nil)
                              message:NSLocalizedString(@"Humid only use your location to retrieve weather forecast. You can enable this by enabling Location Services in Privacy pane in the Settings app", nil)
@@ -131,14 +116,14 @@ float const kHMDurationLowest  = .1f;
     self.weatherService = [WeatherService sharedService];
     self.weatherService.cacheEnabled = YES;
     self.weatherService.cacheExpirationInMinutes = 30;
-
+    
     // -- Forecast.io service
     self.weatherService.urlStringPattern = @"https://api.forecast.io/forecast/%@/%.6f,%.6f?units=auto";
     self.weatherService.APIKey = @""._7._2.c.a._4._8.d._8.b.d._7.d._4.d._1._4._7.b.e.b.f._1.c._8.f.b._9._5._1.f.e._7;
-
+    
     // -- Wunderground service
-//    self.weatherService.urlStringPattern = @"http://api.wunderground.com/api/%@/conditions/q/%.6f,%.6f.json";
-//    self.weatherService.APIKey = @""._4._6._3._3.d._1.a._9.e._6.d._0._2._8.b._3;
+    //    self.weatherService.urlStringPattern = @"http://api.wunderground.com/api/%@/conditions/q/%.6f,%.6f.json";
+    //    self.weatherService.APIKey = @""._4._6._3._3.d._1.a._9.e._6.d._0._2._8.b._3;
 }
 
 - (void)getForecastInfoForLocation:(CLLocation *)location
@@ -157,7 +142,7 @@ float const kHMDurationLowest  = .1f;
                                            if (!self.forecastModel) {
                                                DDLogError(@"ERROR: %@", error.localizedDescription);
                                            }
-
+                                           
                                            [self updateViewsWithCallbackResults];
                                        } failure:^(NSError *error, id response) {
                                            [ZAActivityBar dismiss];
@@ -188,7 +173,7 @@ float const kHMDurationLowest  = .1f;
                          self.degreeSymbol.text = [NSString stringWithFormat:@"%.f%@",
                                                    self.forecastModel.currentlyTemperature, self.degreeSymbolString];
                      } completion:nil];
-
+    
 }
 
 - (void)showAlertViewWithTitle:(NSString *)title

@@ -1,23 +1,23 @@
 PODS:
-  - AFNetworkActivityLogger (2.0.1):
-    - AFNetworking (~> 2.0)
-  - AFNetworking (2.2.1):
+  - AFNetworkActivityLogger (2.0.2):
+    - AFNetworking/NSURLSession (~> 2.0)
+  - AFNetworking (2.2.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
     - AFNetworking/UIKit
-  - AFNetworking/NSURLConnection (2.2.1):
+  - AFNetworking/NSURLConnection (2.2.4):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.2.1):
+  - AFNetworking/NSURLSession (2.2.4):
     - AFNetworking/NSURLConnection
-  - AFNetworking/Reachability (2.2.1)
-  - AFNetworking/Security (2.2.1)
-  - AFNetworking/Serialization (2.2.1)
-  - AFNetworking/UIKit (2.2.1):
+  - AFNetworking/Reachability (2.2.4)
+  - AFNetworking/Security (2.2.4)
+  - AFNetworking/Serialization (2.2.4)
+  - AFNetworking/UIKit (2.2.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - CocoaLumberjack (1.8.1):
@@ -46,12 +46,12 @@ PODS:
   - Mantle (1.4.1):
     - Mantle/extobjc
   - Mantle/extobjc (1.4.1)
-  - NXVLogFormatter (0.0.1):
+  - NXVLogFormatter (0.0.2):
     - CocoaLumberjack (~> 1.8.1)
   - Reachability (3.1.1)
   - SKBounceAnimation (1.0.04)
   - TMCache (1.2.0)
-  - TSMessages (0.9.6):
+  - TSMessages (0.9.9):
     - HexColors
   - UAObfuscatedString (0.2)
   - UIView+DebugQuickLook (1.0)
@@ -61,7 +61,6 @@ PODS:
 DEPENDENCIES:
   - AFNetworkActivityLogger (~> 2.0.1)
   - AFNetworking (~> 2.2.1)
-  - CocoaLumberjack (~> 1.8.1)
   - Kiwi
   - Kiwi-KIF (~> 1.0.1)
   - libextobjc/EXTScope (~> 0.4)
@@ -75,8 +74,8 @@ DEPENDENCIES:
   - ZAActivityBar (~> 0.1.1)
 
 SPEC CHECKSUMS:
-  AFNetworkActivityLogger: c2e99aec5d965a3ee33f0954a20c5ddab18934fe
-  AFNetworking: 0121f4b69be3fa58d1ab317866e036e12ac9651d
+  AFNetworkActivityLogger: 3d12891eb7cb77b4ad0f0b50fe5d877385bd135d
+  AFNetworking: 01aa7c3aa9a200b94943e54072a4373f14b3d219
   CocoaLumberjack: 020378ec400d658923bf5887178394f65f052c90
   HexColors: 99211502e17904af7891fc8f687d0e4958a6d66e
   KIF: c01fb8fb593cf8ffeeb69ed8d402ce88143e0697
@@ -84,11 +83,11 @@ SPEC CHECKSUMS:
   Kiwi-KIF: b5391f7f57e91f43fdb2d4227d64277a67cf9e09
   libextobjc: 2c9fc8226f0f38e562587f65172f93f0c9b4a47a
   Mantle: 0714cdb2b8559d9e6c2410d6a8529e3307bff189
-  NXVLogFormatter: 5708990cb7002e8d2ea4beb2cf6b7f6ff0da64c3
+  NXVLogFormatter: 608b681ac5e44707d64b3f66a4cabd597ca7d994
   Reachability: be4883bb93f31e38266ae3365e5600a317aae735
   SKBounceAnimation: 1d53d07c3496c1f61015e9d93bbaefda8391dc0d
   TMCache: 4b05e1b124d9f7e8d449640e059cff4cda17ed27
-  TSMessages: 839edc3164b99ced48c30af9dde9710cd67bea4d
+  TSMessages: 49f9083df41d320b34e8d66c5ed3ef147e543187
   UAObfuscatedString: 48580b0497824cb98a76c1493ffe4adccfd40750
   UIView+DebugQuickLook: aef933f0af8963bf2d5b848af0ef21018658b262
   ZAActivityBar: 709b333891ee822d80fda8f641030f586e02735f
